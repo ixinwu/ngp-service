@@ -26,7 +26,7 @@ namespace NGP.Framework.DependencyInjection
         /// </summary>
         /// <param name="builder">Container builder</param>
         /// <param name="typeFinder">Type finder</param>
-        void Register(ContainerBuilder builder, ITypeFinder typeFinder);
+        void Register(ContainerBuilder builder, ITypeFinder typeFinder); 
 
         /// <summary>
         /// 注入顺序
