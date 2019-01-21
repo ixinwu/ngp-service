@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="logs\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Foundations\NGP.Foundation.Domain\NGP.Foundation.Domain.csproj" />
+    <ProjectReference Include="..\..\Foundations\NGP.Foundation.Service\NGP.Foundation.Service.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Foundation.Resources\NGP.Foundation.Resources.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Framework.Core\NGP.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Framework.DataAccess\NGP.Framework.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Framework.DependencyInjection\NGP.Framework.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Framework.WebApi.Core\NGP.Framework.WebApi.Core.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="App_Data\installedPlugins.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="autofac.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
