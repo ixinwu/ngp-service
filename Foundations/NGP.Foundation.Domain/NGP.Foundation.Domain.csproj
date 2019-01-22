@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Analysis\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
   <ItemGroup>
