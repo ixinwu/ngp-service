@@ -24,6 +24,11 @@ namespace NGP.Foundation.Service.System
     /// </summary>    
     public interface IUserService
     {
-        TokenResultInfo Certification(OAuthUserInfo userInfo);
+        /// <summary>
+        /// 认证生成token
+        /// </summary>
+        /// <param name="userInfo"></param>
+        /// <returns>token</returns>        
+        OperateResultInfo<TokenResultInfo> Certification(OAuthUserInfo userInfo);
     }
 }

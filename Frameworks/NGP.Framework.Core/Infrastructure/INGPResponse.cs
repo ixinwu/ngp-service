@@ -19,5 +19,19 @@ namespace NGP.Framework.Core
     /// </summary>
     public interface INGPResponse
     {
+        /// <summary>
+        /// 操作状态
+        /// </summary>
+        OperateStatus Status { get; set; }
+
+        /// <summary>
+        /// 消息
+        /// </summary>
+        string Message { get; set; }
+
+        /// <summary>
+        /// 错误码
+        /// </summary>
+        ErrorCode ErrorCode { get; set; }
     }
 }

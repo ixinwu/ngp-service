@@ -13,8 +13,8 @@
 
 using IdentityModel;
 using Microsoft.IdentityModel.Tokens;
+using NGP.Foundation.Resources;
 using NGP.Framework.Core;
-using NGP.Framework.DependencyInjection;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -54,29 +54,73 @@ namespace NGP.Foundation.Service.System
         /// 认证生成token
         /// </summary>
         /// <param name="userInfo"></param>
-        /// <returns></returns>
-        
+        /// <returns></returns>        
         [TransactionCallHandler]
-        public TokenResultInfo Certification(OAuthUserInfo userInfo)
+        public OperateResultInfo<TokenResultInfo> Certification(OAuthUserInfo userInfo)
         {
             // 对密码进行加密
             var password = StringExtend.Encrypt(userInfo.Password);
 
             // 数据库查询
-            var dbUser = _repository.FirstOrDefault<Sys_Org_User>(s => !s.IsDelete && s.UserDisabled
-            && s.LoginName == userInfo.UserName
-            && s.UserPwd == password);
-
+            var dbUser = _repository.FirstOrDefault<Sys_Org_User>(s => s.LoginName == userInfo.UserName);
+            throw new Exception("test");
+            // 用户不存在
             if (dbUser == null)
             {
-                return null;
+                return new OperateResultInfo<TokenResultInfo>
+                {
+                    ErrorCode = ErrorCode.NonExistent,
+                    Status = OperateStatus.Error,
+                    Message = string.Format(CommonResource.NotExist, ServiceResource.UserName)
+                };
             }
 
+            // 用户不存在
             var employee = _repository.FirstOrDefault<Sys_Org_Employee>(s => !s.IsDelete && !s.IsDelete && s.Id == dbUser.EmpId);
             if (employee == null)
             {
-                return null;
+                return new OperateResultInfo<TokenResultInfo>
+                {
+                    ErrorCode = ErrorCode.NonExistent,
+                    Status = OperateStatus.Error,
+                    Message = string.Format(CommonResource.NotExist, ServiceResource.UserName)
+                };
             }
+
+            // 用户被删除
+            if (dbUser.IsDelete)
+            {
+                return new OperateResultInfo<TokenResultInfo>
+                {
+                    ErrorCode = ErrorCode.CheckError,
+                    Status = OperateStatus.Error,
+                    Message = string.Format(ServiceResource.UserDeleted)
+                };
+            }
+
+            // 用户被禁用
+            if (!dbUser.UserDisabled)
+            {
+                return new OperateResultInfo<TokenResultInfo>
+                {
+                    ErrorCode = ErrorCode.CheckError,
+                    Status = OperateStatus.Error,
+                    Message = string.Format(ServiceResource.UserDisabled)
+                };
+            }
+
+            // 密码不正确
+            if (!string.Equals(dbUser.UserPwd, password, StringComparison.CurrentCulture))
+            {
+                return new OperateResultInfo<TokenResultInfo>
+                {
+                    ErrorCode = ErrorCode.CheckError,
+                    Status = OperateStatus.Error,
+                    Message = string.Format(ServiceResource.PasswordError)
+                };
+            }
+
+
             var emplpyeeDept = _repository.FirstOrDefault<Sys_Org_Empl_Dept>(s => s.EmplId == employee.Id);
 
             // 生成token
@@ -113,13 +157,17 @@ namespace NGP.Foundation.Service.System
             dbUser.UserLastLogonTime = DateTime.Now;
             dbUser.UserLogonTimes = (dbUser.UserLogonTimes ?? 0) + 1;
             _repository.Update(dbUser);
-            // 保存拦截
-            var result = new TokenResultInfo
+            var tokenInfo = new TokenResultInfo
             {
                 AccessToken = tokenString,
                 TokenType = "Bearer"
             };
-            return result;
+            return new OperateResultInfo<TokenResultInfo>
+            {
+                Message = CommonResource.OperatorSuccess,
+                Status = OperateStatus.Success,
+                Data = tokenInfo
+            };
         }
     }
 }

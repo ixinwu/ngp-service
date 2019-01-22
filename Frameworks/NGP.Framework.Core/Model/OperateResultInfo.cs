@@ -2,45 +2,52 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * ErrorCode Description:
- * 错误code
+ * OperateResultInfo Description:
+ * 操作结果返回
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019-1-15   hulei@ixinwu.com
+ * Created							1.0		    2019-2-15   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
+
 
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 错误code
+    /// 操作结果返回
     /// </summary>
-    public enum ErrorCode
+    public class OperateResultInfo : INGPResponse
     {
         /// <summary>
-        /// 默认值
+        /// 影响行数
         /// </summary>
-        None = 0,
+        public int AffectedRows { get; set; }
 
         /// <summary>
-        /// 参数为空
+        /// 操作状态
         /// </summary>
-        ParamEmpty = 10,
+        public OperateStatus Status { get; set; }
 
         /// <summary>
-        /// 不存在
+        /// 消息
         /// </summary>
-        NonExistent = 100,
+        public string Message { get; set; }
 
         /// <summary>
-        /// 验证错误
+        /// 错误码
         /// </summary>
-        CheckError = 200,
+        public ErrorCode ErrorCode { get; set; }
+    }
 
+    /// <summary>
+    /// 查询操作结果返回
+    /// </summary>
+    public class OperateResultInfo<T> : OperateResultInfo
+    {
         /// <summary>
-        /// 系统异常
+        /// 返回数据
         /// </summary>
-        SystemError = 500
+        public T Data { get; set; }
     }
 }

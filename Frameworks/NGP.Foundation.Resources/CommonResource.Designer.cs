@@ -223,7 +223,7 @@ namespace NGP.Foundation.Resources {
         }
         
         /// <summary>
-        ///   查找类似 不存在 的本地化字符串。
+        ///   查找类似 {0}不存在！ 的本地化字符串。
         /// </summary>
         public static string NotExist {
             get {
@@ -250,6 +250,33 @@ namespace NGP.Foundation.Resources {
         }
         
         /// <summary>
+        ///   查找类似 操作失败！ 的本地化字符串。
+        /// </summary>
+        public static string OperatorError {
+            get {
+                return ResourceManager.GetString("OperatorError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 操作异常！请联系管理员！ 的本地化字符串。
+        /// </summary>
+        public static string OperatorException {
+            get {
+                return ResourceManager.GetString("OperatorException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 操作成功！ 的本地化字符串。
+        /// </summary>
+        public static string OperatorSuccess {
+            get {
+                return ResourceManager.GetString("OperatorSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 参数异常 的本地化字符串。
         /// </summary>
         public static string ParameterError {
@@ -264,24 +291,6 @@ namespace NGP.Foundation.Resources {
         public static string RownumberName {
             get {
                 return ResourceManager.GetString("RownumberName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 操作失败！ 的本地化字符串。
-        /// </summary>
-        public static string SaveError {
-            get {
-                return ResourceManager.GetString("SaveError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 操作成功！ 的本地化字符串。
-        /// </summary>
-        public static string SaveSuccess {
-            get {
-                return ResourceManager.GetString("SaveSuccess", resourceCulture);
             }
         }
         

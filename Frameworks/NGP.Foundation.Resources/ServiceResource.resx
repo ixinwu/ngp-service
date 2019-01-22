@@ -117,88 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>新增</value>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
   </data>
-  <data name="CreateFileError" xml:space="preserve">
-    <value>生成文件失败</value>
+  <data name="PasswordError" xml:space="preserve">
+    <value>密码错误！请重试！</value>
   </data>
-  <data name="Data" xml:space="preserve">
-    <value>数据</value>
+  <data name="UserDeleted" xml:space="preserve">
+    <value>用户被删除！请联系管理员！</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>删除</value>
+  <data name="UserDisabled" xml:space="preserve">
+    <value>用户被禁用！请联系管理员！</value>
   </data>
-  <data name="DropDownDefaultName" xml:space="preserve">
-    <value>全部</value>
-  </data>
-  <data name="DropDownSelectName" xml:space="preserve">
-    <value>请选择</value>
-  </data>
-  <data name="DynamicResourceAuthError" xml:space="preserve">
-    <value>没有对该数据的授权，不能操作！</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>编辑</value>
-  </data>
-  <data name="Exist" xml:space="preserve">
-    <value>{0}已经存在！</value>
-  </data>
-  <data name="FormatError" xml:space="preserve">
-    <value>{0}格式错误，正确的格式是 {1}！</value>
-  </data>
-  <data name="HasBeenDeleted" xml:space="preserve">
-    <value>{0}已经被删除，请刷新后重试！</value>
-  </data>
-  <data name="LengthError" xml:space="preserve">
-    <value>{0}不能超过{1}长度！</value>
-  </data>
-  <data name="MustLessThan" xml:space="preserve">
-    <value>{0}必须小于{1}</value>
-  </data>
-  <data name="NoBatchDetail" xml:space="preserve">
-    <value>指定的批号{0}不需要续传</value>
-  </data>
-  <data name="NoBatchKey" xml:space="preserve">
-    <value>表单未设定批号</value>
-  </data>
-  <data name="NoRelationError" xml:space="preserve">
-    <value>无冗余关系！</value>
-  </data>
-  <data name="NotAllowBlank" xml:space="preserve">
-    <value>不允许上传空白附件!</value>
-  </data>
-  <data name="NotEmpty" xml:space="preserve">
-    <value>{0}不能为空！</value>
-  </data>
-  <data name="NotExist" xml:space="preserve">
-    <value>{0}不存在！</value>
-  </data>
-  <data name="NotMeetTheRecord" xml:space="preserve">
-    <value>{0}和{1}不符合记录</value>
-  </data>
-  <data name="NoTotalError" xml:space="preserve">
-    <value>统计总个数小于错误个数{0},{1}</value>
-  </data>
-  <data name="ParameterError" xml:space="preserve">
-    <value>参数异常</value>
-  </data>
-  <data name="RownumberName" xml:space="preserve">
-    <value>序号</value>
-  </data>
-  <data name="OperatorError" xml:space="preserve">
-    <value>操作失败！</value>
-  </data>
-  <data name="OperatorSuccess" xml:space="preserve">
-    <value>操作成功！</value>
-  </data>
-  <data name="SaveValidationError" xml:space="preserve">
-    <value>{0}已经被使用，不能操作！</value>
-  </data>
-  <data name="View" xml:space="preserve">
-    <value>查看</value>
-  </data>
-  <data name="OperatorException" xml:space="preserve">
-    <value>操作异常！请联系管理员！</value>
+  <data name="UserName" xml:space="preserve">
+    <value>用户名</value>
   </data>
 </root>

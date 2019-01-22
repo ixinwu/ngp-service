@@ -12,6 +12,7 @@
  * ------------------------------------------------------------------------------*/
 
 using Castle.DynamicProxy;
+using NGP.Foundation.Resources;
 using NGP.Framework.Core;
 using System;
 using System.Reflection;
@@ -63,7 +64,7 @@ namespace NGP.Framework.DependencyInjection
             }
             catch (Exception ex)
             {
-
+                // 书写异常日志
                 ErrorLogInfo error = new ErrorLogInfo
                 {
                     ApiUrl = _workContext.CurrentRequest.Url,
@@ -80,6 +81,18 @@ namespace NGP.Framework.DependencyInjection
                     Exception = ex
                 };
                 _logPublisher.RegisterError(error);
+
+                // 设定返回值
+                INGPResponse response = invocation.ReturnValue as INGPResponse;
+                if (response == null)
+                {
+                    response = Activator.CreateInstance(methodInfo.ReturnType) as INGPResponse;
+                }
+                response.Message = CommonResource.OperatorException;
+                response.Status = OperateStatus.Error;
+                response.ErrorCode = ErrorCode.SystemError;
+
+                invocation.ReturnValue = response;
             }
         }
     }
