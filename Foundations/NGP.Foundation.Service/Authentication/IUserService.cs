@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NGP.Foundation.Service.System
+namespace NGP.Foundation.Service.Authentication
 {
     /// <summary>
     /// 用户业务服务

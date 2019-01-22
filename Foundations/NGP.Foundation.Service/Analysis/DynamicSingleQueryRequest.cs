@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * DynamicDataSetPageQueryRequest Description:
- * 动态查询请求
+ * DynamicSingleQueryRequest Description:
+ * 动态单条查询请求
  *
  * Comment 					        Revision	Date                  Author
  * -----------------------------    --------    ------------------    ----------------
@@ -12,28 +12,16 @@
  * ------------------------------------------------------------------------------*/
 
 
-using System.Collections.Generic;
-
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态分页查询请求
+    /// 动态单条查询请求
     /// </summary>
-    public class DynamicQueryRequest : DynamicBaseRequest
+    public class DynamicSingleQueryRequest : DynamicBaseRequest
     {
         /// <summary>
-        /// 查询表达式
+        /// 主键值
         /// </summary>
-        public string WhereExpression { get; set; }
-
-        /// <summary>
-        /// 模糊查询值
-        /// </summary>
-        public string LikeValue { get; set; }
-
-        /// <summary>
-        /// 查询字段key列表
-        /// </summary>
-        public List<string> QueryFieldKeys { get; set; }
+        public string PrimaryKeyValue { get; set; }
     }
 }

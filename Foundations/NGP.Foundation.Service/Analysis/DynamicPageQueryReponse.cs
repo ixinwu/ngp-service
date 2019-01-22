@@ -16,7 +16,7 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 动态分页查询返回
     /// </summary>
-    public class DynamicListReponse
+    public class DynamicPageQueryReponse
     {
         /// <summary>
         /// 数据总数

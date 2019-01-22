@@ -12,7 +12,7 @@
  * ------------------------------------------------------------------------------*/
 
 using Microsoft.AspNetCore.Mvc;
-using NGP.Foundation.Service.System;
+using NGP.Foundation.Service.Authentication;
 using NGP.Framework.WebApi.Core;
 
 namespace NGP.WebApi

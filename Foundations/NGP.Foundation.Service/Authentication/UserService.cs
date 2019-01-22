@@ -20,7 +20,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace NGP.Foundation.Service.System
+namespace NGP.Foundation.Service.Authentication
 {
     /// <summary>
     /// 用户业务实现

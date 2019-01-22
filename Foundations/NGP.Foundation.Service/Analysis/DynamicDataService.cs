@@ -3,7 +3,7 @@
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
  * IDynamicDataService Description:
- * 动态数据服务接口
+ * 动态数据服务
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -18,18 +18,22 @@ using System.Collections.Generic;
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态数据服务接口
+    /// 动态数据服务
     /// </summary>
-    public interface IDynamicDataService
+    public class DynamicDataService : IDynamicDataService
     {
+        #region methods
         /// <summary>
         /// 删除动态数据(包含详情)
         /// </summary>
         /// <param name="info">删除对象</param>
         /// <param name="extendFunc">扩展删除(返回影响行数)</param>
         /// <returns>操作结果</returns>
-        NGPResponse<List<string>> DeleteDynamicData(DynamicDeleteRequest info,
-            Func<int> extendFunc = null);
+        public NGPResponse<List<string>> DeleteDynamicData(DynamicDeleteRequest info,
+            Func<int> extendFunc = null)
+        {
+            return null;
+        }
 
         /// <summary>
         /// 获取列表页面数据
@@ -38,9 +42,12 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<DynamicPageQueryReponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
+        public NGPResponse<DynamicPageQueryReponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
             IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
-            Action<dynamic> setItem = null);
+            Action<dynamic> setItem = null)
+        {
+            return null;
+        }
 
         /// <summary>
         /// 获取列表页面数据
@@ -49,9 +56,12 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<List<dynamic>> QueryDynamicAllData(DynamicQueryRequest query,
+        public NGPResponse<List<dynamic>> QueryDynamicAllData(DynamicQueryRequest query,
             IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
-            Action<dynamic> setItem = null);
+            Action<dynamic> setItem = null)
+        {
+            return null;
+        }
 
         /// <summary>
         /// 获取列表页面数据
@@ -60,9 +70,12 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<dynamic> QueryDynamicSingleData(DynamicQueryRequest query,
+        public NGPResponse<dynamic> QueryDynamicSingleData(DynamicQueryRequest query,
             IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
-            Action<dynamic> setItem = null);
+            Action<dynamic> setItem = null)
+        {
+            return null;
+        }
 
         /// <summary>
         /// 通过主键获取详情数据
@@ -71,9 +84,12 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<dynamic> QueryDynamicSingleDataByKey(DynamicQueryRequest query,
+        public NGPResponse<dynamic> QueryDynamicSingleDataByKey(DynamicQueryRequest query,
             IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
-            Action<dynamic> setItem = null);
+            Action<dynamic> setItem = null)
+        {
+            return null;
+        }
 
         /// <summary>
         /// 添加动态数据
@@ -82,9 +98,12 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendFunc">扩展操作(返回影响行数)</param>
         /// <param name = "extendRelationFunc" > 扩展操作关联信息(返回影响行数) </param >
         /// <returns>操作结果</returns>
-        NGPResponse AddDynamicData(DynamicAddRequest info,
+        public NGPResponse AddDynamicData(DynamicAddRequest info,
             Func<int> extendFunc = null,
-            Func<string, int> extendRelationFunc = null);
+            Func<string, int> extendRelationFunc = null)
+        {
+            return null;
+        }
 
         /// <summary>
         /// 更新动态数据
@@ -92,7 +111,11 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="info">更新对象</param>
         /// <param name="extendFunc">扩展更新(返回影响行数)</param>
         /// <returns>操作结果</returns>
-        NGPResponse UpdateDynamicData(DynamicUpdateRequest info,
-            Func<int> extendFunc = null);
+        public NGPResponse UpdateDynamicData(DynamicUpdateRequest info,
+            Func<int> extendFunc = null)
+        {
+            return null;
+        }
+        #endregion
     }
 }

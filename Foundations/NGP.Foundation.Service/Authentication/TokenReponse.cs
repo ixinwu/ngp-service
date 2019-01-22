@@ -12,7 +12,7 @@
  * ------------------------------------------------------------------------------*/
 
 
-namespace NGP.Foundation.Service.System
+namespace NGP.Foundation.Service.Authentication
 {
     /// <summary>
     /// 登录对象

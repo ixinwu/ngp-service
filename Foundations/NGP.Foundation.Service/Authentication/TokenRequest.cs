@@ -13,7 +13,7 @@
 
 using NGP.Framework.Core;
 
-namespace NGP.Foundation.Service.System
+namespace NGP.Foundation.Service.Authentication
 {
     /// <summary>
     /// 认证用户对象

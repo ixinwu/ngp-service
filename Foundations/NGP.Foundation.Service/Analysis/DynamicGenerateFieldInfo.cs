@@ -18,12 +18,12 @@ namespace NGP.Foundation.Service
     /// <summary>
     /// 生成动态字段模型
     /// </summary>
-    public class GenerateFieldInfo
+    public class DynamicGenerateFieldInfo
     {
         /// <summary>
-        /// 字段名称
+        /// 字段key
         /// </summary>
-        public string FieldName { get; set; }
+        public string FieldKey { get; set; }
 
         /// <summary>
         /// 字段代码类型

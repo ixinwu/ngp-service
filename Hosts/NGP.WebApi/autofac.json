@@ -89,10 +89,10 @@
     },
     // IUserService
     {
-      "type": "NGP.Foundation.Service.System.UserService,NGP.Foundation.Service",
+      "type": "NGP.Foundation.Service.Authentication.UserService,NGP.Foundation.Service",
       "services": [
         {
-          "type": "NGP.Foundation.Service.System.IUserService,NGP.Foundation.Service"
+          "type": "NGP.Foundation.Service.Authentication.IUserService,NGP.Foundation.Service"
         }
       ],
       "instanceScope": "per-lifetime-scope"
