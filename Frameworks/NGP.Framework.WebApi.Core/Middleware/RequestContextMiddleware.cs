@@ -71,7 +71,7 @@ namespace NGP.Framework.WebApi.Core
             //request.Body = body;
 
             // 设定上下文
-            workContext.CurrentRequest = new WorkRequestInfo
+            workContext.CurrentRequest = new WorkRequest
             {
                 IpAddress = webHelper.GetCurrentIpAddress(),
                 Parameter = request.QueryString.HasValue ? request.QueryString.Value : "",

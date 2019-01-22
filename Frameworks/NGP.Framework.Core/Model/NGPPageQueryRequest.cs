@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * OperateResultInfo Description:
- * 操作结果返回
+ * BasePageQueryInfo Description:
+ * 分页查询模型
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -11,43 +11,36 @@
  *
  * ------------------------------------------------------------------------------*/
 
-
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 操作结果返回
+    /// 分页查询模型
     /// </summary>
-    public class OperateResultInfo : INGPResponse
+    public class NGPPageQueryRequest<T> where T : INGPRequest
     {
         /// <summary>
-        /// 影响行数
+        /// 分页大小
         /// </summary>
-        public int AffectedRows { get; set; }
+        public int PageSize { get; set; }
 
         /// <summary>
-        /// 操作状态
+        /// 当前页码
         /// </summary>
-        public OperateStatus Status { get; set; }
+        public int PageNumber { get; set; }
 
         /// <summary>
-        /// 消息
+        /// 查询条件(文本框输入的模糊查询条件)
         /// </summary>
-        public string Message { get; set; }
+        public string LikeValue { get; set; }
 
         /// <summary>
-        /// 错误码
+        /// 排序表达式
         /// </summary>
-        public ErrorCode ErrorCode { get; set; }
-    }
+        public string SortExpression { get; set; }
 
-    /// <summary>
-    /// 查询操作结果返回
-    /// </summary>
-    public class OperateResultInfo<T> : OperateResultInfo
-    {
         /// <summary>
-        /// 返回数据
+        /// 请求数据
         /// </summary>
-        public T Data { get; set; }
+        public T RequestData { get; set; }
     }
 }

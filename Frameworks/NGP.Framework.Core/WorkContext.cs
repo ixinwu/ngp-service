@@ -25,7 +25,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 当前Api请求信息
         /// </summary>
-        public WorkRequestInfo CurrentRequest { get; set; }
+        public WorkRequest CurrentRequest { get; set; }
 
         /// <summary>
         /// 工作语言

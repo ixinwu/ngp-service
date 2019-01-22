@@ -18,7 +18,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Foundations\NGP.Foundation.Domain\NGP.Foundation.Domain.csproj" />
     <ProjectReference Include="..\..\Foundations\NGP.Foundation.Service\NGP.Foundation.Service.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Foundation.Resources\NGP.Foundation.Resources.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.Core\NGP.Framework.Core.csproj" />

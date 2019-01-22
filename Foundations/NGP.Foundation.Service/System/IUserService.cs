@@ -29,6 +29,6 @@ namespace NGP.Foundation.Service.System
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns>token</returns>        
-        OperateResultInfo<TokenResultInfo> Certification(OAuthUserInfo userInfo);
+        NGPResponse<TokenReponse> Certification(TokenRequest userInfo);
     }
 }

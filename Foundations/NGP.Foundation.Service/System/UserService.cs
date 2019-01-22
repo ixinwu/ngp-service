@@ -56,7 +56,7 @@ namespace NGP.Foundation.Service.System
         /// <param name="userInfo"></param>
         /// <returns></returns>        
         [TransactionCallHandler]
-        public OperateResultInfo<TokenResultInfo> Certification(OAuthUserInfo userInfo)
+        public NGPResponse<TokenReponse> Certification(TokenRequest userInfo)
         {
             // 对密码进行加密
             var password = StringExtend.Encrypt(userInfo.Password);
@@ -67,7 +67,7 @@ namespace NGP.Foundation.Service.System
             // 用户不存在
             if (dbUser == null)
             {
-                return new OperateResultInfo<TokenResultInfo>
+                return new NGPResponse<TokenReponse>
                 {
                     ErrorCode = ErrorCode.NonExistent,
                     Status = OperateStatus.Error,
@@ -79,7 +79,7 @@ namespace NGP.Foundation.Service.System
             var employee = _repository.FirstOrDefault<Sys_Org_Employee>(s => !s.IsDelete && !s.IsDelete && s.Id == dbUser.EmpId);
             if (employee == null)
             {
-                return new OperateResultInfo<TokenResultInfo>
+                return new NGPResponse<TokenReponse>
                 {
                     ErrorCode = ErrorCode.NonExistent,
                     Status = OperateStatus.Error,
@@ -90,7 +90,7 @@ namespace NGP.Foundation.Service.System
             // 用户被删除
             if (dbUser.IsDelete)
             {
-                return new OperateResultInfo<TokenResultInfo>
+                return new NGPResponse<TokenReponse>
                 {
                     ErrorCode = ErrorCode.CheckError,
                     Status = OperateStatus.Error,
@@ -101,7 +101,7 @@ namespace NGP.Foundation.Service.System
             // 用户被禁用
             if (!dbUser.UserDisabled)
             {
-                return new OperateResultInfo<TokenResultInfo>
+                return new NGPResponse<TokenReponse>
                 {
                     ErrorCode = ErrorCode.CheckError,
                     Status = OperateStatus.Error,
@@ -112,7 +112,7 @@ namespace NGP.Foundation.Service.System
             // 密码不正确
             if (!string.Equals(dbUser.UserPwd, password, StringComparison.CurrentCulture))
             {
-                return new OperateResultInfo<TokenResultInfo>
+                return new NGPResponse<TokenReponse>
                 {
                     ErrorCode = ErrorCode.CheckError,
                     Status = OperateStatus.Error,
@@ -157,12 +157,12 @@ namespace NGP.Foundation.Service.System
             dbUser.UserLastLogonTime = DateTime.Now;
             dbUser.UserLogonTimes = (dbUser.UserLogonTimes ?? 0) + 1;
             _repository.Update(dbUser);
-            var tokenInfo = new TokenResultInfo
+            var tokenInfo = new TokenReponse
             {
                 AccessToken = tokenString,
                 TokenType = "Bearer"
             };
-            return new OperateResultInfo<TokenResultInfo>
+            return new NGPResponse<TokenReponse>
             {
                 Message = CommonResource.OperatorSuccess,
                 Status = OperateStatus.Success,

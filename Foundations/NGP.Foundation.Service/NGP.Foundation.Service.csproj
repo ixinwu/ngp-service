@@ -15,7 +15,6 @@
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.Core\NGP.Framework.Core.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.DataAccess\NGP.Framework.DataAccess.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.DependencyInjection\NGP.Framework.DependencyInjection.csproj" />
-    <ProjectReference Include="..\NGP.Foundation.Domain\NGP.Foundation.Domain.csproj" />
   </ItemGroup>
 
 </Project>

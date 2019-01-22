@@ -2,34 +2,31 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * CurrentRequestInfo Description:
- * 当前请求信息
+ * TokenReponse Description:
+ * 登录对象
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019-1-15   hulei@ixinwu.com
+ * Created							1.0		    2019-3-20   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
-namespace NGP.Framework.Core
+
+namespace NGP.Foundation.Service.System
 {
     /// <summary>
-    /// 当前请求信息
+    /// 登录对象
     /// </summary>
-    public class WorkRequestInfo
+    public class TokenReponse
     {
         /// <summary>
-        /// api路径
+        /// 访问token
         /// </summary>
-        public string Url { get; set; }
-        /// <summary>
-        /// api提交参数
-        /// </summary>
-        public string Parameter { get; set; }
+        public string AccessToken { get; set; }
 
         /// <summary>
-        /// 绝对路径
+        /// token类型
         /// </summary>
-        public string IpAddress { get; set; }
+        public string TokenType { get; set; }
     }
 }

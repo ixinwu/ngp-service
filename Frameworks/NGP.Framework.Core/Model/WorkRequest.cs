@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * IWorkContext Description:
- * 当前工作上下文
+ * CurrentRequestInfo Description:
+ * 当前请求信息
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -14,22 +14,22 @@
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 当前工作上下文
+    /// 当前请求信息
     /// </summary>
-    public interface IWorkContext
+    public class WorkRequest
     {
         /// <summary>
-        /// 当前人员信息
+        /// api路径
         /// </summary>
-        WorkEmployee Current { get; set; }
+        public string Url { get; set; }
         /// <summary>
-        /// 当前Api请求信息
+        /// api提交参数
         /// </summary>
-        WorkRequest CurrentRequest { get; set; }
+        public string Parameter { get; set; }
 
         /// <summary>
-        /// 工作语言
+        /// 绝对路径
         /// </summary>
-        WorkLanguage WorkingLanguage { get; set; }
+        public string IpAddress { get; set; }
     }
 }

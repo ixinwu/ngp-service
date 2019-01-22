@@ -1,35 +1,34 @@
 ﻿/* ---------------------------------------------------------------------    
  * Copyright:
- * IXinWu Technology Co., Ltd. All rights reserved. 
+ * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * OAuthUserInfo Description:
- * 认证用户对象
+ * DynamicDeleteRequest Description:
+ * 动态删除请求对象
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019-2-28   hulei@ixinwu.com
+ * Created							1.0		    2019/2/19  hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
-using System;
+using NGP.Framework.Core;
 using System.Collections.Generic;
-using System.Text;
 
-namespace NGP.Foundation.Service.System
+namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 认证用户对象
+    /// 动态删除请求对象
     /// </summary>
-    public class OAuthUserInfo
+    public class DynamicDeleteRequest : DynamicBaseRequest
     {
         /// <summary>
-        /// 用户名
+        /// key
         /// </summary>
-        public string UserName { get; set; }
+        public List<string> Keys { get; set; }
 
         /// <summary>
-        /// 密码
+        /// 是否删除子集
         /// </summary>
-        public string Password { get; set; }
+        public bool IsDeleteSubsets { get; set; }
     }
 }

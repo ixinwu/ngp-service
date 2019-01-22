@@ -2,31 +2,32 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * LoginInfo Description:
- * 登录对象
+ * TokenRequest Description:
+ * 认证用户对象
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019-3-20   hulei@ixinwu.com
+ * Created							1.0		    2019-2-28   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
+using NGP.Framework.Core;
 
 namespace NGP.Foundation.Service.System
 {
     /// <summary>
-    /// 登录对象
+    /// 认证用户对象
     /// </summary>
-    public class TokenResultInfo
+    public class TokenRequest : INGPRequest
     {
         /// <summary>
-        /// 访问token
+        /// 用户名
         /// </summary>
-        public string AccessToken { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
-        /// token类型
+        /// 密码
         /// </summary>
-        public string TokenType { get; set; }
+        public string Password { get; set; }
     }
 }

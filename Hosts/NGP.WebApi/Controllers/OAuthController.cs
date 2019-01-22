@@ -39,7 +39,7 @@ namespace NGP.WebApi
         }
 
         [HttpPost("token")]
-        public IActionResult Token([FromBody]OAuthUserInfo userDto)
+        public IActionResult Token([FromBody]TokenRequest userDto)
         {
             var result = _userService.Certification(userDto);
             return Ok(result);
