@@ -99,21 +99,6 @@ namespace NGP.Framework.WebApi.Core
         }
 
         /// <summary>
-        /// 获取已安装插件的系统名称
-        /// </summary>
-        /// <param name="filePath">文件的路径</param>
-        /// <returns>插件系统名称列表</returns>
-        private static IList<string> GetInstalledPluginNames(string filePath)
-        {
-            var text = _fileProvider.ReadAllText(filePath, Encoding.UTF8);
-            if (string.IsNullOrEmpty(text))
-                return new List<string>();
-
-            // 从JSON文件中获取插件系统名称
-            return JsonConvert.DeserializeObject<IList<string>>(text);
-        }
-
-        /// <summary>
         /// 将已安装插件的系统名称保存到文件中
         /// </summary>
         /// <param name="pluginSystemNames">插件系统名称列表</param>
@@ -202,7 +187,7 @@ namespace NGP.Framework.WebApi.Core
                     throw;
             }
 
-            return shadowCopiedAssembly ?? PerformFileDeploy(plug, applicationPartManager,_reserveShadowCopyFolder);
+            return shadowCopiedAssembly ?? PerformFileDeploy(plug, applicationPartManager, _reserveShadowCopyFolder);
         }
 
         /// <summary>
@@ -330,7 +315,8 @@ namespace NGP.Framework.WebApi.Core
 
                 try
                 {
-                    var installedPluginSystemNames = GetInstalledPluginNames(_fileProvider.MapPath(NGPPluginDefaults.InstalledPluginsFilePath));
+                    var installedPluginSystemNames = _fileProvider.GetFileContent<List<string>>(
+                        _fileProvider.MapPath(NGPPluginDefaults.InstalledPluginsFilePath));
 
                     // 确保创建文件夹
                     _fileProvider.CreateDirectory(pluginFolder);
@@ -479,7 +465,7 @@ namespace NGP.Framework.WebApi.Core
             _fileProvider.CreateFile(filePath);
 
             // 获取已安装的插件名称
-            var installedPluginSystemNames = GetInstalledPluginNames(filePath);
+            var installedPluginSystemNames = _fileProvider.GetFileContent<List<string>>(filePath);
 
             // 如果插件系统名称不存在，请将其添加到列表中
             var alreadyMarkedAsInstalled = installedPluginSystemNames.Any(pluginName => pluginName.Equals(systemName, StringComparison.InvariantCultureIgnoreCase));
@@ -505,7 +491,7 @@ namespace NGP.Framework.WebApi.Core
             _fileProvider.CreateFile(filePath);
 
             // 获取已安装的插件名称
-            var installedPluginSystemNames = GetInstalledPluginNames(filePath);
+            var installedPluginSystemNames = _fileProvider.GetFileContent<List<string>>(filePath);
 
             // 从列表中删除插件系统名称（如果存在）
             var alreadyMarkedAsInstalled = installedPluginSystemNames.Any(pluginName => pluginName.Equals(systemName, StringComparison.InvariantCultureIgnoreCase));

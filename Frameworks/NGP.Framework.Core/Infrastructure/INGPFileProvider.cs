@@ -293,5 +293,13 @@ namespace NGP.Framework.Core
         /// <param name="contents">要写入文件的字符串</param>
         /// <param name="encoding">要应用于字符串的编码</param>
         void WriteAllText(string path, string contents, Encoding encoding);
+
+        /// <summary>
+        /// 获取文件内容
+        /// </summary>
+        /// <typeparam name="T">反序列化对象</typeparam>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>反序列化对象</returns>
+        T GetFileContent<T>(string filePath) where T : new();
     }
 }

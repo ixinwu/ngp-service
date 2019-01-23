@@ -20,6 +20,7 @@ using System.Text;
 using System.Threading;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.FileProviders;
+using Newtonsoft.Json;
 using NGP.Framework.Core;
 
 namespace NGP.Framework.WebApi.Core
@@ -482,6 +483,22 @@ namespace NGP.Framework.WebApi.Core
         public virtual void WriteAllText(string path, string contents, Encoding encoding)
         {
             File.WriteAllText(path, contents, encoding);
+        }
+
+        /// <summary>
+        /// 获取文件内容
+        /// </summary>
+        /// <typeparam name="T">反序列化对象</typeparam>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>反序列化对象</returns>
+        public T GetFileContent<T>(string filePath) where T : new()
+        {
+            var text = ReadAllText(filePath, Encoding.UTF8);
+            if (string.IsNullOrEmpty(text))
+                return new T();
+
+            // 从JSON文件中获取插件系统名称
+            return JsonConvert.DeserializeObject<T>(text);
         }
 
         /// <summary>
