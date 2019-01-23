@@ -12,21 +12,26 @@
  * ------------------------------------------------------------------------------*/
 
 
+using System.Runtime.Serialization;
+
 namespace NGP.Foundation.Service.Authentication
 {
     /// <summary>
     /// 登录对象
     /// </summary>
+    [DataContract]
     public class TokenReponse
     {
         /// <summary>
         /// 访问token
         /// </summary>
+        [DataMember(Name = "accessToken")]
         public string AccessToken { get; set; }
 
         /// <summary>
         /// token类型
         /// </summary>
+        [DataMember(Name = "tokenType")]
         public string TokenType { get; set; }
     }
 }

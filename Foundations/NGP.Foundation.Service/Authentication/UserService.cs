@@ -62,8 +62,7 @@ namespace NGP.Foundation.Service.Authentication
             var password = StringExtend.Encrypt(userInfo.Password);
 
             // 数据库查询
-            var dbUser = _repository.FirstOrDefault<Sys_Org_User>(s => s.LoginName == userInfo.UserName);
-            throw new Exception("test");
+            var dbUser = _repository.FirstOrDefault<Sys_Org_User>(s => s.LoginName == userInfo.LoginName);
             // 用户不存在
             if (dbUser == null)
             {

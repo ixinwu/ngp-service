@@ -12,16 +12,20 @@
  * ------------------------------------------------------------------------------*/
 
 
+using System.Runtime.Serialization;
+
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
     /// 动态单条查询请求
     /// </summary>
+    [DataContract]
     public class DynamicSingleQueryRequest : DynamicBaseRequest
     {
         /// <summary>
         /// 主键值
         /// </summary>
+        [DataMember(Name = "primaryKeyValue")]
         public string PrimaryKeyValue { get; set; }
     }
 }

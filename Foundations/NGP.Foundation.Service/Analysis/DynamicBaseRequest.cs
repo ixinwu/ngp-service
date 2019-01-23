@@ -12,32 +12,38 @@
  * ------------------------------------------------------------------------------*/
 
 using NGP.Framework.Core;
+using System.Runtime.Serialization;
 
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
     /// 动态请求基类
     /// </summary>
-    public class DynamicBaseRequest : INGPRequest
+    [DataContract]
+    public abstract class DynamicBaseRequest : INGPRequest
     {
         /// <summary>
         /// 应用key
         /// </summary>
+        [DataMember(Name = "appKey")]
         public string AppKey { get; set; }
 
         /// <summary>
         /// data set key
         /// </summary>
+        [DataMember(Name = "dataSetKey")]
         public string DataSetKey { get; set; }
 
         /// <summary>
         /// 主表key
         /// </summary>
+        [DataMember(Name = "masterFormKey")]
         public string MasterFormKey { get; set; }
 
         /// <summary>
         /// 资源key(用于鉴权)
         /// </summary>
+        [DataMember(Name = "resourceKey")]
         public string ResourceKey { get; set; }
     }
 }
