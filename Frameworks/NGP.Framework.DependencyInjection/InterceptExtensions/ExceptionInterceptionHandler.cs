@@ -68,7 +68,7 @@ namespace NGP.Framework.DependencyInjection
                 ErrorLogInfo error = new ErrorLogInfo
                 {
                     ApiUrl = _workContext.CurrentRequest.Url,
-                    ApiPostParameter = _workContext.CurrentRequest.Parameter,
+                    Parameters = _workContext.CurrentRequest.Parameter,
                     BusinessMethod = string.Format("{0}.{1}.{2}",
                                                     methodInfo.ReflectedType.Namespace,
                                                     methodInfo.ReflectedType.Name,
@@ -76,8 +76,8 @@ namespace NGP.Framework.DependencyInjection
                     ExceptionContent = string.IsNullOrEmpty(ex.Message) ?
                                             (ex.InnerException != null ? ex.InnerException.Message : "Unknow Error")
                                             : ex.Message,
-                    OperateBy = _workContext.Current != null ? _workContext.Current.EmplId : string.Empty,
-                    OperateDept = _workContext.Current != null ? _workContext.Current.DeptId : string.Empty,
+                    OperatedBy = _workContext.Current != null ? _workContext.Current.EmplId : string.Empty,
+                    OperatedDept = _workContext.Current != null ? _workContext.Current.DeptId : string.Empty,
                     Exception = ex
                 };
                 _logPublisher.RegisterError(error);

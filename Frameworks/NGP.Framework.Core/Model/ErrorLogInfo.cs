@@ -27,7 +27,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// api提交参数
         /// </summary>
-        public string ApiPostParameter { get; set; }
+        public string Parameters { get; set; }
         /// <summary>
         /// 业务方法
         /// </summary>
@@ -40,11 +40,11 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 操作者
         /// </summary>
-        public string OperateBy { get; set; }
+        public string OperatedBy { get; set; }
         /// <summary>
         /// 操作部门
         /// </summary>
-        public string OperateDept { get; set; }
+        public string OperatedDept { get; set; }
 
         /// <summary>
         /// 异常内容

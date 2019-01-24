@@ -35,7 +35,7 @@ namespace NGP.Framework.WebApi.Core
         /// </summary>
         /// <param name="hostingEnvironment">ÍÐ¹Ü»·¾³</param>
         public NGPFileProvider(IHostingEnvironment hostingEnvironment) 
-            : base(File.Exists(hostingEnvironment.WebRootPath) ? Path.GetDirectoryName(hostingEnvironment.WebRootPath) : hostingEnvironment.WebRootPath)
+            : base(File.Exists(hostingEnvironment.WebRootPath) ? Path.GetDirectoryName(hostingEnvironment.WebRootPath) : hostingEnvironment.ContentRootPath)
         {
             var path = hostingEnvironment.ContentRootPath ?? string.Empty;
             if (File.Exists(path))
