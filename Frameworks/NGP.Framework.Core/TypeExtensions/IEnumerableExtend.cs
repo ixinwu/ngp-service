@@ -131,7 +131,7 @@ namespace NGP.Framework.Core
         /// <param name="source"></param>
         /// <returns></returns>
         public static List<T> RecursionInitChild<T>(this IEnumerable<T> source)
-            where T : BaseTreeInfo
+            where T : NGPTree
         {
             var result = new List<T>();
 
@@ -150,16 +150,16 @@ namespace NGP.Framework.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="parentItem"></param>
-        private static void RecursionParentChild<T>(IEnumerable<T> source,T parentItem) where T : BaseTreeInfo
+        private static void RecursionParentChild<T>(IEnumerable<T> source,T parentItem) where T : NGPTree
         {
-            var childList = source.Where(s => s.ParentId == parentItem.Id).ToList();
+            var childList = source.Where(s => s.ParentId == parentItem.Key).ToList();
             if (childList.IsNullOrEmpty())
             {
                 return;
             }
             if (parentItem.Children == null)
             {
-                parentItem.Children = new List<BaseTreeInfo>();
+                parentItem.Children = new List<NGPTree>();
             }
             parentItem.Children.AddRange(childList);
 

@@ -26,7 +26,7 @@ namespace NGP.Foundation.Service.Authentication
     /// 用户业务实现
     /// </summary>
     [ExceptionCallHandler]
-    public class UserService : IUserService
+    public class AuthenticationService : IAuthenticationService
     {
         /// <summary>
         /// 数据库仓储
@@ -43,7 +43,7 @@ namespace NGP.Foundation.Service.Authentication
         /// </summary>
         private readonly IWebHelper _webHelper;
 
-        public UserService(IUnitRepository repository, NGPConfig config, IWebHelper webHelper)
+        public AuthenticationService(IUnitRepository repository, NGPConfig config, IWebHelper webHelper)
         {
             _repository = repository;
             _config = config;

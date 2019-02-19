@@ -12,32 +12,38 @@
  * ------------------------------------------------------------------------------*/
 
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 基本树类型
+    /// 树类型
     /// </summary>
-    public class BaseTreeInfo
+    [DataContract]
+    public class NGPTree
     {
         /// <summary>
-        /// Id
+        /// Key
         /// </summary>
-        public string Id { get; set; }
+        [DataMember(Name = "key")]
+        public string Key { get; set; }
 
         /// <summary>
         /// 显示名称
         /// </summary>
+        [DataMember(Name = "text")]
         public string Text { get; set; }
 
         /// <summary>
         /// 子列表
         /// </summary>
-        public List<BaseTreeInfo> Children { get; set; }
+        [DataMember(Name = "children")]
+        public List<NGPTree> Children { get; set; }
 
         /// <summary>
         /// 上级Id
         /// </summary>
+        [DataMember(Name = "parentId")]
         public string ParentId { get; set; }
     }
 }

@@ -27,13 +27,13 @@ namespace NGP.WebApi
         /// <summary>
         /// config
         /// </summary>
-        private readonly IUserService _userService;
+        private readonly IAuthenticationService _userService;
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="ngpConfig"></param>
-        public OAuthController(IUserService userService)
+        public OAuthController(IAuthenticationService userService)
         {
             _userService = userService;
         }

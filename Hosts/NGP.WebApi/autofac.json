@@ -87,12 +87,12 @@
       ],
       "instanceScope": "per-lifetime-scope"
     },
-    // IUserService
+    // AuthenticationService
     {
-      "type": "NGP.Foundation.Service.Authentication.UserService,NGP.Foundation.Service",
+      "type": "NGP.Foundation.Service.Authentication.AuthenticationService,NGP.Foundation.Service",
       "services": [
         {
-          "type": "NGP.Foundation.Service.Authentication.IUserService,NGP.Foundation.Service"
+          "type": "NGP.Foundation.Service.Authentication.IAuthenticationService,NGP.Foundation.Service"
         }
       ],
       "instanceScope": "per-lifetime-scope"

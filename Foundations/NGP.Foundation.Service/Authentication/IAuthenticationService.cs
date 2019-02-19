@@ -22,7 +22,7 @@ namespace NGP.Foundation.Service.Authentication
     /// <summary>
     /// 用户业务服务
     /// </summary>    
-    public interface IUserService
+    public interface IAuthenticationService
     {
         /// <summary>
         /// 认证生成token
