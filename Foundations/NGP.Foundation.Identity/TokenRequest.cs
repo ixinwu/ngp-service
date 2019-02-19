@@ -14,7 +14,7 @@
 using NGP.Framework.Core;
 using System.Runtime.Serialization;
 
-namespace NGP.Foundation.Service.Authentication
+namespace NGP.Foundation.Identity
 {
     /// <summary>
     /// 认证用户对象

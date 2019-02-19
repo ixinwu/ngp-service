@@ -11,8 +11,8 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using NGP.Foundation.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NGP.Foundation.Service.Authentication;
 using NGP.Framework.WebApi.Core;
 
 namespace NGP.WebApi
@@ -27,13 +27,13 @@ namespace NGP.WebApi
         /// <summary>
         /// config
         /// </summary>
-        private readonly IAuthenticationService _userService;
+        private readonly INGPAuthenticationService _userService;
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="ngpConfig"></param>
-        public OAuthController(IAuthenticationService userService)
+        public OAuthController(INGPAuthenticationService userService)
         {
             _userService = userService;
         }

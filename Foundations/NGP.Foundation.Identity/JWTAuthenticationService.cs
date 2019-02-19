@@ -20,13 +20,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace NGP.Foundation.Service.Authentication
+namespace NGP.Foundation.Identity
 {
     /// <summary>
     /// 用户业务实现
     /// </summary>
     [ExceptionCallHandler]
-    public class AuthenticationService : IAuthenticationService
+    public class JWTAuthenticationService : INGPAuthenticationService
     {
         /// <summary>
         /// 数据库仓储
@@ -43,7 +43,7 @@ namespace NGP.Foundation.Service.Authentication
         /// </summary>
         private readonly IWebHelper _webHelper;
 
-        public AuthenticationService(IUnitRepository repository, NGPConfig config, IWebHelper webHelper)
+        public JWTAuthenticationService(IUnitRepository repository, NGPConfig config, IWebHelper webHelper)
         {
             _repository = repository;
             _config = config;

@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * TokenReponse Description:
- * 登录对象
+ * IUserService Description:
+ * 用户业务服务
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -11,27 +11,23 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using NGP.Framework.Core;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-using System.Runtime.Serialization;
-
-namespace NGP.Foundation.Service.Authentication
+namespace NGP.Foundation.Identity
 {
     /// <summary>
-    /// 登录对象
-    /// </summary>
-    [DataContract]
-    public class TokenReponse
+    /// 用户业务服务
+    /// </summary>    
+    public interface INGPAuthenticationService
     {
         /// <summary>
-        /// 访问token
+        /// 认证生成token
         /// </summary>
-        [DataMember(Name = "accessToken")]
-        public string AccessToken { get; set; }
-
-        /// <summary>
-        /// token类型
-        /// </summary>
-        [DataMember(Name = "tokenType")]
-        public string TokenType { get; set; }
+        /// <param name="userInfo"></param>
+        /// <returns>token</returns>        
+        NGPResponse<TokenReponse> Certification(TokenRequest userInfo);
     }
 }

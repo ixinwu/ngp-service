@@ -89,10 +89,10 @@
     },
     // AuthenticationService
     {
-      "type": "NGP.Foundation.Service.Authentication.AuthenticationService,NGP.Foundation.Service",
+      "type": "NGP.Foundation.Identity.JWTAuthenticationService,NGP.Foundation.Identity",
       "services": [
         {
-          "type": "NGP.Foundation.Service.Authentication.IAuthenticationService,NGP.Foundation.Service"
+          "type": "NGP.Foundation.Identity.INGPAuthenticationService,NGP.Foundation.Identity"
         }
       ],
       "instanceScope": "per-lifetime-scope"
