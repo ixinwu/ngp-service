@@ -1,0 +1,47 @@
+{
+  "defaultAssembly": "NGP.WebApi",
+  "components": [
+    // UnitObjectContext
+    {
+      "type": "NGP.Framework.DataAccess.UnitObjectContext,NGP.Framework.DataAccess",
+      "services": [
+        {
+          "type": "NGP.Framework.DataAccess.IDbContext,NGP.Framework.DataAccess"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope",
+      "autoActivate": true
+    },
+    // IUnitRepository
+    {
+      "type": "NGP.Framework.DataAccess.UnitRepository,NGP.Framework.DataAccess",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.IUnitRepository,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope",
+      "autoActivate": true
+    },
+    // ILogPublisher
+    {
+      "type": "NGP.Foundation.Service.Logger.LogPublisher,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.ILogPublisher,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // ILogProvider
+    {
+      "type": "NGP.Foundation.Service.Logger.LogDbProvider,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.ILogProvider,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    }
+  ]
+}

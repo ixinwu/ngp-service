@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.DependencyInjection\NGP.Framework.DependencyInjection.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
 </Project>

@@ -36,10 +36,5 @@ namespace NGP.Framework.Core
         /// token过期时间（单位小时）
         /// </summary>
         public string TokenExpiresHour { get; set; }
-
-        /// <summary>
-        /// 连接串名称
-        /// </summary>
-        public string DbConnection { get; set; }
     }
 }

@@ -5,4 +5,40 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="autofac.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\NGP.WebApi\appsettings.Development.json" Link="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\NGP.WebApi\appsettings.json" Link="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="autofac.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\NGP.WebApi\log4net.config" Link="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="Topshelf" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Foundations\NGP.Foundation.Service\NGP.Foundation.Service.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Foundation.Resources\NGP.Foundation.Resources.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Framework.Core\NGP.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Framework.DataAccess\NGP.Framework.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Frameworks\NGP.Framework.DependencyInjection\NGP.Framework.DependencyInjection.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -32,13 +32,10 @@ namespace NGP.Framework.WebApi.Core
         /// <param name="configuration"></param>
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            // 获取ngp配置
-            var config = services.BuildServiceProvider().GetRequiredService<NGPConfig>();
-
             //add object context
             services.AddDbContext<UnitObjectContext>(optionsBuilder =>
             {
-                optionsBuilder.UseSqlServer(ConfigurationExtensions.GetConnectionString(configuration, config.DbConnection));
+                optionsBuilder.UseSqlServer(ConfigurationExtensions.GetConnectionString(configuration, "DbConnection"));
             });
 
             //add EF services
