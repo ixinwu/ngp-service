@@ -89,43 +89,14 @@
     },
     // IAuthenticationService
     {
-      "type": "NGP.Foundation.Service.Authentication.AuthenticationService,NGP.Foundation.Service",
+      "type": "NGP.Foundation.Identity.JWTAuthenticationService,NGP.Foundation.Identity",
       "services": [
         {
-          "type": "NGP.Foundation.Service.Authentication.IAuthenticationService,NGP.Foundation.Service"
-        }
-      ],
-      "instanceScope": "per-lifetime-scope"
-    },
-    // ISystemGroupService
-    {
-      "type": "NGP.Foundation.Service.Config.SystemGroupService,NGP.Foundation.Service",
-      "services": [
-        {
-          "type": "NGP.Foundation.Service.Config.ISystemGroupService,NGP.Foundation.Service"
-        }
-      ],
-      "instanceScope": "per-lifetime-scope"
-    },
-    // IEmployeeService
-    {
-      "type": "NGP.Foundation.Service.Organization.OrganizationService,NGP.Foundation.Service",
-      "services": [
-        {
-          "type": "NGP.Foundation.Service.Organization.IOrganizationService,NGP.Foundation.Service"
-        }
-      ],
-      "instanceScope": "per-lifetime-scope"
-    },
-    // ICompanyService
-    {
-      "type": "NGP.Foundation.Service.Company.CompanyService,NGP.Foundation.Service",
-      "services": [
-        {
-          "type": "NGP.Foundation.Service.Company.ICompanyService,NGP.Foundation.Service"
+          "type": "NGP.Foundation.Identity.INGPAuthenticationService,NGP.Foundation.Identity"
         }
       ],
       "instanceScope": "per-lifetime-scope"
     }
+
   ]
 }
