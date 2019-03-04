@@ -159,7 +159,63 @@ namespace NGP.Framework.Core
         /// <returns></returns>
         private static byte[] Encrypt(byte[] input)
         {
-            byte[] rgbKey = new byte[]
+            byte[] result;
+            using (DESCryptoServiceProvider dESCryptoServiceProvider = new DESCryptoServiceProvider())
+            {
+                ICryptoTransform cryptoTransform = dESCryptoServiceProvider.CreateEncryptor(_rgbKey, _rgbIV);
+                byte[] array = cryptoTransform.TransformFinalBlock(input, 0, input.Length);
+                result = array;
+            }
+            return result;
+        }
+        #endregion
+
+        #region 解密
+        
+        /// <summary>
+        /// 解密
+        /// </summary>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static string Decrypt(string src)
+        {
+            bool flag = src == "";
+            string result;
+            if (flag)
+            {
+                result = src;
+            }
+            else
+            {
+                Encoding unicode = Encoding.Unicode;
+                byte[] input = Convert.FromBase64String(src);
+                byte[] bytes = Decrypt(input);
+                string @string = unicode.GetString(bytes);
+                result = @string;
+            }
+            return result;
+        }
+        /// <summary>
+        /// 解密
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static byte[] Decrypt(byte[] input)
+        {
+            byte[] result;
+            using (DESCryptoServiceProvider dESCryptoServiceProvider = new DESCryptoServiceProvider())
+            {
+                ICryptoTransform cryptoTransform = dESCryptoServiceProvider.CreateDecryptor(_rgbKey, _rgbIV);
+                byte[] array = cryptoTransform.TransformFinalBlock(input, 0, input.Length);
+                result = array;
+            }
+            return result;
+        }
+        #endregion
+        /// <summary>
+        /// rgb key
+        /// </summary>
+        private static readonly byte[] _rgbKey = new byte[]
             {
                 19,
                 144,
@@ -170,7 +226,10 @@ namespace NGP.Framework.Core
                 128,
                 18
             };
-            byte[] rgbIV = new byte[]
+        /// <summary>
+        /// rgb iv
+        /// </summary>
+        private static readonly byte[] _rgbIV = new byte[]
             {
                 8,
                 1,
@@ -181,15 +240,5 @@ namespace NGP.Framework.Core
                 153,
                 49
             };
-            byte[] result;
-            using (DESCryptoServiceProvider dESCryptoServiceProvider = new DESCryptoServiceProvider())
-            {
-                ICryptoTransform cryptoTransform = dESCryptoServiceProvider.CreateEncryptor(rgbKey, rgbIV);
-                byte[] array = cryptoTransform.TransformFinalBlock(input, 0, input.Length);
-                result = array;
-            }
-            return result;
-        }
-        #endregion
     }
 }

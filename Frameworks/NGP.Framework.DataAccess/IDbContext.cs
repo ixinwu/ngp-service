@@ -31,7 +31,7 @@ namespace NGP.Framework.DataAccess
         /// </summary>
         /// <typeparam name="TEntity">Entity type</typeparam>
         /// <returns>给定实体类型的集合</returns>
-        DbSet<TEntity> Set<TEntity>() where TEntity : BaseDBEntity;
+        DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         /// <summary>
         /// 生成脚本以创建当前模型的所有表

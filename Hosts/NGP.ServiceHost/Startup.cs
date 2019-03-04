@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NGP.Framework.Core;
 using NGP.Framework.DataAccess;
+using NGP.Framework.DependencyInjection;
 using System;
 using System.IO;
 
@@ -40,22 +41,22 @@ namespace NGP.ServiceHost
         /// </summary>
         public void Start()
         {
-
-
             var services = new ServiceCollection();
+
+            ////add object context
+            //services.AddDbContext<UnitObjectContext>(optionsBuilder =>
+            //{
+            //    optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
+            //});
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(AppContext.BaseDirectory))
                 .AddJsonFile("appsettings.json", optional: true);
-           
+
             Configuration = builder.Build();
 
-            //add object context
-            services.AddDbContext<UnitObjectContext>(optionsBuilder =>
-            {
-                optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
-            });
+            services.ConfigureApplicationServices(Configuration);
         }
 
         /// <summary>

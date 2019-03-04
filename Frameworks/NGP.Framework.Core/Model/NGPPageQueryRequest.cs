@@ -40,10 +40,15 @@ namespace NGP.Framework.Core
         public string LikeValue { get; set; }
 
         /// <summary>
-        /// 排序表达式
+        /// 排序列名
         /// </summary>
-        [DataMember(Name = "sortExpression")]
-        public string SortExpression { get; set; }
+        [DataMember(Name = "sortField")]
+        public string SortField { get; set; }
+        /// <summary>
+        /// 排序asc顺序，desc逆序
+        /// </summary>
+        [DataMember(Name = "sortDirection")]
+        public string SortDirection { get; set; }
 
         /// <summary>
         /// 请求数据

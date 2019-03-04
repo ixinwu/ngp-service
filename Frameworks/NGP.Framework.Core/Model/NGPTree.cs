@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 树类型
+    /// 基本树类型
     /// </summary>
     [DataContract]
     public class NGPTree

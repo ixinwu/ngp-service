@@ -1,5 +1,5 @@
 {
-  "defaultAssembly": "NGP.WebApi",
+  "defaultAssembly": "NGP.ServiceHost",
   "components": [
     // UnitObjectContext
     {
@@ -18,6 +18,17 @@
       "services": [
         {
           "type": "NGP.Framework.Core.IUnitRepository,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope",
+      "autoActivate": true
+    },
+    // INGPFileProvider
+    {
+      "type": "NGP.Framework.Core.NGPFileProvider,NGP.Framework.Core",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.INGPFileProvider,NGP.Framework.Core"
         }
       ],
       "instanceScope": "per-lifetime-scope",

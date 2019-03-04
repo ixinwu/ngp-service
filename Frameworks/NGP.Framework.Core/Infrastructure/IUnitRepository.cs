@@ -53,7 +53,7 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <typeparam name="TEntity">参数类型</typeparam>
         /// <param name="entities">插入列表</param>
-        void Insert<TEntity>(IEnumerable<TEntity> entities) where TEntity : BaseDBEntity;
+        void Insert<TEntity>(IList<TEntity> entities) where TEntity : class;
 
         /// <summary>
         /// 更新对象
@@ -93,7 +93,7 @@ namespace NGP.Framework.Core
         /// <typeparam name="TEntity">查询类型</typeparam>
         ///  <param name="criteria">条件表达式</param>
         /// <returns>当前类型的表接口</returns>
-        IQueryable<TEntity> All<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : BaseDBEntity;
+        IQueryable<TEntity> All<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : class;
 
         /// <summary>
         /// 获取一个启用了“无跟踪”的表（EF功能），仅当只为只读操作加载记录时才使用该表
@@ -101,7 +101,7 @@ namespace NGP.Framework.Core
         /// <typeparam name="TEntity">查询类型</typeparam>
         ///  <param name="criteria">条件表达式</param>
         /// <returns>当前类型的表接口</returns>
-        IQueryable<TEntity> AllNoTracking<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : BaseDBEntity;
+        IQueryable<TEntity> AllNoTracking<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : class;
 
         /// <summary>
         /// 基于原始SQL查询为查询类型创建LINQ查询
@@ -134,7 +134,7 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <typeparam name="TEntity">参数类型</typeparam>
         /// <param name="entities">插入列表</param>
-        void RealBulkInsert<TEntity>(IEnumerable<TEntity> entities) where TEntity : class;
+        void BulkInsert<TEntity>(IList<TEntity> entities) where TEntity : class;
 
         /// <summary>
         /// 将此上下文中所做的所有更改保存到数据库

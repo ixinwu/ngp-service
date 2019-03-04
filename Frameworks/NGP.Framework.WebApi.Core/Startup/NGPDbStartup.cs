@@ -12,11 +12,8 @@
  * ------------------------------------------------------------------------------*/
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NGP.Framework.Core;
-using NGP.Framework.DataAccess;
 
 namespace NGP.Framework.WebApi.Core
 {
@@ -32,15 +29,13 @@ namespace NGP.Framework.WebApi.Core
         /// <param name="configuration"></param>
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            //add object context
-            services.AddDbContext<UnitObjectContext>(optionsBuilder =>
-            {
-                optionsBuilder.UseSqlServer(ConfigurationExtensions.GetConnectionString(configuration, "DbConnection"));
-            });
+            //Singleton<IEngine>.Instance.Resolve<IDbInitConfig>().ConfigureDataBase(services, configuration);
 
-            //add EF services
-            //services.AddEntityFrameworkSqlServer();
-            //services.AddEntityFrameworkProxies();
+            ////add object context
+            //services.AddDbContext<UnitObjectContext>(optionsBuilder =>
+            //{
+            //    optionsBuilder.UseSqlServer(ConfigurationExtensions.GetConnectionString(configuration, "DbConnection"));
+            //});
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ using NGP.Framework.Core;
 using NGP.Framework.DependencyInjection;
 using System.Runtime.CompilerServices;
 
-namespace NGP.Framework.WebApi.Core
+namespace NGP.Framework.DependencyInjection
 {
     /// <summary>
     /// 引擎上下文

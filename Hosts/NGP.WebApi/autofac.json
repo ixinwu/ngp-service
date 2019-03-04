@@ -56,9 +56,9 @@
       "instanceScope": "per-lifetime-scope",
       "autoActivate": true
     },
-    // IWebHelper
+    // INGPFileProvider
     {
-      "type": "NGP.Framework.WebApi.Core.NGPFileProvider,NGP.Framework.WebApi.Core",
+      "type": "NGP.Framework.WebApi.Core.NGPWebFileProvider,NGP.Framework.WebApi.Core",
       "services": [
         {
           "type": "NGP.Framework.Core.INGPFileProvider,NGP.Framework.Core"
@@ -87,12 +87,42 @@
       ],
       "instanceScope": "per-lifetime-scope"
     },
-    // AuthenticationService
+    // IAuthenticationService
     {
-      "type": "NGP.Foundation.Identity.JWTAuthenticationService,NGP.Foundation.Identity",
+      "type": "NGP.Foundation.Service.Authentication.AuthenticationService,NGP.Foundation.Service",
       "services": [
         {
-          "type": "NGP.Foundation.Identity.INGPAuthenticationService,NGP.Foundation.Identity"
+          "type": "NGP.Foundation.Service.Authentication.IAuthenticationService,NGP.Foundation.Service"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // ISystemGroupService
+    {
+      "type": "NGP.Foundation.Service.Config.SystemGroupService,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Foundation.Service.Config.ISystemGroupService,NGP.Foundation.Service"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // IEmployeeService
+    {
+      "type": "NGP.Foundation.Service.Organization.OrganizationService,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Foundation.Service.Organization.IOrganizationService,NGP.Foundation.Service"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // ICompanyService
+    {
+      "type": "NGP.Foundation.Service.Company.CompanyService,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Foundation.Service.Company.ICompanyService,NGP.Foundation.Service"
         }
       ],
       "instanceScope": "per-lifetime-scope"

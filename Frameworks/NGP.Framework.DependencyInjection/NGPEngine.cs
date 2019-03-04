@@ -13,16 +13,14 @@
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NGP.Framework.Core;
-using NGP.Framework.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NGP.Framework.WebApi.Core
+namespace NGP.Framework.DependencyInjection
 {
     /// <summary>
     /// 引擎实现
@@ -44,11 +42,9 @@ namespace NGP.Framework.WebApi.Core
         /// 获取 IServiceProvider
         /// </summary>
         /// <returns>IServiceProvider</returns>
-        protected IServiceProvider GetServiceProvider()
+        protected virtual IServiceProvider GetServiceProvider()
         {
-            var accessor = ServiceProvider.GetService<IHttpContextAccessor>();
-            var context = accessor.HttpContext;
-            return context?.RequestServices ?? ServiceProvider;
+            return ServiceProvider;
         }
 
         /// <summary>

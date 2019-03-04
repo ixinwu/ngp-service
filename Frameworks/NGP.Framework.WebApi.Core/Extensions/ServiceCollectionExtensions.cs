@@ -41,7 +41,7 @@ namespace NGP.Framework.WebApi.Core
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // 创建、初始化和配置引擎
-            EngineFactory.Create();
+            EngineWebFactory.Create();
 
             // 添加TLS 1.2
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -51,7 +51,7 @@ namespace NGP.Framework.WebApi.Core
 
             // 文件提供者
             var hostingEnvironment = provider.GetRequiredService<IHostingEnvironment>();
-            CommonHelper.DefaultFileProvider = new NGPFileProvider(hostingEnvironment);
+            CommonHelper.DefaultFileProvider = new NGPWebFileProvider(hostingEnvironment);
 
             // 初始化插件
             var mvcCoreBuilder = services.AddMvcCore();
@@ -60,6 +60,11 @@ namespace NGP.Framework.WebApi.Core
             // 查找其他程序集提供的启动配置
             var typeFinder = new WebAppTypeFinder();
             var startupConfigurations = typeFinder.FindClassesOfType<INGPStartup>();
+
+            // 初始化数据库
+            var dbConfigType = typeFinder.FindClassesOfType<IDbInitConfig>().FirstOrDefault();
+            var dbConfig = Activator.CreateInstance(dbConfigType) as IDbInitConfig;
+            dbConfig.ConfigureDataBase(services, configuration);
 
             // 创建和排序启动配置的实例
             var instances = startupConfigurations

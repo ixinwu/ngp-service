@@ -11,6 +11,7 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using NGP.Framework.Core;
 using System;
@@ -19,6 +20,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using Z.EntityFramework.Plus;
 
 namespace NGP.Framework.DataAccess
 {
@@ -95,9 +97,8 @@ namespace NGP.Framework.DataAccess
         public int UpdateByExpression<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
             Expression<Func<TEntity, bool>> criteria = null) where TEntity : class
         {
-            //var source = this.All<TEntity>(criteria);
-            return 1;
-            //return source.Update(updateExpression);
+            var source = All<TEntity>(criteria);
+            return source.Update(updateExpression);
         }
 
         /// <summary>
@@ -122,14 +123,12 @@ namespace NGP.Framework.DataAccess
         /// <returns></returns>
         public int DeleteByExpression<T>(Expression<Func<T, bool>> criteria = null) where T : class
         {
-            //var source = _context.Set<T>();
-            //if (criteria == null)
-            //{
-            //    return _context.Set<T>().Delete();
-            //}
-            //return source.Where(criteria).Delete();
-
-            return 1;
+            var source = _context.Set<T>();
+            if (criteria == null)
+            {
+                return _context.Set<T>().Delete();
+            }
+            return source.Where(criteria).Delete();
         }
 
         /// <summary>
@@ -162,7 +161,7 @@ namespace NGP.Framework.DataAccess
         /// <summary>
         /// </summary>
         /// <typeparam name="TEntity">查询类型</typeparam>
-        public IQueryable<TEntity> All<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : BaseDBEntity
+        public IQueryable<TEntity> All<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : class
             => criteria == null ? _context.Set<TEntity>() : _context.Set<TEntity>().Where(criteria);
 
 
@@ -172,7 +171,7 @@ namespace NGP.Framework.DataAccess
         /// <typeparam name="TEntity">查询类型</typeparam>
         ///  <param name="criteria">条件表达式</param>
         /// <returns>当前类型的表接口</returns>
-        public IQueryable<TEntity> AllNoTracking<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : BaseDBEntity
+        public IQueryable<TEntity> AllNoTracking<TEntity>(Expression<Func<TEntity, bool>> criteria = null) where TEntity : class
         {
             var entities = _context.Set<TEntity>().AsNoTracking();
             return criteria == null ? entities : entities.Where(criteria);
@@ -193,7 +192,7 @@ namespace NGP.Framework.DataAccess
         /// </summary>
         /// <typeparam name="TEntity">参数类型</typeparam>
         /// <param name="entities">插入列表</param>
-        public void Insert<TEntity>(IEnumerable<TEntity> entities) where TEntity : BaseDBEntity
+        public void Insert<TEntity>(IList<TEntity> entities) where TEntity : class
         {
             if (entities.IsNullOrEmpty())
             {
@@ -203,10 +202,6 @@ namespace NGP.Framework.DataAccess
             {
                 _context.Set<TEntity>().Add(entitieItem);
             }
-
-            _context.SaveChanges();
-
-            //(_context as DbContext).BulkInsert(entities);
         }
 
         /// <summary>
@@ -214,14 +209,14 @@ namespace NGP.Framework.DataAccess
         /// </summary>
         /// <typeparam name="TEntity">参数类型</typeparam>
         /// <param name="entities">插入列表</param>
-        public void RealBulkInsert<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        public void BulkInsert<TEntity>(IList<TEntity> entities) where TEntity : class
         {
             if (entities.IsNullOrEmpty())
             {
                 return;
             }
 
-            //(_context as DbContext).BulkInsert(entities);
+            (_context as DbContext).BulkInsert(entities);
         }
 
         /// <summary>
@@ -229,9 +224,7 @@ namespace NGP.Framework.DataAccess
         /// </summary>
         /// <returns>写入数据库的状态条目数</returns>
         public int SaveChanges()
-        {
-            return _context.SaveChanges();
-        }
+            => _context.SaveChanges();
         #endregion
 
         #region excute command

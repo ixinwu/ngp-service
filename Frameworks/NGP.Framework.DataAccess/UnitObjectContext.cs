@@ -92,7 +92,7 @@ namespace NGP.Framework.DataAccess
         /// </summary>
         /// <typeparam name="TEntity">Entity type</typeparam>
         /// <returns>给定实体类型的集合</returns>
-        public virtual new DbSet<TEntity> Set<TEntity>() where TEntity : BaseDBEntity
+        public virtual new DbSet<TEntity> Set<TEntity>() where TEntity : class
             => base.Set<TEntity>();
 
         /// <summary>

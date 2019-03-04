@@ -26,7 +26,7 @@ namespace NGP.Framework.Core
         /// <param name="removeLine"></param>
         /// <returns></returns>
         public static string NewGuid(bool removeLine = true)
-        {           
+        {
             if (removeLine)
             {
                 // 去横杠再转换成大写
@@ -40,10 +40,7 @@ namespace NGP.Framework.Core
         /// </summary>
         public static string EmptyGuid
         {
-            get
-            {
-                return Guid.Empty.ToString("N");
-            }
+            get => Guid.Empty.ToString("N");
         }
     }
 }

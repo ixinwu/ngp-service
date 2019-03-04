@@ -14,9 +14,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NGP.Framework.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NGP.Framework.DataAccess
 {
@@ -56,7 +53,6 @@ namespace NGP.Framework.DataAccess
 
             // 创建部门
             builder.Property(t => t.CreatedDept)
-                .IsRequired()
                 .HasMaxLength(50);
 
             // 更新时间
@@ -70,7 +66,6 @@ namespace NGP.Framework.DataAccess
 
             // 更新部门
             builder.Property(t => t.UpdatedDept)
-                .IsRequired()
                 .HasMaxLength(50);
         }
 
@@ -85,7 +80,7 @@ namespace NGP.Framework.DataAccess
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
             //add custom configuration
-            this.PostConfigure(builder);
+            PostConfigure(builder);
         }
 
         /// <summary>

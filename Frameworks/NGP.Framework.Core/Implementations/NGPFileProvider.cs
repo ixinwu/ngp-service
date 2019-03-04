@@ -11,6 +11,8 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using Microsoft.Extensions.FileProviders;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,12 +20,8 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.FileProviders;
-using Newtonsoft.Json;
-using NGP.Framework.Core;
 
-namespace NGP.Framework.WebApi.Core
+namespace NGP.Framework.Core
 {
     /// <summary>
     /// NGP文件提供者(IO功能使用磁盘上的文件系统)
@@ -34,10 +32,9 @@ namespace NGP.Framework.WebApi.Core
         /// 初始化NGPFileProvider的新实例
         /// </summary>
         /// <param name="hostingEnvironment">托管环境</param>
-        public NGPFileProvider(IHostingEnvironment hostingEnvironment) 
-            : base(File.Exists(hostingEnvironment.WebRootPath) ? Path.GetDirectoryName(hostingEnvironment.WebRootPath) : hostingEnvironment.ContentRootPath)
+        public NGPFileProvider(string path = null)
+            : base(string.IsNullOrWhiteSpace(path) ? AppContext.BaseDirectory : path)
         {
-            var path = hostingEnvironment.ContentRootPath ?? string.Empty;
             if (File.Exists(path))
                 path = Path.GetDirectoryName(path);
 
