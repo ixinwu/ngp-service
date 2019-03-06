@@ -76,7 +76,7 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <param name="url">url</param>
         /// <param name="key">查询要移除的参数键</param>
-        /// <param name="values">查询要移除的参数值</param>
+        /// <param name="value">查询要移除的参数值</param>
         /// <returns>没有传递查询参数的新URL</returns>
         string RemoveQueryString(string url, string key, string value = null);
 

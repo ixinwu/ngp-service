@@ -11,11 +11,9 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NGP.Framework.Core;
-using NGP.Framework.DataAccess;
 using NGP.Framework.DependencyInjection;
 using System;
 using System.IO;
@@ -43,12 +41,6 @@ namespace NGP.ServiceHost
         {
             var services = new ServiceCollection();
 
-            ////add object context
-            //services.AddDbContext<UnitObjectContext>(optionsBuilder =>
-            //{
-            //    optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
-            //});
-
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(AppContext.BaseDirectory))
@@ -57,6 +49,22 @@ namespace NGP.ServiceHost
             Configuration = builder.Build();
 
             services.ConfigureApplicationServices(Configuration);
+
+            // 运行服务
+            Singleton<IEngine>.Instance.Resolve<IServiceContainer>().Start();
+
+            // 获取队列
+            var mqInfo = Singleton<IEngine>.Instance.Resolve<IUnitRepository>().GetMessageRouteByBusinessKey(MessageQueueKey.__TestKey);
+            // 启动消息监听
+            Singleton<IEngine>.Instance.Resolve<IMessageSubscriber>().Monitor<NGPSingleRequest>(mqInfo,
+            param =>
+             {
+                 var msg = string.Format("ThreadId : {0}\n, ReceiveMessage : {1}\n ReceiveTime: {2}\n",
+                     System.Threading.Thread.CurrentThread.ManagedThreadId,
+                     param.RequestData,
+                     DateTime.Now);
+                 Console.WriteLine(msg);
+             });
         }
 
         /// <summary>
@@ -64,6 +72,8 @@ namespace NGP.ServiceHost
         /// </summary>
         public void Shutdown()
         {
+            // 停止服务
+            Singleton<IEngine>.Instance.Resolve<IServiceContainer>().Shutdown();
         }
     }
 }

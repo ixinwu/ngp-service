@@ -17,6 +17,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using NGP.Framework.Core;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace NGP.Framework.WebApi.Core
 {
@@ -39,7 +44,7 @@ namespace NGP.Framework.WebApi.Core
             mvcBuilder.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // 配置json序列化
-            mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            //mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
         /// <summary>
@@ -48,19 +53,19 @@ namespace NGP.Framework.WebApi.Core
         /// <param name="application"></param>
         public void Configure(IApplicationBuilder application)
         {
-            //路由
-            application.UseMvc(routeBuilder =>
-            {
-                //注册路由
-                Singleton<IEngine>.Instance.Resolve<IRoutePublisher>().RegisterRoutes(routeBuilder);
-            });
-
             // 全局配置
             application.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+            //路由
+            application.UseMvc(routeBuilder =>
+            {
+                //注册路由
+                Singleton<IEngine>.Instance.Resolve<IRoutePublisher>().RegisterRoutes(routeBuilder);
+            });
         }
 
         /// <summary>
@@ -68,7 +73,6 @@ namespace NGP.Framework.WebApi.Core
         /// </summary>
         public int Order
         {
-            // api应该在最后
             get { return 1000; }
         }
     }

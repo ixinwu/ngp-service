@@ -29,7 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Framework.DependencyInj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Foundation.Service", "Foundations\NGP.Foundation.Service\NGP.Foundation.Service.csproj", "{810A13DC-AEF8-4D3F-91D5-D2AE38932CC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Foundation.Identity", "Foundations\NGP.Foundation.Identity\NGP.Foundation.Identity.csproj", "{E3DE67BB-823C-418D-BE14-2FBC704807EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Foundation.Identity", "Foundations\NGP.Foundation.Identity\NGP.Foundation.Identity.csproj", "{E3DE67BB-823C-418D-BE14-2FBC704807EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.MessageQueue", "Middlewares\NGP.Middleware.MessageQueue\NGP.Middleware.MessageQueue.csproj", "{F8F59BC1-649A-422B-BCBF-2062062A17B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.TaskWrapper", "Middlewares\NGP.Middleware.TaskWrapper\NGP.Middleware.TaskWrapper.csproj", "{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,14 @@ Global
 		{E3DE67BB-823C-418D-BE14-2FBC704807EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3DE67BB-823C-418D-BE14-2FBC704807EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3DE67BB-823C-418D-BE14-2FBC704807EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F59BC1-649A-422B-BCBF-2062062A17B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F59BC1-649A-422B-BCBF-2062062A17B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F59BC1-649A-422B-BCBF-2062062A17B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F59BC1-649A-422B-BCBF-2062062A17B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +99,8 @@ Global
 		{4E9E3104-B899-4BC2-91E3-083A5885E53C} = {A3E285E0-EF36-45C0-B6B4-9AA44489FC4B}
 		{810A13DC-AEF8-4D3F-91D5-D2AE38932CC3} = {A329FB0B-3F98-4D46-9087-BED3FC9DE1FD}
 		{E3DE67BB-823C-418D-BE14-2FBC704807EE} = {A329FB0B-3F98-4D46-9087-BED3FC9DE1FD}
+		{F8F59BC1-649A-422B-BCBF-2062062A17B1} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
+		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B291264-3401-47DE-B70F-EBBBAB794AB1}

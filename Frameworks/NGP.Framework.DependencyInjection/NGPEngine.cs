@@ -50,9 +50,13 @@ namespace NGP.Framework.DependencyInjection
         /// <summary>
         /// 依赖注入
         /// </summary>
-        /// <param name="services">Collection of service descriptors</param>
-        /// <param name="typeFinder">Type finder</param>
-        public IServiceProvider RegisterDependencies(IServiceCollection services, ITypeFinder typeFinder)
+        /// <param name="services"></param>
+        /// <param name="typeFinder"></param>
+        /// <param name="registerList"></param>
+        /// <returns></returns>
+        public IServiceProvider RegisterDependencies(IServiceCollection services,
+            ITypeFinder typeFinder,
+            params NGPKeyValuePair<Type, object>[] registerList)
         {
             var containerBuilder = new ContainerBuilder();
 
@@ -61,6 +65,12 @@ namespace NGP.Framework.DependencyInjection
 
             // 注册类型查找器
             containerBuilder.RegisterInstance(typeFinder).As<ITypeFinder>().SingleInstance();
+
+            // 额外注入
+            foreach (var registerType in registerList)
+            {
+                containerBuilder.RegisterInstance(registerType.Value).As(registerType.Key).SingleInstance();
+            }
 
             // 查找IDependencyRegistrar
             var dependencyRegistrars = typeFinder.FindClassesOfType<IDependencyRegistrar>();
@@ -94,7 +104,7 @@ namespace NGP.Framework.DependencyInjection
         public IServiceProvider Initialize(IServiceCollection services, IConfiguration configuration)
         {
             // 组件加载事件
-            AppDomain.CurrentDomain.AssemblyResolve += (sender,args)=>
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 // 检查已加载的装配
                 var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.FullName == args.Name);
@@ -106,7 +116,7 @@ namespace NGP.Framework.DependencyInjection
                 assembly = tf.GetAssemblies().FirstOrDefault(a => a.FullName == args.Name);
                 return assembly;
             };
-            
+
             return _serviceProvider;
         }
 

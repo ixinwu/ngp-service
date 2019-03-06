@@ -19,32 +19,27 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 键值对模型
     /// </summary>
-    [DataContract]
     public class NGPKeyValuePair<TKey, TValue>
     {
         /// <summary>
         /// 键
         /// </summary>
-        [DataMember(Name = "key")]
         public TKey Key { get; set; }
 
         /// <summary>
         /// 值
         /// </summary>
-        [DataMember(Name = "value")]
         public TValue Value { get; set; }
 
         /// <summary>
         /// 排序
         /// </summary>
-        [DataMember(Name = "orderIndex")]
         public int? OrderIndex { get; set; }
     }
 
     /// <summary>
     /// 键值对模型
     /// </summary>
-    [DataContract]
     public class NGPKeyValuePair : NGPKeyValuePair<string, string>
     {
     }
@@ -52,7 +47,6 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 键值对模型
     /// </summary>
-    [DataContract]
     public class NGPKeyValuePair<TValue> : NGPKeyValuePair<string, TValue>
     {
     }

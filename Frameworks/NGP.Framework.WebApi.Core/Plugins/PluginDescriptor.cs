@@ -24,7 +24,9 @@ namespace NGP.Framework.WebApi.Core
     public class PluginDescriptor : IComparable<PluginDescriptor>
     {
         #region Ctor
-
+        /// <summary>
+        /// ctor
+        /// </summary>
         public PluginDescriptor()
         {
         }

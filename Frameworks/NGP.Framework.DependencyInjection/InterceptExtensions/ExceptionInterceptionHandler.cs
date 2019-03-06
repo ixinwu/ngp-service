@@ -38,6 +38,7 @@ namespace NGP.Framework.DependencyInjection
         /// ctor
         /// </summary>
         /// <param name="workContext"></param>
+        /// <param name="logPublisher"></param>
         public ExceptionInterceptionHandler(IWorkContext workContext, ILogPublisher logPublisher)
         {
             _workContext = workContext;

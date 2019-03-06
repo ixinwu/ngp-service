@@ -11,6 +11,8 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using System;
+
 namespace NGP.Framework.Core
 {
     /// <summary>
@@ -19,24 +21,29 @@ namespace NGP.Framework.Core
     public class ServiceJobDescriptor : BaseEntity
     {
         /// <summary>
-        /// 应用Key
-        /// </summary>
-        public string AppKey { get; set; }
-
-        /// <summary>
         /// 服务Key
         /// </summary>
         public string ServiceKey { get; set; }
 
         /// <summary>
-        /// 服务类型
+        /// Cron表达式
         /// </summary>
-        public string ServiceType { get; set; }
+        public string CronExpression { get; set; }
 
         /// <summary>
-        /// 运行配置对象
+        /// 排序
         /// </summary>
-        public ServiceRunningDescriptor WorkConfig { get; set; }
+        public int? OrderIndex { get; set; }
+
+        /// <summary>
+        /// 有效起始时间
+        /// </summary>
+        public DateTime? ValidStartTime { get; set; }
+
+        /// <summary>
+        /// 有效结束时间
+        /// </summary>
+        public DateTime? ValidEndTime { get; set; }
 
         /// <summary>
         /// 策略执行方法

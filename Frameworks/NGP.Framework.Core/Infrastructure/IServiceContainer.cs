@@ -39,22 +39,5 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <param name="item">服务项</param>
         void AddServiceJob(ServiceJobDescriptor item);
-
-        /// <summary>
-        /// 修改服务项触发器
-        /// </summary>
-        /// <param name="item">服务项</param>
-        void ModifyServiceJobTrigger(ServiceJobDescriptor item);
-
-        /// <summary>
-        /// 去除服务项
-        /// </summary>
-        /// <param name="item">服务项</param>
-        void RemoveServiceJob(ServiceJobDescriptor item);
-
-        /// <summary>
-        /// 服务项列表
-        /// </summary>
-        IEnumerable<ServiceJobDescriptor> ServiceJobDescriptors { get; }
     }
 }

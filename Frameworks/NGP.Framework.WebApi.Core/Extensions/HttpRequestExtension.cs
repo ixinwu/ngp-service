@@ -31,6 +31,7 @@ namespace NGP.Framework.WebApi.Core
         /// 获取指定的HTTP请求URI是否引用本地主机。
         /// </summary>
         /// <param name="req">HTTP request</param>
+        /// <param name="webHelper">webHelper</param>
         /// <returns>如果HTTP请求URI引用本地主机，则为True</returns>
         public static bool IsLocalRequest(this HttpRequest req, IWebHelper webHelper)
         {

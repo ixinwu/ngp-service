@@ -35,6 +35,10 @@ namespace NGP.Framework.DataAccess
         private readonly IDbContext _context;
 
         #region Ctor
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="context"></param>
         public UnitRepository(IDbContext context)
           => _context = context;
         #endregion
@@ -54,7 +58,7 @@ namespace NGP.Framework.DataAccess
         /// 根据ID查找
         /// </summary>
         /// <typeparam name="TEntity">返回值类型</typeparam>
-        /// <param name="keyValues">主键值</param>
+        /// <param name="id">主键值</param>
         /// <returns>查询结果</returns>
         public TEntity FindById<TEntity>(string id) where TEntity : BaseDBEntity
             => _context.Set<TEntity>().Find(id);
@@ -118,7 +122,7 @@ namespace NGP.Framework.DataAccess
         /// <summary>
         /// EF扩展删除
         /// </summary>
-        /// <typeparam name="TEntity">参数类型</typeparam>
+        /// <typeparam name="T">参数类型</typeparam>
         /// <param name="criteria">查询表达式</param>
         /// <returns></returns>
         public int DeleteByExpression<T>(Expression<Func<T, bool>> criteria = null) where T : class

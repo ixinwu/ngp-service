@@ -28,6 +28,7 @@ namespace NGP.Framework.WebApi.Core
         /// 配置应用程序HTTP请求管道
         /// </summary>
         /// <param name="application">用于配置应用程序请求管道的生成器</param>
+        /// <param name="loggerFactory"></param>
         public static void ConfigureRequestPipeline(this IApplicationBuilder application,ILoggerFactory loggerFactory)
         {
             // 通过类型查找器获取启动配置

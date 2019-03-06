@@ -11,10 +11,10 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 
 namespace NGP.Framework.Core
 {
@@ -29,8 +29,9 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <param name="services"></param>
         /// <param name="typeFinder"></param>
+        /// <param name="registerList"></param>
         /// <returns></returns>
-        IServiceProvider RegisterDependencies(IServiceCollection services, ITypeFinder typeFinder);
+        IServiceProvider RegisterDependencies(IServiceCollection services, ITypeFinder typeFinder, params NGPKeyValuePair<Type, object>[] registerList);
 
         /// <summary>
         /// 初始化

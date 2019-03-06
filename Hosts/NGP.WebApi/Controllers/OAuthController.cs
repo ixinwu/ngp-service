@@ -32,12 +32,17 @@ namespace NGP.WebApi
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="ngpConfig"></param>
+        /// <param name="userService"></param>
         public OAuthController(INGPAuthenticationService userService)
         {
             _userService = userService;
         }
 
+        /// <summary>
+        /// 验证获取token
+        /// </summary>
+        /// <param name="userDto"></param>
+        /// <returns></returns>
         [HttpPost("token")]
         public IActionResult Token([FromBody]TokenRequest userDto)
         {

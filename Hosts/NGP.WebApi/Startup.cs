@@ -35,7 +35,10 @@ namespace NGP.WebApi
         #endregion
 
         #region Ctor
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             // 设置配置

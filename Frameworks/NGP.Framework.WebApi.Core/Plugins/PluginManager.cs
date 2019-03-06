@@ -158,7 +158,6 @@ namespace NGP.Framework.WebApi.Core
         /// </summary>
         /// <param name="plug">插件文件信息</param>
         /// <param name="applicationPartManager"></param>
-        /// <param name="config">Config</param>
         /// <param name="shadowCopyPath">Shadow copy path</param>
         /// <returns>Assembly</returns>
         private static Assembly PerformFileDeploy(string plug, ApplicationPartManager applicationPartManager, string shadowCopyPath = "")
@@ -193,7 +192,6 @@ namespace NGP.Framework.WebApi.Core
         /// <summary>
         /// 注册插件定义
         /// </summary>
-        /// <param name="config">Config</param>
         /// <param name="applicationPartManager">Application part manager</param>
         /// <param name="plug">Plugin file info</param>
         /// <returns>Assembly</returns>
@@ -298,7 +296,6 @@ namespace NGP.Framework.WebApi.Core
         /// 初始化
         /// </summary>
         /// <param name="applicationPartManager">Application part manager</param>
-        /// <param name="config">Config</param>
         public static void Initialize(ApplicationPartManager applicationPartManager)
         {
             if (applicationPartManager == null)

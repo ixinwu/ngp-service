@@ -38,6 +38,8 @@
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.Core\NGP.Framework.Core.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.DataAccess\NGP.Framework.DataAccess.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.DependencyInjection\NGP.Framework.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\Middlewares\NGP.Middleware.MessageQueue\NGP.Middleware.MessageQueue.csproj" />
+    <ProjectReference Include="..\..\Middlewares\NGP.Middleware.TaskWrapper\NGP.Middleware.TaskWrapper.csproj" />
   </ItemGroup>
 
 </Project>

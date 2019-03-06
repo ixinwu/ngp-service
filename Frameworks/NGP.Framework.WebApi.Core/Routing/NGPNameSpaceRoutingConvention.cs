@@ -26,11 +26,19 @@ namespace NGP.Framework.WebApi.Core.RouteExtensions
         private readonly string apiPrefix;
         private const string urlTemplate = "{0}/{1}/{2}";
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="apiPrefix"></param>
         public NGPNameSpaceRoutingConvention(string apiPrefix = "api")
         {
             this.apiPrefix = apiPrefix;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="application"></param>
         public void Apply(ApplicationModel application)
         {
             foreach (var controller in application.Controllers)

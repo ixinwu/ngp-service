@@ -24,24 +24,6 @@ namespace NGP.Framework.Core
     /// </summary>
     public class ServiceRunningDescriptor
     {
-        /// <summary>
-        /// Cron表达式
-        /// </summary>
-        public string CronExpression { get; set; }
-
-        /// <summary>
-        /// 有效起始时间
-        /// </summary>
-        public DateTime? ValidStartTime { get; set; }
-
-        /// <summary>
-        /// 有效结束时间
-        /// </summary>
-        public DateTime? ValidEndTime { get; set; }
-
-        /// <summary>
-        /// 排序
-        /// </summary>
-        public int? OrderIndex { get; set; }
+        
     }
 }

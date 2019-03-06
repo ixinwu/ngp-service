@@ -30,6 +30,6 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 工作语言
         /// </summary>
-        public WorkLanguage WorkingLanguage { get; set; }
+        public WorkLanguage WorkingLanguage { get; set; }        
     }
 }

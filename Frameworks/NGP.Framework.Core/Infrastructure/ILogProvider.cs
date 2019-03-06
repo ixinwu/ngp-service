@@ -29,7 +29,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 插入业务日志
         /// </summary>
-        /// <param name="info">日志对象</param>
+        /// <param name="context">日志对象</param>
         void InsertBusinessLog(BusinessLogContext context);
     }
 }

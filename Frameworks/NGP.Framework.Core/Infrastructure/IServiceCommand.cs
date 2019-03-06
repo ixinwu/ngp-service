@@ -25,9 +25,9 @@ namespace NGP.Framework.Core
     public interface IServiceCommand
     {
         /// <summary>
-        /// 服务类型
+        /// 服务key
         /// </summary>
-        string ServiceType { get; }
+        string ServiceKey { get; }
 
         /// <summary>
         /// 当前执行的任务

@@ -58,7 +58,7 @@ namespace NGP.Framework.WebApi.Core
             PluginManager.Initialize(mvcCoreBuilder.PartManager);
 
             // 查找其他程序集提供的启动配置
-            var typeFinder = new WebAppTypeFinder();
+            var typeFinder = new NGPTypeFinder();
             var startupConfigurations = typeFinder.FindClassesOfType<INGPStartup>();
 
             // 初始化数据库

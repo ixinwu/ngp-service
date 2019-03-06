@@ -30,7 +30,6 @@ namespace NGP.Framework.DependencyInjection
         /// </summary>
         /// <param name="builder">Container builder</param>
         /// <param name="typeFinder">Type finder</param>
-        /// <param name="config">Config</param>
         public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder)
         {
             var config = new ConfigurationBuilder();

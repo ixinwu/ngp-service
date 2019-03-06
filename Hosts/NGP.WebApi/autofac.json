@@ -87,7 +87,27 @@
       ],
       "instanceScope": "per-lifetime-scope"
     },
-    // IAuthenticationService
+    // IMessagePublisher
+    {
+      "type": "NGP.Middleware.MessageQueue.RabbitMQPublisher,NGP.Middleware.MessageQueue",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.IMessagePublisher,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // IMessageSubscriber
+    {
+      "type": "NGP.Middleware.MessageQueue.RabbitMQSubscriber,NGP.Middleware.MessageQueue",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.IMessageSubscriber,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // INGPAuthenticationService
     {
       "type": "NGP.Foundation.Identity.JWTAuthenticationService,NGP.Foundation.Identity",
       "services": [

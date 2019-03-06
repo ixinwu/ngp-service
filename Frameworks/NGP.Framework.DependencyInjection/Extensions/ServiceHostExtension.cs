@@ -41,18 +41,20 @@ namespace NGP.Framework.DependencyInjection
             CommonHelper.DefaultFileProvider = new NGPFileProvider();
 
             // 类型查找器
-            var typeFinder = new AppDomainTypeFinder();
-
+            var typeFinder = new NGPTypeFinder();
             var dbConfigType = typeFinder.FindClassesOfType<IDbInitConfig>().FirstOrDefault();
             var dbConfig = Activator.CreateInstance(dbConfigType) as IDbInitConfig;
             dbConfig.ConfigureDataBase(services, configuration);
 
             // 注册依赖
-            Singleton<IEngine>.Instance.RegisterDependencies(services, typeFinder);
+            Singleton<IEngine>.Instance.RegisterDependencies(services, typeFinder, new NGPKeyValuePair<Type, object>
+            {
+                Key = typeof(IWorkContext),
+                Value = CommonHelper.SystemWorkContext
+            });
 
             // 初始化引擎
             var serviceProvider = Singleton<IEngine>.Instance.Initialize(services, configuration);
-
 
             return serviceProvider;
         }

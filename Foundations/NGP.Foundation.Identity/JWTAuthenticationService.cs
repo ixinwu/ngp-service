@@ -43,6 +43,12 @@ namespace NGP.Foundation.Identity
         /// </summary>
         private readonly IWebHelper _webHelper;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="config"></param>
+        /// <param name="webHelper"></param>
         public JWTAuthenticationService(IUnitRepository repository, NGPConfig config, IWebHelper webHelper)
         {
             _repository = repository;

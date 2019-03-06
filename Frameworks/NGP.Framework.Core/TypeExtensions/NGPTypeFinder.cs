@@ -24,15 +24,19 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 通过循环当前执行的AppDomain中的程序集来查找NGP所需类型的类。
     /// 只调查名称与某些模式匹配的程序集，
-    /// 并且始终调查由<see cref=“assemblyname”/>引用的程序集的可选列表。
+    /// 并且始终调查由assiable引用的程序集的可选列表。
     /// </summary>
-    public class AppDomainTypeFinder : ITypeFinder
+    public class NGPTypeFinder : ITypeFinder
     {
         #region Fields
-
+        /// <summary>
+        /// file provider
+        /// </summary>
         protected INGPFileProvider _fileProvider;
 
         private bool _ignoreReflectionErrors = true;
+
+        private bool _binFolderAssembliesLoaded;
 
         #endregion
 
@@ -41,7 +45,7 @@ namespace NGP.Framework.Core
         /// 
         /// </summary>
         /// <param name="fileProvider"></param>
-        public AppDomainTypeFinder(INGPFileProvider fileProvider = null)
+        public NGPTypeFinder(INGPFileProvider fileProvider = null)
         {
             this._fileProvider = fileProvider ?? CommonHelper.DefaultFileProvider;
         }
@@ -185,6 +189,22 @@ namespace NGP.Framework.Core
             }
         }
 
+        /// <summary>
+        /// 获取与当前实现相关的程序集。
+        /// </summary>
+        /// <returns>程序集列表</returns>
+        protected virtual IList<Assembly> GetCurrentAssemblies()
+        {
+            var addedAssemblyNames = new List<string>();
+            var assemblies = new List<Assembly>();
+
+            if (LoadAppDomainAssemblies)
+                AddAssembliesInAppDomain(addedAssemblyNames, assemblies);
+            AddConfiguredAssemblies(addedAssemblyNames, assemblies);
+
+            return assemblies;
+        }
+
         #endregion
 
         #region Methods
@@ -298,14 +318,24 @@ namespace NGP.Framework.Core
         /// <returns>程序集列表</returns>
         public virtual IList<Assembly> GetAssemblies()
         {
-            var addedAssemblyNames = new List<string>();
-            var assemblies = new List<Assembly>();
 
-            if (LoadAppDomainAssemblies)
-                AddAssembliesInAppDomain(addedAssemblyNames, assemblies);
-            AddConfiguredAssemblies(addedAssemblyNames, assemblies);
+            if (!EnsureBinFolderAssembliesLoaded || _binFolderAssembliesLoaded)
+                return GetCurrentAssemblies();
 
-            return assemblies;
+            _binFolderAssembliesLoaded = true;
+            var binPath = GetBinDirectory();
+            LoadMatchingAssemblies(binPath);
+
+            return GetCurrentAssemblies();
+        }
+
+        /// <summary>
+        /// 获取\ Bin目录的物理磁盘路径
+        /// </summary>
+        /// <returns>物理路径. E.g. "c:\inetpub\wwwroot\bin"</returns>
+        public virtual string GetBinDirectory()
+        {
+            return AppContext.BaseDirectory;
         }
 
         #endregion
@@ -335,6 +365,12 @@ namespace NGP.Framework.Core
         /// <summary>获取或设置将要调查的dll的模式。为了便于使用，除了提高性能之外，此默认值将匹配所有项，您可能需要配置一个包含程序集和您自己的模式。</summary>
         /// <remarks>如果更改此项以使NGP程序集不受调查（例如，不包含类似于“^NGP”……”的内容），则可能会破坏核心功能。</remarks>
         public string AssemblyRestrictToLoadingPattern { get; set; } = ".*";
+
+        /// <summary>
+        /// 获取或设置是否应特别检查Web应用程序的bin文件夹中的程序集是否在应用程序加载时加载。 
+        /// 在重新加载应用程序后需要在AppDomain中加载插件的情况下需要这样做。
+        /// </summary>
+        public bool EnsureBinFolderAssembliesLoaded { get; set; } = true;
 
         #endregion
     }

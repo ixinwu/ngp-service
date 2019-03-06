@@ -18,20 +18,17 @@ namespace NGP.Framework.Core
     /// <summary>
     /// ngp单对象请求
     /// </summary>
-    [DataContract]
     public class NGPSingleRequest<T> : INGPRequest
     {
         /// <summary>
         /// 请求值
-        /// </summary
-        [DataMember(Name = "data")]
+        /// </summary>
         public T RequestData { get; set; }
     }
 
     /// <summary>
     /// ngp单对象请求
     /// </summary>
-    [DataContract]
     public class NGPSingleRequest : NGPSingleRequest<string>
     {
     }

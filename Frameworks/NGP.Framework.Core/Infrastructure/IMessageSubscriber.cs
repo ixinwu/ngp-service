@@ -17,14 +17,14 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 消息订阅者接口
     /// </summary>
-    /// <typeparam name="T">监听数据类型</typeparam>
-    public interface IMessageSubscriber<T>
+    public interface IMessageSubscriber
     {
         /// <summary>
         /// 注册监听
         /// </summary>
-        /// <param name="mqInfo">监听通道对象</param>
-        /// <param name="action">监听回调</param>
-        void Monitor(MessageRouteInfo mqInfo, Action<T> action);
+        /// <typeparam name="T"></typeparam>
+        /// <param name="mqInfo"></param>
+        /// <param name="action"></param>
+        void Monitor<T>(MessageRouteInfo mqInfo, Action<T> action);
     }
 }

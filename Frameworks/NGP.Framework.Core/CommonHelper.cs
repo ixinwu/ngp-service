@@ -12,13 +12,7 @@
  * ------------------------------------------------------------------------------*/
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
@@ -60,7 +54,7 @@ namespace NGP.Framework.Core
         {
             var output = email.EnsureNotNull();
             output = output.Trim();
-            output = output.EnsureMaximumLength( 255);
+            output = output.EnsureMaximumLength(255);
 
             if (!IsValidEmail(output))
             {
@@ -143,6 +137,24 @@ namespace NGP.Framework.Core
         /// 获取或设置默认文件提供程序
         /// </summary>
         public static INGPFileProvider DefaultFileProvider { get; set; }
+
+        /// <summary>
+        /// 系统工作上下文
+        /// </summary>
+        public static IWorkContext SystemWorkContext
+        {
+            get => new WorkContext
+            {
+                Current = new WorkEmployee
+                {
+                    DeptId = "0",
+                    EmplId = "admin",
+                    LoginName = "admin"
+                },
+                CurrentRequest = new WorkRequest(),
+                WorkingLanguage = new WorkLanguage()
+            };
+        }
 
         #endregion
     }

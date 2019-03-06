@@ -31,7 +31,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 初始化NGPFileProvider的新实例
         /// </summary>
-        /// <param name="hostingEnvironment">托管环境</param>
+        /// <param name="path">路径</param>
         public NGPFileProvider(string path = null)
             : base(string.IsNullOrWhiteSpace(path) ? AppContext.BaseDirectory : path)
         {

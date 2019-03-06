@@ -53,6 +53,36 @@
         }
       ],
       "instanceScope": "per-lifetime-scope"
+    },
+    // IMessagePublisher
+    {
+      "type": "NGP.Middleware.MessageQueue.RabbitMQPublisher,NGP.Middleware.MessageQueue",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.IMessagePublisher,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // IMessageSubscriber
+    {
+      "type": "NGP.Middleware.MessageQueue.RabbitMQSubscriber,NGP.Middleware.MessageQueue",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.IMessageSubscriber,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // IServiceContainer
+    {
+      "type": "NGP.Middleware.TaskWrapper.QuartzServiceContainer,NGP.Middleware.TaskWrapper",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.IServiceContainer,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
     }
   ]
 }
