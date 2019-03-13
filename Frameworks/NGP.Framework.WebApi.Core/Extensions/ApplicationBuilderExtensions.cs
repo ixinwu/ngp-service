@@ -40,8 +40,12 @@ namespace NGP.Framework.WebApi.Core
                 .Select(startup => (INGPStartup)Activator.CreateInstance(startup))
                 .OrderBy(startup => startup.Order);
 
-            // 配置日志
-            loggerFactory.AddLog4Net();
+            var ngpConfig = Singleton<IEngine>.Instance.Resolve<NGPConfig>();
+            if (ngpConfig.LogEnabled)
+            {
+                // 配置日志
+                loggerFactory.AddLog4Net();
+            }
 
             // 配置请求管道
             foreach (var instance in instances)

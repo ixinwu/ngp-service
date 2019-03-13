@@ -36,5 +36,10 @@ namespace NGP.Framework.Core
         /// token过期时间（单位小时）
         /// </summary>
         public string TokenExpiresHour { get; set; }
+
+        /// <summary>
+        /// 是否启用日志
+        /// </summary>
+        public bool LogEnabled { get; set; }
     }
 }
