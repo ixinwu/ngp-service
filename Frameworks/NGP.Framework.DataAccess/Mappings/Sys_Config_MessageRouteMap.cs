@@ -1,13 +1,13 @@
 ﻿/* ---------------------------------------------------------------------    
  * Copyright:
- * Wuxi Efficient Technology Co., Ltd. All rights reserved. 
+ * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
  * Class Description:
  * 
  *
  * Comment 					        Revision	        Date                 Author
  * -----------------------------    --------         --------            -----------
- * Created							1.0		    2019/3/4 15:37:44   rock@xcloudbiz.com
+ * Created							1.0		    2019/3/4 15:37:44   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 using Microsoft.EntityFrameworkCore;

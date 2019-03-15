@@ -126,7 +126,7 @@ namespace NGP.Foundation.Identity
             }
 
 
-            var emplpyeeDept = _repository.FirstOrDefault<Sys_Org_Empl_Dept>(s => s.EmplId == employee.Id);
+            var emplpyeeDept = _repository.FirstOrDefault<Sys_Org_EmplDept>(s => s.EmplId == employee.Id);
 
             // 生成token
             var tokenHandler = new JwtSecurityTokenHandler();

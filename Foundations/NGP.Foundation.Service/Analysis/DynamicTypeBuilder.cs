@@ -1,6 +1,6 @@
 ﻿/* ---------------------------------------------------------------------    
  * Copyright:
- * Wuxi Efficient Technology Co., Ltd. All rights reserved. 
+ * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
  * DynamicTypeBuilder Description:
  * 动态创建类型
@@ -73,9 +73,9 @@ namespace NGP.Foundation.Service.Analysis
                                 TypeAttributes.BeforeFieldInit |
                                 TypeAttributes.AutoLayout
                                 , null);
-            // 添加DataContract特性
-            var dataContractBuilder = new CustomAttributeBuilder(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes), new object[0]);
-            typeBuilder.SetCustomAttribute(dataContractBuilder);
+            //// 添加DataContract特性
+            //var dataContractBuilder = new CustomAttributeBuilder(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes), new object[0]);
+            //typeBuilder.SetCustomAttribute(dataContractBuilder);
             return typeBuilder;
         }
 
@@ -102,12 +102,12 @@ namespace NGP.Foundation.Service.Analysis
             }
 
             // 添加序列化标记
-            var dataMemberAttribute = new CustomAttributeBuilder(
-                typeof(DataMemberAttribute).GetConstructor(Type.EmptyTypes),
-                new object[0],
-                new PropertyInfo[] { typeof(DataMemberAttribute).GetProperty("Name") },
-                new object[] { serializedLabel });
-            property.SetCustomAttribute(dataMemberAttribute);
+            //var dataMemberAttribute = new CustomAttributeBuilder(
+            //    typeof(DataMemberAttribute).GetConstructor(Type.EmptyTypes),
+            //    new object[0],
+            //    new PropertyInfo[] { typeof(DataMemberAttribute).GetProperty("Name") },
+            //    new object[] { serializedLabel });
+            //property.SetCustomAttribute(dataMemberAttribute);
 
             var getSetAttr = MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
             var getMethod = typeBuilder.DefineMethod("get_" + propertyName, getSetAttr, propertyType, Type.EmptyTypes);

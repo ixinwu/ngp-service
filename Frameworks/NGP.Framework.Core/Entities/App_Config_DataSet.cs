@@ -2,48 +2,41 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * Class Description:
- * 
+ * App_Config_DataSet Description:
+ * 应用数据集配置
  *
  * Comment 					        Revision	        Date                 Author
  * -----------------------------    --------         --------            -----------
- * Created							1.0		    2019/3/4 15:37:41   hulei@ixinwu.com
+ * Created							1.0		    2019/3/7 14:49:49   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
-
-
-using System;
 
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 服务运行配置
+    /// 应用数据集配置
     /// </summary>
-    public partial class Sys_Config_ServiceRunning : BaseDBEntity
+    public class App_Config_DataSet : BaseDBEntity
     {
         /// <summary>
-        /// 配置Key
+        /// 应用key
         /// </summary>
-        public string ConfigKey { get; set; }
+        public string AppKey { get; set; }
         /// <summary>
-        /// 配置名称
+        /// 数据集key
         /// </summary>
-        public string ConfigName { get; set; }
+        public string DataSetKey { get; set; }
         /// <summary>
-        /// 有效起始时间
+        /// 数据集名称
         /// </summary>
-        public DateTime? ValidStartTime { get; set; }
+        public string DataSetName { get; set; }
         /// <summary>
-        /// 有效截止时间
+        /// 主表单key
         /// </summary>
-        public DateTime? ValidEndTime { get; set; }
+        public string MainFormKey { get; set; }
         /// <summary>
-        /// 是否可用
+        /// 关联id列表
         /// </summary>
-        public bool IsEnable { get; set; }
-        /// <summary>
-        /// Cron配置
-        /// </summary>
-        public string CronConfig { get; set; }
+        public string RelationIds { get; set; }
     }
 }

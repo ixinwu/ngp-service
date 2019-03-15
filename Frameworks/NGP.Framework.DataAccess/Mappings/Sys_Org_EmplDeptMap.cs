@@ -20,16 +20,16 @@ namespace NGP.Framework.DataAccess
     /// <summary>
     /// 雇员部门关联映射
     /// </summary>
-    public class Sys_Org_Empl_DeptMap : BaseDBEntityMap<Sys_Org_Empl_Dept>
+    public class Sys_Org_EmplDeptMap : BaseDBEntityMap<Sys_Org_EmplDept>
     {
         /// <summary>
         /// 雇员部门关联映射
         /// </summary>
         /// <param name="builder"></param>
-        protected override void PostConfigure(EntityTypeBuilder<Sys_Org_Empl_Dept> builder)
+        protected override void PostConfigure(EntityTypeBuilder<Sys_Org_EmplDept> builder)
         {
             // 表
-            builder.ToTable("Sys_Org_Empl_Dept");
+            builder.ToTable("Sys_Org_EmplDept");
 
             builder.Property(t => t.EmplId)
                 .IsRequired()

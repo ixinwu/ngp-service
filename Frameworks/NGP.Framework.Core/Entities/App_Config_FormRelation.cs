@@ -2,48 +2,46 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * Class Description:
- * 
+ * App_Config_FormRelation Description:
+ * 应用表关联配置
  *
  * Comment 					        Revision	        Date                 Author
  * -----------------------------    --------         --------            -----------
- * Created							1.0		    2019/3/4 15:37:41   hulei@ixinwu.com
+ * Created							1.0		    2019/3/7 14:49:49   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
-
-
-using System;
 
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 服务运行配置
+    /// 应用表关联配置
     /// </summary>
-    public partial class Sys_Config_ServiceRunning : BaseDBEntity
+    public class App_Config_FormRelation : BaseDBEntity
     {
         /// <summary>
-        /// 配置Key
+        /// 主应用key
         /// </summary>
-        public string ConfigKey { get; set; }
+        public string MasterAppKey { get; set; }
         /// <summary>
-        /// 配置名称
+        /// 主表单key
         /// </summary>
-        public string ConfigName { get; set; }
+        public string MasterFormKey { get; set; }
         /// <summary>
-        /// 有效起始时间
+        /// 主字段key
         /// </summary>
-        public DateTime? ValidStartTime { get; set; }
+        public string MasterFieldKey { get; set; }
+
         /// <summary>
-        /// 有效截止时间
+        /// 从应用key
         /// </summary>
-        public DateTime? ValidEndTime { get; set; }
+        public string SlaveAppKey { get; set; }
         /// <summary>
-        /// 是否可用
+        /// 从表单key
         /// </summary>
-        public bool IsEnable { get; set; }
+        public string SlaveFormKey { get; set; }
         /// <summary>
-        /// Cron配置
+        /// 从字段key
         /// </summary>
-        public string CronConfig { get; set; }
+        public string SlaveFieldKey { get; set; }
     }
 }

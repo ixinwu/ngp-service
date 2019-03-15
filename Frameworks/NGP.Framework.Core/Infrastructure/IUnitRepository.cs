@@ -53,7 +53,7 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <typeparam name="TEntity">参数类型</typeparam>
         /// <param name="entities">插入列表</param>
-        void Insert<TEntity>(IList<TEntity> entities) where TEntity : class;
+        void Insert<TEntity>(List<TEntity> entities) where TEntity : class;
 
         /// <summary>
         /// 更新对象

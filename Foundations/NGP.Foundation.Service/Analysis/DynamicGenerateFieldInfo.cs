@@ -1,6 +1,6 @@
 ﻿/* ---------------------------------------------------------------------    
  * Copyright:
- * Wuxi Efficient Technology Co., Ltd. All rights reserved. 
+ * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
  * GenerateFieldInfo Description:
  * 生成动态字段模型

@@ -16,7 +16,7 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 雇员部门关联
     /// </summary>
-    public class Sys_Org_Empl_Dept : BaseDBEntity
+    public class Sys_Org_EmplDept : BaseDBEntity
     {
         /// <summary>
         /// 雇员id

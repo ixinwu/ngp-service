@@ -1,6 +1,6 @@
 ﻿/* ---------------------------------------------------------------------    
  * Copyright:
- * Wuxi Efficient Technology Co., Ltd. All rights reserved. 
+ * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
  * MonitorMessageRouteInfo Description:
  * 监听消息路由对象

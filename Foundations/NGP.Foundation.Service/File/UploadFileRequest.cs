@@ -2,28 +2,30 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * ServiceRunningDescriptor Description:
- * 
+ * UploadFileRequest Description:
+ * 上传文件请求对象
  *
  * Comment 					        Revision	Date                  Author
  * -----------------------------    --------    ------------------    ----------------
- * Created							1.0		    2019/2/26 15:02:55    hulei@ixinwu.com
+ * Created							1.0		    2019/3/7 16:53:09    hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NGP.Framework.Core
+using Microsoft.AspNetCore.Http;
+using NGP.Framework.Core;
+using System.Collections.Generic;
+
+namespace NGP.Foundation.Service.File
 {
     /// <summary>
-    /// 服务运行描述
+    /// 追加人员请求
     /// </summary>
-    public class ServiceRunningDescriptor
+    public class UploadFileRequest : INGPRequest
     {
-        
+        /// <summary>
+        /// 文件列表
+        /// </summary>
+        public List<IFormFile> Files { get; set; }
     }
 }

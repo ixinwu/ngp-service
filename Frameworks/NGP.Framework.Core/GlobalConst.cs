@@ -22,7 +22,22 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 附件路径
         /// </summary>
-        public const string __AttachmentFilesPath = "~/AttachmentFiles";
+        public const string __AttachmentFilesPath = "wwwroot\\attachments\\";
+
+        /// <summary>
+        /// 代码xml文档
+        /// </summary>
+        public const string __CodeXmlDocuments = "App_Data\\XmlDocuments\\";
+
+        /// <summary>
+        /// swagger sjon
+        /// </summary>
+        public const string __SwaggerJson = "/swagger/v1/swagger.json";
+
+        /// <summary>
+        /// 系统api名称
+        /// </summary>
+        public const string __ApiName = "NGP API";
 
         /// <summary>
         /// 日期格式常量
@@ -38,38 +53,16 @@ namespace NGP.Framework.Core
             /// 时间格式
             /// </summary>
             public const string __DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
-        }
-
-        /// <summary>
-        /// 系统人员常量
-        /// </summary>
-        public struct SysEmployeeConst
-        {
-            /// <summary>
-            /// 人员id
-            /// </summary>
-            public const string __EmpId = "100001";
 
             /// <summary>
-            /// 部门id
+            /// 时间格式
             /// </summary>
-            public const string __DeptId = "0";
+            public const string __DateTimeFormatNotBar = "yyyyMMddHHmmss";
         }
 
         /// <summary>
         /// 策略数据映射key
         /// </summary>
         public const string __ServiceDataMapKey = "ServiceDataMapKey";
-
-        /// <summary>
-        /// 消息路由常量
-        /// </summary>
-        public struct MessageRouteConst
-        {
-            /// <summary>
-            /// 数据处理路由
-            /// </summary>
-            public const string __DataProcessRoute = "DataProcessExchange-DataProcessQueue-DataProcessRoute";
-        }
     }
 }

@@ -2,58 +2,65 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * Class Description:
- * 
+ * App_Config_FormField Description:
+ * 应用表单字段配置表
  *
  * Comment 					        Revision	        Date                 Author
  * -----------------------------    --------         --------            -----------
- * Created							1.0		    2019/3/4 15:37:39   hulei@ixinwu.com
+ * Created							1.0		    2019/3/7 14:49:49   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 消息路由配置
+    /// 应用表单字段配置表
     /// </summary>
-    public partial class Sys_Config_MessageRoute : BaseDBEntity
+    public class App_Config_FormField : BaseDBEntity
     {
         /// <summary>
-        /// 消息队列key
+        /// 应用key
         /// </summary>
-        public string MessageRouteKey { get; set; }
+        public string AppKey { get; set; }
 
         /// <summary>
-        /// 主机地址
+        /// 表单key
         /// </summary>
-        public string HostName { get; set; }
+        public string FormKey { get; set; }
+
         /// <summary>
-        /// 用户名
+        /// 字段key
         /// </summary>
-        public string UserName { get; set; }
+        public string FieldKey { get; set; }
+
         /// <summary>
-        /// 密码
+        /// 字段名称
         /// </summary>
-        public string Password { get; set; }
+        public string FieldName { get; set; }
+
         /// <summary>
-        /// 交换机名称
+        /// 字段类型
         /// </summary>
-        public string ExchangeName { get; set; }
+        public string FieldType { get; set; }
+
         /// <summary>
-        /// 交换机类型
+        /// 是否系统字段
         /// </summary>
-        public string ExchangeType { get; set; }
+        public bool? IsSystemField { get; set; }
+
         /// <summary>
-        /// 队列名称
+        /// DB配置
         /// </summary>
-        public string QueueName { get; set; }
+        public string DbConfig { get; set; }
+
         /// <summary>
-        /// 队列是否持久化
+        /// 验证配置
         /// </summary>
-        public bool QueueDurable { get; set; }
+        public string VerificationConfig { get; set; }
+
         /// <summary>
-        /// 路由Key
+        /// 业务配置
         /// </summary>
-        public string RouteKey { get; set; }
+        public string BusinessConfig { get; set; }
     }
 }

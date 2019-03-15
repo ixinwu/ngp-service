@@ -37,11 +37,11 @@ namespace NGP.Framework.WebApi.Core
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "NGP API"
+                    Title = GlobalConst.__ApiName
                 });
 
                 // 获取xml
-                var files = CommonHelper.DefaultFileProvider.GetFiles(CommonHelper.DefaultFileProvider.MapPath(@"App_Data\XmlDocuments\"), "*.xml");
+                var files = CommonHelper.DefaultFileProvider.GetFiles(CommonHelper.DefaultFileProvider.MapPath(GlobalConst.__CodeXmlDocuments), "*.xml");
                 foreach (var file in files)
                 {
                     c.IncludeXmlComments(file);
@@ -49,6 +49,9 @@ namespace NGP.Framework.WebApi.Core
 
                 // Swagger认证拦截器
                 c.OperationFilter<SwaggerAuthorizationOperationFilter>();
+
+                // swagger文件上传拦截器
+                c.OperationFilter<SwaggerFileUploadOperationFilter>();
             });
         }
 
@@ -65,7 +68,7 @@ namespace NGP.Framework.WebApi.Core
             // 启用中间件以提供swagger-ui（HTML，JS，CSS等），指定Swagger JSON端点。
             application.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "NGP API V1");
+                c.SwaggerEndpoint(GlobalConst.__SwaggerJson, GlobalConst.__ApiName);
             });
         }
 
