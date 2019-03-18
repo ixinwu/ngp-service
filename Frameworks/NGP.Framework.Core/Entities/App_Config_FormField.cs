@@ -11,6 +11,8 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using System.Collections.Generic;
+
 namespace NGP.Framework.Core
 {
     /// <summary>
@@ -44,23 +46,18 @@ namespace NGP.Framework.Core
         public string FieldType { get; set; }
 
         /// <summary>
-        /// 是否系统字段
-        /// </summary>
-        public bool? IsSystemField { get; set; }
-
-        /// <summary>
         /// DB配置
         /// </summary>
-        public string DbConfig { get; set; }
+        public FieldDbConfig DbConfig { get; set; }
 
         /// <summary>
         /// 验证配置
         /// </summary>
-        public string VerificationConfig { get; set; }
+        public List<FieldVerificationConfig> VerificationConfig { get; set; }
 
         /// <summary>
         /// 业务配置
         /// </summary>
-        public string BusinessConfig { get; set; }
+        public FieldBusinessConfig BusinessConfig { get; set; }
     }
 }

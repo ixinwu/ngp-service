@@ -12,6 +12,7 @@
  * ------------------------------------------------------------------------------*/
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 using NGP.Framework.Core;
 
 namespace NGP.Framework.DataAccess
@@ -38,6 +39,11 @@ namespace NGP.Framework.DataAccess
             builder.Property(t => t.FormName)
                 .IsRequired()
                 .HasMaxLength(200);
+
+            builder.Property(t => t.VerificationConfig)
+                .HasConversion(
+                v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                v => JsonConvert.DeserializeObject<FormVerificationConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
             base.PostConfigure(builder);
         }

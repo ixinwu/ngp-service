@@ -12,7 +12,9 @@
  * ------------------------------------------------------------------------------*/
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 using NGP.Framework.Core;
+using System.Collections.Generic;
 
 namespace NGP.Framework.DataAccess
 {
@@ -44,6 +46,21 @@ namespace NGP.Framework.DataAccess
             builder.Property(t => t.FieldType)
               .IsRequired()
               .HasMaxLength(100);
+
+            builder.Property(t => t.DbConfig)
+                .HasConversion(
+                v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                v => JsonConvert.DeserializeObject<FieldDbConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+
+            builder.Property(t => t.VerificationConfig)
+                .HasConversion(
+                v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                v => JsonConvert.DeserializeObject<List<FieldVerificationConfig>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+
+            builder.Property(t => t.BusinessConfig)
+                .HasConversion(
+                v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                v => JsonConvert.DeserializeObject<FieldBusinessConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
             base.PostConfigure(builder);
         }

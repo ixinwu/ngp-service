@@ -30,5 +30,10 @@ namespace NGP.Framework.Core
         /// 表单名称
         /// </summary>
         public string FormName { get; set; }
+
+        /// <summary>
+        /// 表单验证配置
+        /// </summary>
+        public FormVerificationConfig VerificationConfig { get; set; }
     }
 }
