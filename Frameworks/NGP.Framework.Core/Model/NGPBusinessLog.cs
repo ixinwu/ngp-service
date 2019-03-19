@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * BusinessLogInfo Description:
+ * NGPBusinessLog Description:
  * 业务日志
  *
  * Comment 					        Revision	Date        Author
@@ -19,7 +19,7 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 业务日志
     /// </summary>
-    public class BusinessLogInfo
+    public class NGPBusinessLog
     {
         /// <summary>
         /// api路径
@@ -54,6 +54,6 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 日志详情
         /// </summary>
-        public List<BusinessLogInfo> LogInfos { get; set; } 
+        public List<NGPBusinessLogDetail> LogInfos { get; set; } 
     }
 }

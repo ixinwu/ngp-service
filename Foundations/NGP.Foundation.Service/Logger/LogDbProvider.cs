@@ -41,7 +41,7 @@ namespace NGP.Foundation.Service.Logger
         /// 插入错误日志
         /// </summary>
         /// <param name="info">错误信息</param>
-        public void InsertSysErrorLog(ErrorLogInfo info)
+        public void InsertSysErrorLog(NGPExceptionLog info)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace NGP.Foundation.Service.Logger
         /// 插入业务日志
         /// </summary>
         /// <param name="context">日志对象</param>
-        public void InsertBusinessLog(BusinessLogContext context)
+        public void InsertBusinessLog(NGPBusinessLog context)
         {
             try { 
             //{

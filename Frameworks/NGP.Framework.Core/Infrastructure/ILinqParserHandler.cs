@@ -2,32 +2,28 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * ILogPublisher Description:
- * 日志发布者接口
+ * ILinqParserHandler Description:
+ * linq解析处理器
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019-1-15   hulei@ixinwu.com
+ * Created							1.0		    2019-3-15   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
+
 
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 日志发布者接口
+    /// linq解析处理器
     /// </summary>
-    public interface ILogPublisher
+    public interface ILinqParserHandler
     {
         /// <summary>
-        /// 注册错误日志
+        /// 解析
         /// </summary>
-        /// <param name="info">日志对象</param>
-        void RegisterError(NGPExceptionLog info);
-
-        /// <summary>
-        /// 注册业务日志
-        /// </summary>
-        /// <param name="info">日志对象</param>
-        void RegisterBusiness(NGPBusinessLog info);
+        /// <param name="request">请求对象</param>
+        /// <returns>解析结果</returns>
+        LinqParserResponse Resolve(LinqParserRequest request);
     }
 }

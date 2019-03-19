@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Foundation.Service", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Foundation.Identity", "Foundations\NGP.Foundation.Identity\NGP.Foundation.Identity.csproj", "{E3DE67BB-823C-418D-BE14-2FBC704807EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.MessageQueue", "Middlewares\NGP.Middleware.MessageQueue\NGP.Middleware.MessageQueue.csproj", "{F8F59BC1-649A-422B-BCBF-2062062A17B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.MessageQueue", "Middlewares\NGP.Middleware.MessageQueue\NGP.Middleware.MessageQueue.csproj", "{F8F59BC1-649A-422B-BCBF-2062062A17B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.TaskWrapper", "Middlewares\NGP.Middleware.TaskWrapper\NGP.Middleware.TaskWrapper.csproj", "{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.TaskWrapper", "Middlewares\NGP.Middleware.TaskWrapper\NGP.Middleware.TaskWrapper.csproj", "{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.Dsl", "Middlewares\NGP.Middleware.Dsl\NGP.Middleware.Dsl.csproj", "{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{E3DE67BB-823C-418D-BE14-2FBC704807EE} = {A329FB0B-3F98-4D46-9087-BED3FC9DE1FD}
 		{F8F59BC1-649A-422B-BCBF-2062062A17B1} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
 		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
+		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B291264-3401-47DE-B70F-EBBBAB794AB1}

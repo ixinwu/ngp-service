@@ -24,12 +24,12 @@ namespace NGP.Framework.Core
         /// 插入错误日志
         /// </summary>
         /// <param name="info">日志对象</param>
-        void InsertSysErrorLog(ErrorLogInfo info);
+        void InsertSysErrorLog(NGPExceptionLog info);
 
         /// <summary>
         /// 插入业务日志
         /// </summary>
         /// <param name="context">日志对象</param>
-        void InsertBusinessLog(BusinessLogContext context);
+        void InsertBusinessLog(NGPBusinessLog context);
     }
 }

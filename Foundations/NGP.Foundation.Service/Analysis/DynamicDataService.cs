@@ -43,7 +43,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
         public NGPResponse<DynamicPageQueryReponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
-            IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
+            IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
             return null;
@@ -57,7 +57,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
         public NGPResponse<List<dynamic>> QueryDynamicAllData(DynamicQueryRequest query,
-            IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
+            IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
             return null;
@@ -71,7 +71,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
         public NGPResponse<dynamic> QueryDynamicSingleData(DynamicQueryRequest query,
-            IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
+            IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
             return null;
@@ -85,7 +85,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
         public NGPResponse<dynamic> QueryDynamicSingleDataByKey(DynamicQueryRequest query,
-            IEnumerable<DynamicGenerateFieldInfo> extendTypes = null,
+            IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
             return null;

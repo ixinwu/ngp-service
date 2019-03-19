@@ -29,6 +29,7 @@
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.DataAccess\NGP.Framework.DataAccess.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.DependencyInjection\NGP.Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.WebApi.Core\NGP.Framework.WebApi.Core.csproj" />
+    <ProjectReference Include="..\..\Middlewares\NGP.Middleware.Dsl\NGP.Middleware.Dsl.csproj" />
     <ProjectReference Include="..\..\Middlewares\NGP.Middleware.MessageQueue\NGP.Middleware.MessageQueue.csproj" />
   </ItemGroup>
 

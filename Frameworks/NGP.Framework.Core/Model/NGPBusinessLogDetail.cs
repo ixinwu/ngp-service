@@ -17,7 +17,7 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 业务日志详情
     /// </summary>
-    public class BusinessLogDetailInfo
+    public class NGPBusinessLogDetail
     {
         /// <summary>
         /// 列名

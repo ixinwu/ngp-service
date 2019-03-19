@@ -11,14 +11,12 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using NGP.Framework.Core;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.Serialization;
 
-namespace NGP.Foundation.Service.Analysis
+namespace NGP.Framework.Core
 {
     /// <summary>
     /// 动态创建类型
@@ -45,7 +43,7 @@ namespace NGP.Foundation.Service.Analysis
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
-        public static Type CompileType(this IEnumerable<DynamicGenerateFieldInfo> fields)
+        public static Type CompileType(this IEnumerable<DynamicGenerateObject> fields)
         {
             string className = "D_" + GuidExtend.NewGuid();
             var typeBuilder = CreateTypeBuilder(className);
@@ -85,9 +83,9 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="typeBuilder"></param>
         /// <param name="propertyItem"></param>
         /// <returns></returns>
-        private static void CreateProperty(TypeBuilder typeBuilder, DynamicGenerateFieldInfo propertyItem)
+        private static void CreateProperty(TypeBuilder typeBuilder, DynamicGenerateObject propertyItem)
         {
-            var propertyName = propertyItem.FieldKey;
+            var propertyName = propertyItem.ObjectKey;
             var propertyType = propertyItem.CodeType;
 
             // 创建字段
@@ -95,11 +93,11 @@ namespace NGP.Foundation.Service.Analysis
 
             // 创建属性
             var property = typeBuilder.DefineProperty(propertyName, PropertyAttributes.None, propertyType, Type.EmptyTypes);
-            var serializedLabel = propertyItem.SerializedLabel;
-            if (string.IsNullOrWhiteSpace(serializedLabel))
-            {
-                serializedLabel = propertyItem.FieldKey;
-            }
+            //var serializedLabel = propertyItem.SerializedLabel;
+            //if (string.IsNullOrWhiteSpace(serializedLabel))
+            //{
+            //    serializedLabel = propertyItem.FieldKey;
+            //}
 
             // 添加序列化标记
             //var dataMemberAttribute = new CustomAttributeBuilder(

@@ -24,27 +24,27 @@ namespace NGP.Foundation.Service.Logger
         /// <summary>
         /// 初始化错误日志TPL
         /// </summary>
-        private static readonly ActionBlock<ErrorLogInfo> _sendErrorHandler = null;
+        private static readonly ActionBlock<NGPExceptionLog> _sendErrorHandler = null;
 
         /// <summary>
         /// 初始化业务日志TPL
         /// </summary>
-        private static readonly ActionBlock<BusinessLogContext> _sendBusinessHandler = null;
+        private static readonly ActionBlock<NGPBusinessLog> _sendBusinessHandler = null;
 
         /// <summary>
         /// ctor
         /// </summary>
         static LogPublisher()
         {
-            _sendErrorHandler = new ActionBlock<ErrorLogInfo>(context => SendErrorHandler(context));
-            _sendBusinessHandler = new ActionBlock<BusinessLogContext>(context => SendBusinessHandler(context));
+            _sendErrorHandler = new ActionBlock<NGPExceptionLog>(context => SendErrorHandler(context));
+            _sendBusinessHandler = new ActionBlock<NGPBusinessLog>(context => SendBusinessHandler(context));
         }
 
         /// <summary>
         /// 注册错误日志
         /// </summary>
         /// <param name="obj">日志对象</param>
-        public void RegisterError(ErrorLogInfo obj)
+        public void RegisterError(NGPExceptionLog obj)
         {
             _sendErrorHandler.Post(obj);
         }
@@ -53,7 +53,7 @@ namespace NGP.Foundation.Service.Logger
         /// 错误日志数据处理
         /// </summary>
         /// <param name="context">上下文</param>
-        private static void SendErrorHandler(ErrorLogInfo context)
+        private static void SendErrorHandler(NGPExceptionLog context)
         {
             Singleton<IEngine>.Instance.Resolve<ILogProvider>().InsertSysErrorLog(context);
         }
@@ -62,7 +62,7 @@ namespace NGP.Foundation.Service.Logger
         /// 业务日志数据处理
         /// </summary>
         /// <param name="context">上下文</param>
-        private static void SendBusinessHandler(BusinessLogContext context)
+        private static void SendBusinessHandler(NGPBusinessLog context)
         {
             Singleton<IEngine>.Instance.Resolve<ILogProvider>().InsertBusinessLog(context);
         }
@@ -71,7 +71,7 @@ namespace NGP.Foundation.Service.Logger
         /// 注册业务日志
         /// </summary>
         /// <param name="info">日志对象</param>
-        public void RegisterBusiness(BusinessLogContext info)
+        public void RegisterBusiness(NGPBusinessLog info)
         {
             _sendBusinessHandler.Post(info);
         }

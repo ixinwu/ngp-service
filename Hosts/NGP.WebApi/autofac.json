@@ -116,6 +116,26 @@
         }
       ],
       "instanceScope": "per-lifetime-scope"
+    },
+    // ILinqParserHandler
+    {
+      "type": "NGP.Middleware.Dsl.Handler.LinqParserHandler,NGP.Middleware.Dsl",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.ILinqParserHandler,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // ILinqParserCommand
+    {
+      "type": "NGP.Framework.Core.LinqParserSqlServerCommand,NGP.Framework.Core",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.ILinqParserCommand,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
     }
 
   ]

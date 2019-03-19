@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * GenerateFieldInfo Description:
- * 生成动态字段模型
+ * DynamicGenerateObject Description:
+ * 生成动态对象模型
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -13,26 +13,21 @@
 
 using System;
 
-namespace NGP.Foundation.Service
+namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 生成动态字段模型
+    /// 生成动态对象模型
     /// </summary>
-    public class DynamicGenerateFieldInfo
+    public class DynamicGenerateObject
     {
         /// <summary>
-        /// 字段key
+        /// 对象key
         /// </summary>
-        public string FieldKey { get; set; }
+        public string ObjectKey { get; set; }
 
         /// <summary>
         /// 字段代码类型
         /// </summary>
         public Type CodeType { get; set; }
-
-        /// <summary>
-        /// 序列化标签
-        /// </summary>
-        public string SerializedLabel { get; set; }
     }
 }

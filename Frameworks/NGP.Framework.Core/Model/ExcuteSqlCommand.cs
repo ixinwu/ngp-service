@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * ExcuteSqlCommandInfo Description:
+ * ExcuteSqlCommand Description:
  * 执行SQL对象
  *
  * Comment 					        Revision	Date        Author
@@ -19,24 +19,24 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 执行SQL对象
     /// </summary>
-    public class ExcuteSqlCommandInfo
+    public class ExcuteSqlCommand
     {
         #region Ctor
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="commandText">sql语句</param>
-        public ExcuteSqlCommandInfo(string commandText) : this()
+        public ExcuteSqlCommand(string commandText) : this()
         {
-            this.CommandText = commandText.Trim();
+            CommandText = commandText.Trim();
         }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public ExcuteSqlCommandInfo()
+        public ExcuteSqlCommand()
         {
-            this.ParameterCollection = new Dictionary<string, object>();
+            ParameterCollection = new Dictionary<string, object>();
         }
 
         #endregion
@@ -58,10 +58,10 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static ExcuteSqlCommandInfo FormatterCommands(List<ExcuteSqlCommandInfo> source)
+        public static ExcuteSqlCommand FormatterCommands(List<ExcuteSqlCommand> source)
         {
-            var result = new ExcuteSqlCommandInfo();
-            result.CommandText = string.Join("   ", source.Select(s => s.CommandText));
+            var result = new ExcuteSqlCommand();
+            result.CommandText = string.Join(" \n", source.Select(s => s.CommandText));
             foreach (var item in source)
             {
                 foreach (var parame in item.ParameterCollection)

@@ -86,7 +86,7 @@ namespace NGP.Middleware.MessageQueue
                             {
                                 var type = GetType();
                                 // 写日志
-                                var info = new ErrorLogInfo
+                                var info = new NGPExceptionLog
                                 {
                                     BusinessMethod = string.Format("{0}.{1}", type.FullName, "Excute"),
                                     ExceptionContent = string.IsNullOrEmpty(ex.Message) ? (ex.InnerException != null ? ex.InnerException.Message : "Unknow Error") : ex.Message,

@@ -66,7 +66,7 @@ namespace NGP.Framework.DependencyInjection
             catch (Exception ex)
             {
                 // 书写异常日志
-                ErrorLogInfo error = new ErrorLogInfo
+                NGPExceptionLog error = new NGPExceptionLog
                 {
                     ApiUrl = _workContext.CurrentRequest.Url,
                     Parameters = _workContext.CurrentRequest.Parameter,
