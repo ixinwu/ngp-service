@@ -19,29 +19,29 @@ namespace NGP.Framework.Core
     public class App_Config_FormRelation : BaseDBEntity
     {
         /// <summary>
-        /// 主应用key
+        /// 源应用key
         /// </summary>
-        public string MasterAppKey { get; set; }
+        public string SourceAppKey { get; set; }
         /// <summary>
-        /// 主表单key
+        /// 源表单key
         /// </summary>
-        public string MasterFormKey { get; set; }
+        public string SourceFormKey { get; set; }
         /// <summary>
-        /// 主字段key
+        /// 源字段key
         /// </summary>
-        public string MasterFieldKey { get; set; }
+        public string SourceFieldKey { get; set; }
 
         /// <summary>
-        /// 从应用key
+        /// 关联应用key
         /// </summary>
-        public string SlaveAppKey { get; set; }
+        public string RelationAppKey { get; set; }
         /// <summary>
-        /// 从表单key
+        /// 关联表单key
         /// </summary>
-        public string SlaveFormKey { get; set; }
+        public string RelationFormKey { get; set; }
         /// <summary>
-        /// 从字段key
+        /// 关联字段key
         /// </summary>
-        public string SlaveFieldKey { get; set; }
+        public string RelationFieldKey { get; set; }
     }
 }

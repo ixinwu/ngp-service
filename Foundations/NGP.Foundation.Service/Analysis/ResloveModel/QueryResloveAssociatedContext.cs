@@ -2,32 +2,36 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * DynamicDetailOperateInfo Description:
- * 动态详情页面操作对象
+ * ResloveContext Description:
+ * 解析上下文
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2017/3/14  hulei@ixinwu.com
+ * Created							1.0		    2019/2/19  hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
+using NGP.Framework.Core;
+using System;
 using System.Collections.Generic;
 
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态详情页面操作对象
+    /// 解析上下文
     /// </summary>
-    public class DynamicUpdateRequest : DynamicBaseRequest
+    public class QueryResloveAssociatedContext
     {
         /// <summary>
-        /// 主键值
+        /// 人员列表
         /// </summary>
-        public string PrimaryKeyValue { get; set; }
+        public List<Sys_Org_Employee> Employees { get; set; }
 
         /// <summary>
-        /// 操作字段列表
+        /// 部门列表
         /// </summary>
-        public List<DynamicAddRequest> OperateFields { get; set; }
+        public List<Sys_Org_Department> Departments { get; set; }
+
+        
     }
 }

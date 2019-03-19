@@ -13,7 +13,6 @@
 
 
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace NGP.Foundation.Service.Analysis
 {
@@ -26,6 +25,11 @@ namespace NGP.Foundation.Service.Analysis
         /// 查询表达式
         /// </summary>
         public string WhereExpression { get; set; }
+
+        /// <summary>
+        /// 排序表达式
+        /// </summary>
+        public string SortExpression { get; set; }
 
         /// <summary>
         /// 查询字段key列表

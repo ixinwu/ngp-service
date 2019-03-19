@@ -58,6 +58,6 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 业务配置
         /// </summary>
-        public FieldBusinessConfig BusinessConfig { get; set; }
+        public FieldExtendConfig ExtendConfig { get; set; }
     }
 }

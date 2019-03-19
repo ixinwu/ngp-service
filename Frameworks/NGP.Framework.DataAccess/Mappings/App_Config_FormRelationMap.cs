@@ -29,22 +29,22 @@ namespace NGP.Framework.DataAccess
         {
             // Table & Column Mappings
             builder.ToTable("App_Config_FormRelation");
-            builder.Property(t => t.MasterAppKey)
+            builder.Property(t => t.SourceAppKey)
                 .IsRequired()
                 .HasMaxLength(100);
-            builder.Property(t => t.MasterFormKey)
+            builder.Property(t => t.SourceFormKey)
                 .IsRequired()
                 .HasMaxLength(100);
-            builder.Property(t => t.MasterFieldKey)
+            builder.Property(t => t.SourceFieldKey)
                 .IsRequired()
                 .HasMaxLength(100);
-            builder.Property(t => t.SlaveAppKey)
+            builder.Property(t => t.RelationAppKey)
                 .IsRequired()
                 .HasMaxLength(100);
-            builder.Property(t => t.SlaveFormKey)
+            builder.Property(t => t.RelationFormKey)
                 .IsRequired()
                 .HasMaxLength(100);
-            builder.Property(t => t.SlaveFieldKey)
+            builder.Property(t => t.RelationFieldKey)
                 .IsRequired()
                 .HasMaxLength(100);
 

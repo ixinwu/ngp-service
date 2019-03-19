@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * FieldBusinessConfig Description:
- * 字段业务配置
+ * FieldType Description:
+ * 字段类型
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -11,22 +11,36 @@
  *
  * ------------------------------------------------------------------------------*/
 
-
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 字段业务配置
+    /// 字段类型
     /// </summary>
-    public class FieldBusinessConfig
+    public enum FieldType
     {
         /// <summary>
-        /// 组key
+        /// 表单类型
         /// </summary>
-        public string GroupKey { get; set; }
+        FormType = 0,
 
         /// <summary>
-        /// 是否系统字段
+        /// 关联类型
         /// </summary>
-        public bool? IsSystemField { get; set; }
+        RelationType,
+
+        /// <summary>
+        /// 组类型
+        /// </summary>
+        GroupType,
+
+        /// <summary>
+        /// 人员类型
+        /// </summary>
+        EmployeeType,
+
+        /// <summary>
+        /// 部门类型
+        /// </summary>
+        DeptType,
     }
 }

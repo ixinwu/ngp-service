@@ -282,7 +282,7 @@ asParam : TEXT;
 sqlParam : ART TEXT;
 checkSingleParam : STRING;
 formParam : FORMKEY;
-fieldParam : TEXT POINT FIELDKEY;
+fieldParam : (TEXT POINT)? FIELDKEY;
 /*
  * Key Word Lexer Definitions
  */

@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * DynamicDeleteRequest Description:
- * 动态删除请求对象
+ * ResloveContext Description:
+ * 解析上下文
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -11,23 +11,34 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using NGP.Framework.Core;
 using System.Collections.Generic;
 
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态删除请求对象
+    /// 解析上下文
     /// </summary>
-    public class DynamicDeleteRequest : DynamicBaseRequest
+    public class ResloveInitContext
     {
         /// <summary>
-        /// key
+        /// data set对象
         /// </summary>
-        public List<string> Keys { get; set; }
+        public App_Config_DataSet DataSet { get; set; }
 
         /// <summary>
-        /// 是否删除子集
+        /// 表单列表对象
         /// </summary>
-        public bool IsDeleteSubsets { get; set; }
+        public List<App_Config_Form> Forms { get; set; }
+
+        /// <summary>
+        /// 表单关系对象
+        /// </summary>
+        public List<App_Config_FormRelation> FormRelations { get; set; }
+
+        /// <summary>
+        /// 表单字段对象
+        /// </summary>
+        public List<App_Config_FormField> FormFields { get; set; }
     }
 }

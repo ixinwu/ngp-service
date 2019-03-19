@@ -68,6 +68,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// select page query
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="selectCommand"></param>
         /// <param name="fromCommand"></param>
         /// <param name="joinCommand"></param>
@@ -77,14 +78,14 @@ namespace NGP.Framework.Core
         /// <param name="pageStart"></param>
         /// <param name="pageEnd"></param>
         /// <returns>query string</returns>
-        public string SelectPageQuery(string selectCommand,
+        public string SelectPageQuery<T>(string selectCommand,
                                         string fromCommand,
                                         string joinCommand,
                                         string whereCommand,
                                         string groupCommand,
                                         string orderCommand,
-                                        string pageStart,
-                                        string pageEnd)
+                                        T pageStart,
+                                        T pageEnd)
         => string.Format("SELECT * FROM \r\n (SELECT ROW_NUMBER() OVER ({5}) RowNumber,{0} \r\n" +
                         " FROM {1} \r\n {2} \r\n {3} \r\n {4}) temp \r\n" +
                         " WHERE temp.RowNumber > {6} and temp.RowNumber <= {7} \r\n",
@@ -96,6 +97,21 @@ namespace NGP.Framework.Core
                 orderCommand,
                 pageStart,
                 pageEnd);
+
+        /// <summary>
+        /// select count query
+        /// </summary>
+        /// <param name="fromCommand"></param>
+        /// <param name="joinCommand"></param>
+        /// <param name="whereCommand"></param>
+        /// <returns></returns>
+        public string SelectTotalCountQuery(string fromCommand,
+            string joinCommand,
+            string whereCommand)
+        => string.Format("SELECT COUNT(1) \r\n FROM {0} \r\n {1} \r\n {2}",
+            fromCommand,
+            joinCommand,
+            whereCommand);
 
 
         /// <summary>

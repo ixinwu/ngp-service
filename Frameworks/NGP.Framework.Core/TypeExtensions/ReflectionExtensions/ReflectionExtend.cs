@@ -11,6 +11,7 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using System;
 using System.Reflection;
 
 namespace NGP.Framework.Core

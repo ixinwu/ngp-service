@@ -2,34 +2,33 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * DynamicPageQueryReponse Description:
- * 动态分页查询返回
+ * QueryResolveAllExcuteStep Description:
+ * 解析所有查询步骤
  *
  * Comment 					        Revision	Date                  Author
  * -----------------------------    --------    ------------------    ----------------
- * Created							1.0		    2019/1/22 10:29:45    hulei@ixinwu.com
+ * Created							1.0		    2019/3/18 15:56:08    hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
-using System.Runtime.Serialization;
+using NGP.Framework.Core;
 
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态分页查询返回
+    /// 解析所有查询步骤
     /// </summary>
-    [DataContract]
-    public class DynamicPageQueryReponse
+    public class QueryResolveAllExcuteStep : StepBase<QueryResloveContext>
     {
         /// <summary>
-        /// 数据总数
+        /// 执行上下文
         /// </summary>
-        [DataMember(Name = "totalCount")]
-        public int TotalCount { get; set; }
-        /// <summary>
-        /// 数据列表
-        /// </summary>
-        [DataMember(Name = "Data")]
-        public dynamic Data { get; set; }
+        /// <param name="ctx"></param>
+        /// <returns></returns>
+        public override bool Process(QueryResloveContext ctx)
+        {
+            
+            return true;
+        }
     }
 }

@@ -2,23 +2,31 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * IUnitOfWork Description:
- * 工作单元操作接口
+ * FieldBusinessConfig Description:
+ * 字段业务配置
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
  * Created							1.0		    2019-1-15   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
-using System;
+
 
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 工作单元操作接口
+    /// 字段业务配置
     /// </summary>
-    public interface IUnitOfWork : IDisposable
+    public class FieldExtendConfig
     {
-     
+        /// <summary>
+        /// 组key
+        /// </summary>
+        public string GroupKey { get; set; }
+
+        /// <summary>
+        /// 是否必须
+        /// </summary>
+        public bool? IsRequired { get; set; }
     }
 }

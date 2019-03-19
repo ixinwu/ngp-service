@@ -34,6 +34,6 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 表单验证配置
         /// </summary>
-        public FormVerificationConfig VerificationConfig { get; set; }
+        public FormExtendConfig ExtendConfig { get; set; }
     }
 }

@@ -2,27 +2,33 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * DynamicSingleQueryRequest Description:
- * 动态单条查询请求
+ * QueryResolvePageExcuteStep Description:
+ * 解析分页查询步骤
  *
  * Comment 					        Revision	Date                  Author
  * -----------------------------    --------    ------------------    ----------------
- * Created							1.0		    2019/1/22 16:53:09    hulei@ixinwu.com
+ * Created							1.0		    2019/3/18 15:56:08    hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
-
+using NGP.Framework.Core;
 
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态单条查询请求
+    /// 解析分页查询步骤
     /// </summary>
-    public class DynamicSingleQueryRequest : DynamicBaseRequest
+    public class QueryResolvePageExcuteStep : StepBase<QueryResloveContext>
     {
         /// <summary>
-        /// 主键值
+        /// 执行上下文
         /// </summary>
-        public string PrimaryKeyValue { get; set; }
+        /// <param name="ctx"></param>
+        /// <returns></returns>
+        public override bool Process(QueryResloveContext ctx)
+        {
+            
+            return true;
+        }
     }
 }

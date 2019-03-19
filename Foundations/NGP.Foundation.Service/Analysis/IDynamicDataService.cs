@@ -38,7 +38,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<DynamicPageQueryReponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
+        NGPResponse<NGPPageQueryResponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null);
 
@@ -49,7 +49,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<List<dynamic>> QueryDynamicAllData(DynamicQueryRequest query,
+        NGPResponse<dynamic> QueryDynamicAllData(DynamicQueryRequest query,
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null);
 

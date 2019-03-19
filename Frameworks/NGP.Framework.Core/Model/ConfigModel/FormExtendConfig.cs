@@ -1,33 +1,34 @@
 ﻿/* ---------------------------------------------------------------------    
  * Copyright:
- * IXinWu Technology Co., Ltd. All rights reserved.
+ * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * DynamicDeleteRequest Description:
- * 动态删除请求对象
+ * FormVerificationConfig Description:
+ * 表单验证配置
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019/2/19  hulei@ixinwu.com
+ * Created							1.0		    2019-1-15   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
+
 using System.Collections.Generic;
 
-namespace NGP.Foundation.Service.Analysis
+namespace NGP.Framework.Core
 {
     /// <summary>
-    /// 动态删除请求对象
+    /// 表单验证配置
     /// </summary>
-    public class DynamicDeleteRequest : DynamicBaseRequest
+    public class FormExtendConfig
     {
         /// <summary>
-        /// key
+        /// 显示字段key
         /// </summary>
-        public List<string> Keys { get; set; }
+        public string DisplayFieldKey { get; set; }
 
         /// <summary>
-        /// 是否删除子集
+        /// 约束字段列表
         /// </summary>
-        public bool IsDeleteSubsets { get; set; }
+        public List<FormUniqueConfig> UniqueFields { get; set; }
     }
 }

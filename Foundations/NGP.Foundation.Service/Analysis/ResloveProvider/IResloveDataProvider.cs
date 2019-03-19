@@ -2,28 +2,31 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * FormVerificationConfig Description:
- * 表单验证配置
+ * IDynamicDataService Description:
+ * 动态数据服务接口
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019-1-15   hulei@ixinwu.com
+ * Created							1.0		    2019/1/22 9:07:18   hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
-
+using NGP.Framework.Core;
+using System;
 using System.Collections.Generic;
 
-namespace NGP.Framework.Core
+namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 表单验证配置
+    /// 动态数据服务接口
     /// </summary>
-    public class FormVerificationConfig
+    public interface IResloveDataProvider
     {
         /// <summary>
-        /// 约束字段列表
+        /// 初始化解析上下文
         /// </summary>
-        public List<FormUniqueConfig> UniqueFields { get; set; }
+        /// <param name="request"></param>
+        /// <returns></returns>
+        ResloveInitContext InitResloveContext(DynamicBaseRequest request);
     }
 }

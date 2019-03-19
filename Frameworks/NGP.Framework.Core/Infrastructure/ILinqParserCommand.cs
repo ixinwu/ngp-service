@@ -53,6 +53,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// select page query
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="selectCommand"></param>
         /// <param name="fromCommand"></param>
         /// <param name="joinCommand"></param>
@@ -62,14 +63,25 @@ namespace NGP.Framework.Core
         /// <param name="pageStart"></param>
         /// <param name="pageEnd"></param>
         /// <returns>query string</returns>
-        string SelectPageQuery(string selectCommand,
-                                       string fromCommand,
-                                       string joinCommand,
-                                       string whereCommand,
-                                       string groupCommand,
-                                       string orderCommand,
-                                       string pageStart,
-                                       string pageEnd);
+        string SelectPageQuery<T>(string selectCommand,
+                                        string fromCommand,
+                                        string joinCommand,
+                                        string whereCommand,
+                                        string groupCommand,
+                                        string orderCommand,
+                                        T pageStart,
+                                        T pageEnd);
+
+        /// <summary>
+        /// select count query
+        /// </summary>
+        /// <param name="fromCommand"></param>
+        /// <param name="joinCommand"></param>
+        /// <param name="whereCommand"></param>
+        /// <returns></returns>
+        string SelectTotalCountQuery(string fromCommand,
+            string joinCommand,
+            string whereCommand);
 
         /// <summary>
         /// from join

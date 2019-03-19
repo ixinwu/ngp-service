@@ -40,10 +40,10 @@ namespace NGP.Framework.DataAccess
                 .IsRequired()
                 .HasMaxLength(200);
 
-            builder.Property(t => t.VerificationConfig)
+            builder.Property(t => t.ExtendConfig)
                 .HasConversion(
                 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
-                v => JsonConvert.DeserializeObject<FormVerificationConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+                v => JsonConvert.DeserializeObject<FormExtendConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
             base.PostConfigure(builder);
         }

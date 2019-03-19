@@ -2,32 +2,34 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * DynamicDetailOperateInfo Description:
- * 动态详情页面操作对象
+ * QueryGenerateContext Description:
+ * 解析生成对象上下文
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2017/3/14  hulei@ixinwu.com
+ * Created							1.0		    2019/2/19  hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
+using NGP.Framework.Core;
+using System;
 using System.Collections.Generic;
 
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态详情页面操作对象
+    /// 解析生成对象上下文
     /// </summary>
-    public class DynamicUpdateRequest : DynamicBaseRequest
+    public class QueryGenerateContext
     {
         /// <summary>
-        /// 主键值
+        /// 生成名称字段的列表
         /// </summary>
-        public string PrimaryKeyValue { get; set; }
+        public List<App_Config_FormField> GenerateNameFields { get; set; } = new List<App_Config_FormField>();
 
         /// <summary>
-        /// 操作字段列表
+        /// 生成类型
         /// </summary>
-        public List<DynamicAddRequest> OperateFields { get; set; }
+        public Type GenerateType { get; set; }
     }
 }

@@ -11,6 +11,8 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using System.Collections.Generic;
+
 namespace NGP.Framework.Core
 {
     /// <summary>
@@ -31,12 +33,8 @@ namespace NGP.Framework.Core
         /// </summary>
         public string DataSetName { get; set; }
         /// <summary>
-        /// 主表单key
-        /// </summary>
-        public string MainFormKey { get; set; }
-        /// <summary>
         /// 关联id列表
         /// </summary>
-        public string RelationIds { get; set; }
+        public List<string> RelationIds { get; set; }
     }
 }

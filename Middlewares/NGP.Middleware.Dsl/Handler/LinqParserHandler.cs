@@ -49,6 +49,11 @@ namespace NGP.Middleware.Dsl.Handler
         private readonly ParseTreeProperty<string> _statementTree = new ParseTreeProperty<string>();
 
         /// <summary>
+        /// 包含的字段列表
+        /// </summary>
+        private readonly List<string> _includeFieldKeys = new List<string>();
+
+        /// <summary>
         /// 请求对象
         /// </summary>
         private LinqParserRequest _parserRequest;
@@ -132,7 +137,8 @@ namespace NGP.Middleware.Dsl.Handler
             return new LinqParserResponse
             {
                 Command = command,
-                GenerateObjects = _generateObjects
+                GenerateObjects = _generateObjects,
+                IncludeFieldKeys = _includeFieldKeys
             };
         }
         #endregion
@@ -1022,9 +1028,23 @@ namespace NGP.Middleware.Dsl.Handler
         /// <param name="context"></param>
         public override void ExitFieldParam([NotNull] LinqParserParser.FieldParamContext context)
         {
-            var filedKey = context.FIELDKEY().GetText().Trim();
-            var column = filedKey.Split("_").LastOrDefault();
-            var command = string.Format("{0}.[{1}]", context.TEXT().GetText().Trim(), column);
+            var fieldKey = context.FIELDKEY().GetText().Trim();
+
+            if (!_includeFieldKeys.Contains(fieldKey))
+            {
+                _includeFieldKeys.Add(fieldKey);
+            }
+
+            var column = AppConfigExtend.GetColumn(fieldKey);
+            var command = string.Empty;
+            if (context.TEXT() == null || string.IsNullOrWhiteSpace(context.TEXT().GetText()))
+            {
+                command = AppConfigExtend.GetSqlFullName(fieldKey);
+                SetStatement(context, command);
+                return;
+            }
+
+            command = string.Format("{0}.[{1}]", context.TEXT().GetText().Trim(), column);
             SetStatement(context, command);
         }
         #endregion

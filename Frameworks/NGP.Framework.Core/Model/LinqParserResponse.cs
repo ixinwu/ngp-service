@@ -30,5 +30,10 @@ namespace NGP.Framework.Core
         /// 生成对象列表
         /// </summary>
         public List<DynamicGenerateObject> GenerateObjects { get; set; }
+
+        /// <summary>
+        /// 涉及到的字段key
+        /// </summary>
+        public List<string> IncludeFieldKeys { get; set; }
     }
 }

@@ -57,10 +57,10 @@ namespace NGP.Framework.DataAccess
                 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
                 v => JsonConvert.DeserializeObject<List<FieldVerificationConfig>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
-            builder.Property(t => t.BusinessConfig)
+            builder.Property(t => t.ExtendConfig)
                 .HasConversion(
                 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
-                v => JsonConvert.DeserializeObject<FieldBusinessConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+                v => JsonConvert.DeserializeObject<FieldExtendConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
             base.PostConfigure(builder);
         }

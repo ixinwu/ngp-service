@@ -30,6 +30,11 @@ namespace NGP.Framework.Core
         public const string __CodeXmlDocuments = "App_Data\\XmlDocuments\\";
 
         /// <summary>
+        /// 解析json文档
+        /// </summary>
+        public const string __ResloveJsons = "App_Data\\ResloveJsons\\";
+
+        /// <summary>
         /// swagger sjon
         /// </summary>
         public const string __SwaggerJson = "/swagger/v1/swagger.json";

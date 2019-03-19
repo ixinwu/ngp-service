@@ -22,6 +22,31 @@ namespace NGP.Foundation.Service.Analysis
     /// </summary>
     public class DynamicDataService : IDynamicDataService
     {
+        #region private fields
+        /// <summary>
+        /// 工作上下文
+        /// </summary>
+        private readonly IWorkContext _workContext;
+
+        /// <summary>
+        /// 仓储
+        /// </summary>
+        private readonly IUnitRepository _unitRepository;
+        #endregion
+
+        #region ctor
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="workContext"></param>
+        /// <param name="unitRepository"></param>
+        public DynamicDataService(IWorkContext workContext, IUnitRepository unitRepository)
+        {
+            _workContext = workContext;
+            _unitRepository = unitRepository;
+        }
+        #endregion
+
         #region methods
         /// <summary>
         /// 删除动态数据(包含详情)
@@ -42,7 +67,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        public NGPResponse<DynamicPageQueryReponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
+        public NGPResponse<NGPPageQueryResponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
@@ -56,7 +81,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendTypes">扩展类型定义</param>
         /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        public NGPResponse<List<dynamic>> QueryDynamicAllData(DynamicQueryRequest query,
+        public NGPResponse<dynamic> QueryDynamicAllData(DynamicQueryRequest query,
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {

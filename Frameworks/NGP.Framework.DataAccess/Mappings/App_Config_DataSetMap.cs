@@ -12,7 +12,9 @@
  * ------------------------------------------------------------------------------*/
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 using NGP.Framework.Core;
+using System.Collections.Generic;
 
 namespace NGP.Framework.DataAccess
 {
@@ -38,9 +40,11 @@ namespace NGP.Framework.DataAccess
             builder.Property(t => t.DataSetName)
                 .IsRequired()
                .HasMaxLength(200);
-            builder.Property(t => t.MainFormKey)
-               .IsRequired()
-              .HasMaxLength(100);
+
+            builder.Property(t => t.RelationIds)
+             .HasConversion(
+             v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+             v => JsonConvert.DeserializeObject<List<string>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
             base.PostConfigure(builder);
         }
