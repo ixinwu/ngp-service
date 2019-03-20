@@ -1,2 +1,3 @@
-# nextquick
-Quickly build application scaffolding reference nop and other open source frameworks, using .net core
+# ngp-service
+后端开发工程，包含脚手架功能，配置驱动数据处理，各种中间件集成
+用于快速搭建应用服务
