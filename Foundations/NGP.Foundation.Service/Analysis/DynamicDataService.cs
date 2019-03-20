@@ -151,7 +151,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="extendFunc">扩展操作(返回影响行数)</param>
         /// <param name = "extendRelationFunc" > 扩展操作关联信息(返回影响行数) </param >
         /// <returns>操作结果</returns>
-        public NGPResponse AddDynamicData(DynamicAddRequest info,
+        public NGPResponse AddDynamicData(DynamicOperatorRequest info,
             Func<int> extendFunc = null,
             Func<string, int> extendRelationFunc = null)
         {
@@ -164,7 +164,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="info">更新对象</param>
         /// <param name="extendFunc">扩展更新(返回影响行数)</param>
         /// <returns>操作结果</returns>
-        public NGPResponse UpdateDynamicData(DynamicUpdateRequest info,
+        public NGPResponse UpdateDynamicData(DynamicOperatorRequest info,
             Func<int> extendFunc = null)
         {
             return null;

@@ -18,16 +18,11 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 动态详情页面操作对象
     /// </summary>
-    public class DynamicUpdateRequest : DynamicBaseRequest
+    public class DynamicOperatorRequest : DynamicBaseRequest
     {
-        /// <summary>
-        /// 主键值
-        /// </summary>
-        public string PrimaryKeyValue { get; set; }
-
         /// <summary>
         /// 操作字段列表
         /// </summary>
-        public List<DynamicAddRequest> OperateFields { get; set; }
+        public List<DynamicOperateFieldRequest> OperateFields { get; set; }
     }
 }

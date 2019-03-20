@@ -88,7 +88,7 @@ namespace NGP.WebApi
         /// <param name="info">追加对象</param>        
         /// <returns>操作结果</returns>
         [HttpPost("addDynamicData")]
-        public ActionResult<NGPResponse> AddDynamicData(DynamicAddRequest info)
+        public ActionResult<NGPResponse> AddDynamicData(DynamicOperatorRequest info)
         {
             return Ok(_dynamicDataService.AddDynamicData(info));
         }
@@ -99,7 +99,7 @@ namespace NGP.WebApi
         /// <param name="info">更新对象</param>
         /// <returns>操作结果</returns>
         [HttpPost("updateDynamicData")]
-        public ActionResult<NGPResponse> UpdateDynamicData(DynamicUpdateRequest info)
+        public ActionResult<NGPResponse> UpdateDynamicData(DynamicOperatorRequest info)
         {
             return Ok(_dynamicDataService.UpdateDynamicData(info));
         }
