@@ -51,6 +51,25 @@ namespace NGP.Framework.Core
                                    string groupCommand);
 
         /// <summary>
+        /// select single query
+        /// </summary>
+        /// <param name="distinct"></param>
+        /// <param name="selectCommand"></param>
+        /// <param name="fromCommand"></param>
+        /// <param name="joinCommand"></param>
+        /// <param name="whereCommand"></param>
+        /// <param name="orderCommand"></param>
+        /// <param name="groupCommand"></param>
+        /// <returns>query string</returns>
+        string SelectSingleQuery(string distinct,
+                                   string selectCommand,
+                                   string fromCommand,
+                                   string joinCommand,
+                                   string whereCommand,
+                                   string orderCommand,
+                                   string groupCommand);
+
+        /// <summary>
         /// select page query
         /// </summary>
         /// <typeparam name="T"></typeparam>

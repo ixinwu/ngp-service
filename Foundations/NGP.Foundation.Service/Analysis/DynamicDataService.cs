@@ -101,7 +101,20 @@ namespace NGP.Foundation.Service.Analysis
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
-            return null;
+            var context = new QueryResolveContext
+            {
+                Request = query,
+            };
+            context.GenerateContext.ExtendSetItem = setItem;
+            context.GenerateContext.ExtendTypes = extendTypes;
+
+            ResolveProcessorFactory.StepResolveAllQuery.HandleProcess(context);
+            return new NGPResponse<dynamic>
+            {
+                Message = CommonResource.OperatorSuccess,
+                Status = OperateStatus.Success,
+                Data = context.Response.Data
+            };
         }
 
         /// <summary>
@@ -115,21 +128,20 @@ namespace NGP.Foundation.Service.Analysis
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
-            return null;
-        }
+            var context = new QueryResolveContext
+            {
+                Request = query,
+            };
+            context.GenerateContext.ExtendSetItem = setItem;
+            context.GenerateContext.ExtendTypes = extendTypes;
 
-        /// <summary>
-        /// 通过主键获取详情数据
-        /// </summary>
-        /// <param name="query">查询对象</param>
-        /// <param name="extendTypes">扩展类型定义</param>
-        /// <param name="setItem">设定值回调</param>
-        /// <returns>查询结果</returns>
-        public NGPResponse<dynamic> QueryDynamicSingleDataByKey(DynamicQueryRequest query,
-            IEnumerable<DynamicGenerateObject> extendTypes = null,
-            Action<dynamic> setItem = null)
-        {
-            return null;
+            ResolveProcessorFactory.StepResolveSingleQuery.HandleProcess(context);
+            return new NGPResponse<dynamic>
+            {
+                Message = CommonResource.OperatorSuccess,
+                Status = OperateStatus.Success,
+                Data = context.Response.Data
+            };
         }
 
         /// <summary>

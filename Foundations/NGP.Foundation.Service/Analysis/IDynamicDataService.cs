@@ -65,17 +65,6 @@ namespace NGP.Foundation.Service.Analysis
             Action<dynamic> setItem = null);
 
         /// <summary>
-        /// 通过主键获取详情数据
-        /// </summary>
-        /// <param name="query">查询对象</param>
-        /// <param name="extendTypes">扩展类型定义</param>
-        /// <param name="setItem">设定值回调</param>
-        /// <returns>查询结果</returns>
-        NGPResponse<dynamic> QueryDynamicSingleDataByKey(DynamicQueryRequest query,
-            IEnumerable<DynamicGenerateObject> extendTypes = null,
-            Action<dynamic> setItem = null);
-
-        /// <summary>
         /// 添加动态数据
         /// </summary>
         /// <param name="info">追加对象</param>

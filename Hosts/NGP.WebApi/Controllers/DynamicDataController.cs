@@ -83,17 +83,6 @@ namespace NGP.WebApi
         }
 
         /// <summary>
-        /// 通过主键获取详情数据
-        /// </summary>
-        /// <param name="query">查询对象</param>
-        /// <returns>查询结果</returns>
-        [HttpPost("queryDynamicSingleDataByKey")]
-        public ActionResult<NGPResponse<dynamic>> QueryDynamicSingleDataByKey(DynamicQueryRequest query)
-        {
-            return Ok(_dynamicDataService.QueryDynamicSingleDataByKey(query));
-        }
-
-        /// <summary>
         /// 添加动态数据
         /// </summary>
         /// <param name="info">追加对象</param>        

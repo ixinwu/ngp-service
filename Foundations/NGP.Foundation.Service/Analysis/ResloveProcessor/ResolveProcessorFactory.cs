@@ -31,6 +31,11 @@ namespace NGP.Foundation.Service.Analysis
         public static IStep<QueryResolveContext> StepResolveSingleQuery { get; private set; }= new QueryResolveInitializeStep();
 
         /// <summary>
+        /// 解析创建状态初始化步骤--全部查询
+        /// </summary>
+        public static IStep<QueryResolveContext> StepResolveAllQuery { get; private set; } = new QueryResolveInitializeStep();
+
+        /// <summary>
         /// ctor
         /// </summary>
         static ResolveProcessorFactory()
@@ -39,7 +44,7 @@ namespace NGP.Foundation.Service.Analysis
                 .AddNextStep(new QueryResolveWhereStep())
                 .AddNextStep(new QueryResolveOrderStep())
                 .AddNextStep(new QueryResolveJoinStep())
-                .AddNextStep(new QueryResolveBuildCommandStep())
+                .AddNextStep(new QueryResolveBuildPageCommandStep())
                 .AddNextStep(new QueryResolveBuildTypeStep())
                 .AddNextStep(new QueryResolveAssociatedQueryStep())
                 .AddNextStep(new QueryResolvePageExcuteStep())
@@ -49,11 +54,21 @@ namespace NGP.Foundation.Service.Analysis
                .AddNextStep(new QueryResolveWhereStep())
                .AddNextStep(new QueryResolveOrderStep())
                .AddNextStep(new QueryResolveJoinStep())
-               .AddNextStep(new QueryResolveBuildCommandStep())
+               .AddNextStep(new QueryResolveBuildSingleCommandStep())
                .AddNextStep(new QueryResolveBuildTypeStep())
                .AddNextStep(new QueryResolveAssociatedQueryStep())
                .AddNextStep(new QueryResolveSingleExcuteStep())
                .AddNextStep(new QueryResolveExtendAssignmentStep());
+
+            StepResolveAllQuery.AddNextStep(new QueryResolvePermissionStep())
+              .AddNextStep(new QueryResolveWhereStep())
+              .AddNextStep(new QueryResolveOrderStep())
+              .AddNextStep(new QueryResolveJoinStep())
+              .AddNextStep(new QueryResolveBuildAllCommandStep())
+              .AddNextStep(new QueryResolveBuildTypeStep())
+              .AddNextStep(new QueryResolveAssociatedQueryStep())
+              .AddNextStep(new QueryResolveAllExcuteStep())
+              .AddNextStep(new QueryResolveExtendAssignmentStep());
         }
     }
 }

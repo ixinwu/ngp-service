@@ -66,6 +66,33 @@ namespace NGP.Framework.Core
                groupCommand);
 
         /// <summary>
+        /// select single query
+        /// </summary>
+        /// <param name="distinct"></param>
+        /// <param name="selectCommand"></param>
+        /// <param name="fromCommand"></param>
+        /// <param name="joinCommand"></param>
+        /// <param name="whereCommand"></param>
+        /// <param name="orderCommand"></param>
+        /// <param name="groupCommand"></param>
+        /// <returns>query string</returns>
+       public string SelectSingleQuery(string distinct,
+                                   string selectCommand,
+                                   string fromCommand,
+                                   string joinCommand,
+                                   string whereCommand,
+                                   string orderCommand,
+                                   string groupCommand)
+         => string.Format("SELECT TOP 1 {0} {1} \r\n FROM {2} \r\n {3} \r\n {4} \r\n {5} \r\n {6}",
+               distinct,
+               selectCommand,
+               fromCommand,
+               joinCommand,
+               whereCommand,
+               orderCommand,
+               groupCommand);
+
+        /// <summary>
         /// select page query
         /// </summary>
         /// <typeparam name="T"></typeparam>

@@ -27,7 +27,13 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns></returns>
         public override bool Process(QueryResolveContext ctx)
         {
-            
+            var unitRepository = Singleton<IEngine>.Instance.Resolve<IUnitRepository>();
+            ctx.Response.Data = unitRepository.ExecuteReader(ctx.CommandContext.ExcuteCommand.CommandText,
+                    ctx.GenerateContext.GenerateType,
+                    ctx.CommandContext.ExcuteCommand.ParameterCollection,
+                    null,
+                    null,
+                    ctx.GenerateContext.ExtendSetItem);
             return true;
         }
     }

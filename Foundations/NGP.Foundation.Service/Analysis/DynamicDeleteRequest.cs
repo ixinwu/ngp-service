@@ -21,9 +21,14 @@ namespace NGP.Foundation.Service.Analysis
     public class DynamicDeleteRequest : DynamicBaseRequest
     {
         /// <summary>
+        /// 主键key
+        /// </summary>
+        public string PrimaryFieldKey { get; set; }
+
+        /// <summary>
         /// key
         /// </summary>
-        public List<string> Keys { get; set; }
+        public List<string> KeyValues { get; set; }
 
         /// <summary>
         /// 是否删除子集
