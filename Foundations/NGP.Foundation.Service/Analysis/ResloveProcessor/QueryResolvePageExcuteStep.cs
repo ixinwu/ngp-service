@@ -27,7 +27,19 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns></returns>
         public override bool Process(QueryResloveContext ctx)
         {
-            
+            var unitRepository = Singleton<IEngine>.Instance.Resolve<IUnitRepository>();
+
+            // 先查询总条数
+            ctx.Response.TotalCount = unitRepository.ExecuteScalar<int>(ctx.CommandContext.TotalCommand.CommandText,
+                ctx.CommandContext.TotalCommand.ParameterCollection);
+            if (ctx.Response.TotalCount > 0)
+            {
+                ctx.Response.Data = unitRepository.ReadValues(ctx.CommandContext.ExcuteCommand.CommandText,
+                    ctx.GenerateContext.GenerateType,
+                    ctx.CommandContext.ExcuteCommand.ParameterCollection,
+                    ctx.GenerateContext.ExtendSetItem);
+            }
+
             return true;
         }
     }

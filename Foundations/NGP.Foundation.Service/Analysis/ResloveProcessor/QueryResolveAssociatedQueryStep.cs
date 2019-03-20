@@ -42,6 +42,19 @@ namespace NGP.Foundation.Service.Analysis
             {
                 ctx.AssociatedContext.Departments = unitRepository.AllNoTracking<Sys_Org_Department>(s => !s.IsDelete).ToList();
             }
+
+            // 是否有类别字段
+            var groupKeys = ctx.GenerateContext.GenerateNameFields
+                .Where(s => s.FieldType.ToEnum<FieldType>() == FieldType.GroupType &&
+                s.ExtendConfig != null && !string.IsNullOrWhiteSpace(s.ExtendConfig.GroupKey))
+                .Select(s=> s.ExtendConfig.GroupKey)
+                .Distinct()
+                .ToList();
+            if (!groupKeys.IsNullOrEmpty())
+            {
+                ctx.AssociatedContext.GroupTypes = unitRepository.AllNoTracking<App_Config_GroupType>(s => groupKeys.Contains(s.GroupKey)).ToList();
+            }
+
             return true;
         }
     }

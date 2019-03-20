@@ -53,6 +53,6 @@ namespace NGP.Foundation.Service.Analysis
         /// <summary>
         /// 返回结果
         /// </summary>
-        public NGPPageQueryResponse Response { get; set; } = new NGPPageQueryResponse();
+        public NGPPageQueryResponse Response { get; set; } = new NGPPageQueryResponse() { Data = null };
     }
 }

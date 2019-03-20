@@ -25,13 +25,16 @@ namespace NGP.Foundation.Service.Analysis
         /// <summary>
         /// 人员列表
         /// </summary>
-        public List<Sys_Org_Employee> Employees { get; set; }
+        public List<Sys_Org_Employee> Employees { get; set; } = new List<Sys_Org_Employee>();
 
         /// <summary>
         /// 部门列表
         /// </summary>
-        public List<Sys_Org_Department> Departments { get; set; }
+        public List<Sys_Org_Department> Departments { get; set; } = new List<Sys_Org_Department>();
 
-        
+        /// <summary>
+        /// 类别组列表
+        /// </summary>
+        public List<App_Config_GroupType> GroupTypes { get; set; } = new List<App_Config_GroupType>();
     }
 }

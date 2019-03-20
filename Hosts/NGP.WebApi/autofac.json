@@ -136,7 +136,26 @@
         }
       ],
       "instanceScope": "per-lifetime-scope"
+    },
+    // IResloveDataProvider
+    {
+      "type": "NGP.Foundation.Service.Analysis.ResloveJsonDataProvider,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Foundation.Service.Analysis.IResloveDataProvider,NGP.Foundation.Service"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // IDynamicDataService
+    {
+      "type": "NGP.Foundation.Service.Analysis.DynamicDataService,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Foundation.Service.Analysis.IDynamicDataService,NGP.Foundation.Service"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
     }
-
   ]
 }

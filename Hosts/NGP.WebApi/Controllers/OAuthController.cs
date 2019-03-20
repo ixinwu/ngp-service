@@ -14,6 +14,7 @@
 using NGP.Foundation.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NGP.Framework.WebApi.Core;
+using NGP.Framework.Core;
 
 namespace NGP.WebApi
 {
@@ -44,7 +45,7 @@ namespace NGP.WebApi
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPost("token")]
-        public IActionResult Token([FromBody]TokenRequest userDto)
+        public ActionResult<NGPResponse<TokenReponse>> Token([FromBody]TokenRequest userDto)
         {
             var result = _userService.Certification(userDto);
             return Ok(result);

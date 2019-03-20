@@ -34,7 +34,9 @@ namespace NGP.Foundation.Service.Analysis
                 .AddNextStep(new QueryResolveJoinStep())
                 .AddNextStep(new QueryResolveBuildCommandStep())
                 .AddNextStep(new QueryResolveBuildTypeStep())
-                .AddNextStep(new QueryResolvePageExcuteStep());
+                .AddNextStep(new QueryResolveAssociatedQueryStep())
+                .AddNextStep(new QueryResolvePageExcuteStep())
+                .AddNextStep(new QueryResolveExtendAssignmentStep());
         }
     }
 }

@@ -66,6 +66,8 @@ namespace NGP.Foundation.Service.Analysis
                 }
             }
 
+            generateList.AddRange(ctx.GenerateContext.ExtendTypes ?? new List<DynamicGenerateObject>());
+
             // 生成类型
             ctx.GenerateContext.GenerateType = generateList.CompileType();
 

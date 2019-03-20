@@ -11,6 +11,7 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using NGP.Foundation.Resources;
 using NGP.Framework.Core;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 动态数据服务
     /// </summary>
+    [ExceptionCallHandler]
     public class DynamicDataService : IDynamicDataService
     {
         #region private fields
@@ -71,7 +73,21 @@ namespace NGP.Foundation.Service.Analysis
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
-            return null;
+            var context = new QueryResloveContext
+            {
+                Request = query.RequestData,
+                PageQueryRequest = query,
+            };
+            context.GenerateContext.ExtendSetItem = setItem;
+            context.GenerateContext.ExtendTypes = extendTypes;
+
+            ResloveProcessorFactory.StepResolveQuery.HandleProcess(context);
+            return new NGPResponse<NGPPageQueryResponse>
+            {
+                Message = CommonResource.OperatorSuccess,
+                Status = OperateStatus.Success,
+                Data = context.Response
+            };
         }
 
         /// <summary>

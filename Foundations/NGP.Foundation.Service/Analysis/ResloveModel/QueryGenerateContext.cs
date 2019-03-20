@@ -31,5 +31,15 @@ namespace NGP.Foundation.Service.Analysis
         /// 生成类型
         /// </summary>
         public Type GenerateType { get; set; }
+
+        /// <summary>
+        /// 扩展类型
+        /// </summary>
+        public IEnumerable<DynamicGenerateObject> ExtendTypes { get; set; }
+
+        /// <summary>
+        /// 扩展设定回调
+        /// </summary>
+        public Action<dynamic> ExtendSetItem { get; set; }
     }
 }
