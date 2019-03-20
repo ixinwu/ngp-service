@@ -20,14 +20,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析where条件步骤
     /// </summary>
-    public class QueryResolveWhereStep : StepBase<QueryResloveContext>
+    public class QueryResolveWhereStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             // 添加dsl
             var andDsl = new List<string>() { ctx.Request.WhereExpression };

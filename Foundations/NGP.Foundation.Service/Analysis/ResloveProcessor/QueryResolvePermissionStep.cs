@@ -18,14 +18,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析权限步骤
     /// </summary>
-    public class QueryResolvePermissionStep : StepBase<QueryResloveContext>
+    public class QueryResolvePermissionStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             
             return true;

@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * ResloveExtend Description:
+ * ResolveExtend Description:
  * 解析扩展
  *
  * Comment 					        Revision	Date        Author
@@ -20,7 +20,7 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析扩展
     /// </summary>
-    public static class ResloveExtend
+    public static class ResolveExtend
     {
         /// <summary>
         /// 获取代码的类型

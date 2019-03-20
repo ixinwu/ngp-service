@@ -48,7 +48,7 @@
 
 
   <ItemGroup>
-    <None Update="App_Data\ResloveJsons\readme.txt">
+    <None Update="App_Data\ResolveJsons\readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="App_Data\XmlDocuments\readme.txt">

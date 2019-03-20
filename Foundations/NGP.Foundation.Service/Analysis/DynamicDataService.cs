@@ -73,7 +73,7 @@ namespace NGP.Foundation.Service.Analysis
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
-            var context = new QueryResloveContext
+            var context = new QueryResolveContext
             {
                 Request = query.RequestData,
                 PageQueryRequest = query,
@@ -81,7 +81,7 @@ namespace NGP.Foundation.Service.Analysis
             context.GenerateContext.ExtendSetItem = setItem;
             context.GenerateContext.ExtendTypes = extendTypes;
 
-            ResloveProcessorFactory.StepResolveQuery.HandleProcess(context);
+            ResolveProcessorFactory.StepResolveQuery.HandleProcess(context);
             return new NGPResponse<NGPPageQueryResponse>
             {
                 Message = CommonResource.OperatorSuccess,

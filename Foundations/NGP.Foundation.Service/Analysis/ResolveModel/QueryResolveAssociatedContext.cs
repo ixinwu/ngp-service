@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * ResloveContext Description:
+ * ResolveContext Description:
  * 解析上下文
  *
  * Comment 					        Revision	Date        Author
@@ -12,6 +12,7 @@
  * ------------------------------------------------------------------------------*/
 
 using NGP.Framework.Core;
+using System;
 using System.Collections.Generic;
 
 namespace NGP.Foundation.Service.Analysis
@@ -19,31 +20,21 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析上下文
     /// </summary>
-    public class ResloveInitContext
+    public class QueryResolveAssociatedContext
     {
         /// <summary>
-        /// data set对象
+        /// 人员列表
         /// </summary>
-        public App_Config_DataSet DataSet { get; set; }
+        public List<Sys_Org_Employee> Employees { get; set; } = new List<Sys_Org_Employee>();
 
         /// <summary>
-        /// 表单列表对象
+        /// 部门列表
         /// </summary>
-        public List<App_Config_Form> Forms { get; set; }
+        public List<Sys_Org_Department> Departments { get; set; } = new List<Sys_Org_Department>();
 
         /// <summary>
-        /// 表单关系对象
+        /// 类别组列表
         /// </summary>
-        public List<App_Config_FormRelation> FormRelations { get; set; }
-
-        /// <summary>
-        /// 表单字段对象
-        /// </summary>
-        public List<App_Config_FormField> FormFields { get; set; }
-
-        /// <summary>
-        /// 主表key
-        /// </summary>
-        public string MainFormKey { get; set; }
+        public List<App_Config_GroupType> GroupTypes { get; set; } = new List<App_Config_GroupType>();
     }
 }

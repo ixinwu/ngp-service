@@ -17,14 +17,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 动态数据服务接口
     /// </summary>
-    public class ResloveDbDataProvider : IResloveDataProvider
+    public class ResolveDbDataProvider : IResolveDataProvider
     {
         /// <summary>
         /// 初始化解析上下文
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public ResloveInitContext InitResloveContext(DynamicBaseRequest request)
+        public ResolveInitContext InitResolveContext(DynamicBaseRequest request)
         {
             return null;
         }

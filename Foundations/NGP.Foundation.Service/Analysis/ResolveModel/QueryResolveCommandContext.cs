@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * ResloveContext Description:
+ * ResolveContext Description:
  * 解析上下文
  *
  * Comment 					        Revision	Date        Author
@@ -20,7 +20,7 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析上下文
     /// </summary>
-    public class QueryResloveCommandContext
+    public class QueryResolveCommandContext
     {
         /// <summary>
         /// join命令

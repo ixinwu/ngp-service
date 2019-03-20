@@ -18,14 +18,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析排序步骤
     /// </summary>
-    public class QueryResolveOrderStep : StepBase<QueryResloveContext>
+    public class QueryResolveOrderStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             var sortExpression = ctx.Request.SortExpression;
             if (string.IsNullOrWhiteSpace(sortExpression))

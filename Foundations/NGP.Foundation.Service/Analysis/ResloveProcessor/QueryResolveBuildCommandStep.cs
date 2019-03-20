@@ -19,14 +19,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 页面解析组装命令处理
     /// </summary>
-    public class QueryResolveBuildCommandStep : StepBase<QueryResloveContext>
+    public class QueryResolveBuildCommandStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             // 格式命令接口
             var parserCommand = Singleton<IEngine>.Instance.Resolve<ILinqParserCommand>();

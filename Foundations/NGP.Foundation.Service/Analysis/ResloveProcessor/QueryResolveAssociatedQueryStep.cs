@@ -19,14 +19,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析关联查询步骤
     /// </summary>
-    public class QueryResolveAssociatedQueryStep : StepBase<QueryResloveContext>
+    public class QueryResolveAssociatedQueryStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             var unitRepository = Singleton<IEngine>.Instance.Resolve<IUnitRepository>();
             // 是否有人员名称字段

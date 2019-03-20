@@ -137,12 +137,12 @@
       ],
       "instanceScope": "per-lifetime-scope"
     },
-    // IResloveDataProvider
+    // IResolveDataProvider
     {
-      "type": "NGP.Foundation.Service.Analysis.ResloveJsonDataProvider,NGP.Foundation.Service",
+      "type": "NGP.Foundation.Service.Analysis.ResolveJsonDataProvider,NGP.Foundation.Service",
       "services": [
         {
-          "type": "NGP.Foundation.Service.Analysis.IResloveDataProvider,NGP.Foundation.Service"
+          "type": "NGP.Foundation.Service.Analysis.IResolveDataProvider,NGP.Foundation.Service"
         }
       ],
       "instanceScope": "per-lifetime-scope"

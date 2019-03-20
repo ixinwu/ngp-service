@@ -20,14 +20,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 页面解析组装命令处理
     /// </summary>
-    public class QueryResolveBuildTypeStep : StepBase<QueryResloveContext>
+    public class QueryResolveBuildTypeStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             // 获取字段列表
             var fieldList = ctx.InitContext.FormFields

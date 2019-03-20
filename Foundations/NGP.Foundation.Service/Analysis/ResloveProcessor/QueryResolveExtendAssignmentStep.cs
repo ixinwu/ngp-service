@@ -21,14 +21,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析扩展赋值步骤
     /// </summary>
-    public class QueryResolveExtendAssignmentStep : StepBase<QueryResloveContext>
+    public class QueryResolveExtendAssignmentStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             if (ctx.Response.Data == null)
             {

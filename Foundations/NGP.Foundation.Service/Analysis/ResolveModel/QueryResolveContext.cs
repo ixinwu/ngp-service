@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * ResloveContext Description:
+ * ResolveContext Description:
  * 解析上下文
  *
  * Comment 					        Revision	Date        Author
@@ -18,7 +18,7 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析上下文
     /// </summary>
-    public class QueryResloveContext
+    public class QueryResolveContext
     {
         /// <summary>
         /// 请求对象
@@ -33,12 +33,12 @@ namespace NGP.Foundation.Service.Analysis
         /// <summary>
         /// 命令上下文
         /// </summary>
-        public QueryResloveCommandContext CommandContext { get; set; } = new QueryResloveCommandContext();
+        public QueryResolveCommandContext CommandContext { get; set; } = new QueryResolveCommandContext();
 
         /// <summary>
         /// 初始化对象
         /// </summary>
-        public ResloveInitContext InitContext { get; set; } = new ResloveInitContext();
+        public ResolveInitContext InitContext { get; set; } = new ResolveInitContext();
 
         /// <summary>
         /// 生成上下文
@@ -48,7 +48,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <summary>
         /// 关联上下文
         /// </summary>
-        public QueryResloveAssociatedContext AssociatedContext { get; set; } = new QueryResloveAssociatedContext();
+        public QueryResolveAssociatedContext AssociatedContext { get; set; } = new QueryResolveAssociatedContext();
 
         /// <summary>
         /// 返回结果

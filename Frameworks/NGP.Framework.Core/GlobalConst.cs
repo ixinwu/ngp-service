@@ -32,7 +32,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 解析json文档
         /// </summary>
-        public const string __ResloveJsons = "App_Data\\ResloveJsons\\";
+        public const string __ResolveJsons = "App_Data\\ResolveJsons\\";
 
         /// <summary>
         /// swagger sjon

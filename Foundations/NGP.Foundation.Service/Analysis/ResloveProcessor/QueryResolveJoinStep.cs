@@ -20,14 +20,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析关联步骤
     /// </summary>
-    public class QueryResolveJoinStep : StepBase<QueryResloveContext>
+    public class QueryResolveJoinStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             // 获取关联列表
             var relationList = ctx.InitContext.FormRelations.Where(s => s.SourceFormKey == ctx.InitContext.MainFormKey);

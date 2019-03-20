@@ -20,20 +20,20 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 页面解析初始化处理
     /// </summary>
-    public class QueryResolveInitializeStep : StepBase<QueryResloveContext>
+    public class QueryResolveInitializeStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(QueryResloveContext ctx)
+        public override bool Process(QueryResolveContext ctx)
         {
             // 配置信息读取服务
-            var dataProvider = Singleton<IEngine>.Instance.Resolve<IResloveDataProvider>();
+            var dataProvider = Singleton<IEngine>.Instance.Resolve<IResolveDataProvider>();
 
             // 处理参数上下文
-            ctx.InitContext = dataProvider.InitResloveContext(ctx.Request);
+            ctx.InitContext = dataProvider.InitResolveContext(ctx.Request);
 
             // 分析当前解析的主表
             var formKeys = ctx.Request.QueryFieldKeys.Select(s => AppConfigExtend.GetFormKey(s)).Distinct();

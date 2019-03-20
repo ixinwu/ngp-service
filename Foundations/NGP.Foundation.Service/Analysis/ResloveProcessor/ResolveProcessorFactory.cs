@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * ResloveProcessorFactory Description:
+ * ResolveProcessorFactory Description:
  * 解析工厂
  *
  * Comment 					        Revision	Date                  Author
@@ -18,16 +18,23 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 解析工厂
     /// </summary>
-    public static class ResloveProcessorFactory
+    public static class ResolveProcessorFactory
     {
         /// <summary>
         /// 解析创建状态初始化步骤--分页查询
         /// </summary>
-        public static IStep<QueryResloveContext> StepResolveQuery { get; private set; } = null;
+        public static IStep<QueryResolveContext> StepResolveQuery { get; private set; } = new QueryResolveInitializeStep();
 
-        static ResloveProcessorFactory()
+        /// <summary>
+        /// 解析创建状态初始化步骤--单条查询
+        /// </summary>
+        public static IStep<QueryResolveContext> StepResolveSingleQuery { get; private set; }= new QueryResolveInitializeStep();
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        static ResolveProcessorFactory()
         {
-            StepResolveQuery = new QueryResolveInitializeStep();
             StepResolveQuery.AddNextStep(new QueryResolvePermissionStep())
                 .AddNextStep(new QueryResolveWhereStep())
                 .AddNextStep(new QueryResolveOrderStep())
@@ -37,6 +44,16 @@ namespace NGP.Foundation.Service.Analysis
                 .AddNextStep(new QueryResolveAssociatedQueryStep())
                 .AddNextStep(new QueryResolvePageExcuteStep())
                 .AddNextStep(new QueryResolveExtendAssignmentStep());
+
+            StepResolveSingleQuery.AddNextStep(new QueryResolvePermissionStep())
+               .AddNextStep(new QueryResolveWhereStep())
+               .AddNextStep(new QueryResolveOrderStep())
+               .AddNextStep(new QueryResolveJoinStep())
+               .AddNextStep(new QueryResolveBuildCommandStep())
+               .AddNextStep(new QueryResolveBuildTypeStep())
+               .AddNextStep(new QueryResolveAssociatedQueryStep())
+               .AddNextStep(new QueryResolveSingleExcuteStep())
+               .AddNextStep(new QueryResolveExtendAssignmentStep());
         }
     }
 }

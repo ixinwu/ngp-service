@@ -20,13 +20,13 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 动态数据服务接口
     /// </summary>
-    public interface IResloveDataProvider
+    public interface IResolveDataProvider
     {
         /// <summary>
         /// 初始化解析上下文
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        ResloveInitContext InitResloveContext(DynamicBaseRequest request);
+        ResolveInitContext InitResolveContext(DynamicBaseRequest request);
     }
 }
