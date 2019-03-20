@@ -89,7 +89,7 @@ namespace NGP.Foundation.Service.Analysis
             };
 
             // 如果是列表
-            if (ctx.Response.Data is IList && ctx.GenerateContext.GenerateType.IsGenericType && !ctx.Response.Data.IsNullOrEmpty())
+            if (ctx.Response.Data is IList && ctx.Response.Data.GetType().IsGenericType && ctx.Response.Data.Count > 0)
             {
                 foreach (var item in ctx.Response.Data)
                 {

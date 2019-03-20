@@ -156,6 +156,11 @@ namespace NGP.Middleware.Dsl.Handler
                 SetStatement(context, GetStatement(context.selectStatement()));
                 return;
             }
+            if (context.orderStatement() != null)
+            {
+                SetStatement(context, GetStatement(context.orderStatement()));
+                return;
+            }
             SetStatement(context, GetStatement(context.whereStatement()));
         }
         #endregion

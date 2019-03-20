@@ -29,10 +29,5 @@ namespace NGP.Foundation.Service.Analysis
         /// 资源key(用于鉴权)
         /// </summary>
         public string ResourceKey { get; set; }
-
-        /// <summary>
-        /// 主表key
-        /// </summary>
-        public string MainFormKey { get; set; }
     }
 }

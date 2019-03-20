@@ -30,7 +30,7 @@ namespace NGP.Foundation.Service.Analysis
         public override bool Process(QueryResloveContext ctx)
         {
             // 获取关联列表
-            var relationList = ctx.InitContext.FormRelations.Where(s => s.SourceFormKey == ctx.Request.MainFormKey);
+            var relationList = ctx.InitContext.FormRelations.Where(s => s.SourceFormKey == ctx.InitContext.MainFormKey);
 
             var joinList = new List<string>();
 

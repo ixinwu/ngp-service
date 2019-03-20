@@ -33,7 +33,7 @@ namespace NGP.Foundation.Service.Analysis
             var andDsl = new List<string>() { ctx.Request.WhereExpression };
 
             andDsl.Add(ctx.CommandContext.PermissionWhere);
-
+            andDsl = andDsl.RemoveEmptyRepeat().ToList();
             var sourceDsl = string.Join(" && ", andDsl.Select(s => string.Format("({0})", s)));
 
             // 执行where解析

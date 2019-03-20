@@ -12,6 +12,8 @@
  * ------------------------------------------------------------------------------*/
 
 using NGP.Framework.Core;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NGP.Foundation.Service.Analysis
 {
@@ -33,7 +35,45 @@ namespace NGP.Foundation.Service.Analysis
             // 处理参数上下文
             ctx.InitContext = dataProvider.InitResloveContext(ctx.Request);
 
+            // 分析当前解析的主表
+            var formKeys = ctx.Request.QueryFieldKeys.Select(s => AppConfigExtend.GetFormKey(s)).Distinct();
+            var findFormKeys = formKeys.ToList();
+            var mainKey = string.Empty;
+            foreach (var item in formKeys)
+            {
+                var sourceKey = FindSourceKey(item, ctx.InitContext.FormRelations, findFormKeys);
+                if (findFormKeys.Contains(sourceKey))
+                {
+                    mainKey = sourceKey;
+                    break;
+                }
+            }
+
+            ctx.InitContext.MainFormKey = mainKey;
             return true;
+        }
+
+        /// <summary>
+        /// find source key
+        /// </summary>
+        /// <param name="mainKey"></param>
+        /// <param name="relations"></param>
+        /// <param name="formKeys"></param>
+        /// <returns></returns>
+        private string FindSourceKey(string mainKey, List<App_Config_FormRelation> relations, List<string> formKeys)
+        {
+            // 取第一个源
+            var sourceKey = relations
+                .Where(s => s.RelationFormKey == mainKey && formKeys.Contains(s.SourceFormKey))
+                .Select(s => s.SourceFormKey)
+                .Distinct()
+                .FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(sourceKey))
+            {
+                return mainKey;
+            }
+            formKeys.Remove(mainKey);
+            return FindSourceKey(sourceKey, relations, formKeys);
         }
     }
 }

@@ -27,11 +27,23 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns></returns>
         public override bool Process(QueryResloveContext ctx)
         {
-            ctx.CommandContext.SortCommand = ctx.Request.SortExpression;
-            if (string.IsNullOrWhiteSpace(ctx.CommandContext.SortCommand))
+            var sortExpression = ctx.Request.SortExpression;
+            if (string.IsNullOrWhiteSpace(sortExpression))
             {
-                ctx.CommandContext.SortCommand = string.Format("{0}_UpdatedTime DESC", ctx.Request.MainFormKey);
+                sortExpression = string.Format("{0}_UpdatedTime DESC", ctx.InitContext.MainFormKey);
             }
+
+            // 执行order解析
+            var workContext = Singleton<IEngine>.Instance.Resolve<IWorkContext>();
+            var engine = Singleton<IEngine>.Instance.Resolve<ILinqParserHandler>();
+            var parserResult = engine.Resolve(new LinqParserRequest
+            {
+                Current = workContext.Current,
+                DslContent = string.Format("ORDER BY {0}", sortExpression)
+            });
+
+            // 设定结果
+            ctx.CommandContext.SortCommand = parserResult.Command.CommandText;
 
             return true;
         }

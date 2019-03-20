@@ -3,6 +3,7 @@ grammar LinqParser;
 linqStatement
     : selectStatement
     | whereStatement
+	| orderStatement
 ;
 
 selectStatement

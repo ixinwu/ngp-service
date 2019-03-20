@@ -256,7 +256,7 @@ namespace NGP.Framework.Core
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public string LikeCommand(string left, string right) => string.Format("{0} LIKE {2}", left, right);
+        public string LikeCommand(string left, string right) => string.Format("{0} LIKE {1}", left, right);
 
         /// <summary>
         /// null equal

@@ -12,6 +12,7 @@
  * ------------------------------------------------------------------------------*/
 
 using NGP.Framework.Core;
+using System.Linq;
 
 namespace NGP.Foundation.Service.Analysis
 {
@@ -47,10 +48,13 @@ namespace NGP.Foundation.Service.Analysis
             var endIndex = ctx.PageQueryRequest.PageNumber * ctx.PageQueryRequest.PageSize;
 
             // 查询列
-            var selectString = string.Join(",", ctx.Request.QueryFieldKeys);
+            var selectList = ctx.Request.QueryFieldKeys.Select(s => string.Format("{0} AS {1}", AppConfigExtend.GetSqlFullName(s), s));
+
+            // 查询列
+            var selectString = string.Join(",", selectList);
 
             // 总条数命令
-            var totalCommand = parserCommand.SelectTotalCountQuery(ctx.Request.MainFormKey,
+            var totalCommand = parserCommand.SelectTotalCountQuery(ctx.InitContext.MainFormKey,
                 ctx.CommandContext.JoinCommand,
                 whereString);
 
@@ -62,11 +66,11 @@ namespace NGP.Foundation.Service.Analysis
 
             // 分页命令
             var pageCommand = parserCommand.SelectPageQuery(selectString,
-                ctx.Request.MainFormKey,
+                ctx.InitContext.MainFormKey,
                 ctx.CommandContext.JoinCommand,
                 whereString,
                 string.Empty,
-                ctx.Request.SortExpression,
+                ctx.CommandContext.SortCommand,
                 startIndex,
                 endIndex);
 

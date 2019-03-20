@@ -40,5 +40,10 @@ namespace NGP.Foundation.Service.Analysis
         /// 表单字段对象
         /// </summary>
         public List<App_Config_FormField> FormFields { get; set; }
+
+        /// <summary>
+        /// 主表key
+        /// </summary>
+        public string MainFormKey { get; set; }
     }
 }
