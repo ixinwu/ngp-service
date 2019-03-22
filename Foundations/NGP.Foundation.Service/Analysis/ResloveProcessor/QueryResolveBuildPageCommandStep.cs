@@ -38,7 +38,7 @@ namespace NGP.Foundation.Service.Analysis
             var whereString = string.Empty;
             if (!string.IsNullOrWhiteSpace(ctx.CommandContext.WhereCommand.CommandText))
             {
-                whereString = string.Format("WHERE {0}", ctx.CommandContext.WhereCommand.CommandText);
+                whereString = parserCommand.WhereCommand(ctx.CommandContext.WhereCommand.CommandText);
             }
 
             // 起始页
@@ -48,10 +48,10 @@ namespace NGP.Foundation.Service.Analysis
             var endIndex = ctx.PageQueryRequest.PageNumber * ctx.PageQueryRequest.PageSize;
 
             // 查询列
-            var selectList = ctx.Request.QueryFieldKeys.Select(s => string.Format("{0} AS {1}", AppConfigExtend.GetSqlFullName(s), s));
+            var selectList = ctx.Request.QueryFieldKeys.Select(s => parserCommand.RenameCommand(AppConfigExtend.GetSqlFullName(s), s));
 
             // 查询列
-            var selectString = string.Join(",", selectList);
+            var selectString = parserCommand.JoinField(selectList);
 
             // 总条数命令
             var totalCommand = parserCommand.SelectTotalCountQuery(ctx.InitContext.MainFormKey,

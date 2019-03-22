@@ -11,8 +11,10 @@
  *
  * ------------------------------------------------------------------------------*/
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Text.RegularExpressions;
 
 namespace NGP.Framework.Core
 {
@@ -22,6 +24,35 @@ namespace NGP.Framework.Core
     public static class AppConfigExtend
     {
         /// <summary>
+        /// 匹配字段key列表
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static List<string> MatchFieldKeys(string content)
+        {
+            var fieldKeys = new List<string>();
+            var regex = new Regex(GlobalConst.RegexConst.__FieldKeyRule);
+            var matchs = regex.Matches(content);
+            foreach (Match item in matchs)
+            {
+                fieldKeys.Add(item.Value);
+            }
+            fieldKeys = fieldKeys.RemoveEmptyRepeat().ToList();
+            return fieldKeys;
+        }
+
+        /// <summary>
+        /// 生成字段key
+        /// </summary>
+        /// <param name="formKey"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
+        public static string GenerateFieldKey(string formKey,string columnName)
+        {
+            return string.Format("{0}_{1}", formKey, columnName);
+        }
+
+        /// <summary>
         /// 获取字段名称key
         /// </summary>
         /// <param name="fieldKey"></param>
@@ -29,6 +60,16 @@ namespace NGP.Framework.Core
         public static string GetFieldNameKey(string fieldKey)
         {
             return string.Format("{0}__Name", fieldKey);
+        }
+
+        /// <summary>
+        /// 获取表单key
+        /// </summary>
+        /// <param name="formKey"></param>
+        /// <returns></returns>
+        public static string GetFormPrimaryKey(string formKey)
+        {
+            return string.Format("{0}_Id", formKey);
         }
 
         /// <summary>
@@ -62,6 +103,17 @@ namespace NGP.Framework.Core
         public static string GetSqlFullName(string fieldKey)
         {
             return string.Format("{0}.[{1}]", GetFormKey(fieldKey), GetColumn(fieldKey));
+        }
+
+        /// <summary>
+        /// 生成字段key
+        /// </summary>
+        /// <param name="formKey"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
+        public static string GenerateSqlFullName(string formKey, string columnName)
+        {
+            return string.Format("{0}.[{1}]", formKey, columnName);
         }
     }
 }

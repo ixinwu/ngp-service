@@ -22,6 +22,11 @@ namespace NGP.Foundation.Service.Analysis
     public class ResolveInitContext
     {
         /// <summary>
+        /// 应用基本配置
+        /// </summary>
+        public App_Config_BaseInfo App { get; set; }
+
+        /// <summary>
         /// data set对象
         /// </summary>
         public App_Config_DataSet DataSet { get; set; }

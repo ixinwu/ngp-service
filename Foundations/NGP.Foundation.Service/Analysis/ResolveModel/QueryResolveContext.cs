@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * ResolveContext Description:
- * 解析上下文
+ * QueryResolveContext Description:
+ * 查询解析上下文
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -16,7 +16,7 @@ using NGP.Framework.Core;
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 解析上下文
+    /// 查询解析上下文
     /// </summary>
     public class QueryResolveContext
     {

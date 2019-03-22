@@ -31,8 +31,8 @@ namespace NGP.Framework.Core
         /// </summary>
         public string ShortName { get; set; }
         /// <summary>
-        /// 是否全局
+        /// 扩展配置
         /// </summary>
-        public bool? IsGlobal { get; set; }
+        public AppExtendConfig ExtendConfig { get; set; }
     }
 }

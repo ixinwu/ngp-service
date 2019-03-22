@@ -29,12 +29,13 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns></returns>
         public override bool Process(QueryResolveContext ctx)
         {
+            var parserCommand = Singleton<IEngine>.Instance.Resolve<ILinqParserCommand>();
             // 添加dsl
             var andDsl = new List<string>() { ctx.Request.WhereExpression };
 
             andDsl.Add(ctx.CommandContext.PermissionWhere);
             andDsl = andDsl.RemoveEmptyRepeat().ToList();
-            var sourceDsl = string.Join(" && ", andDsl.Select(s => string.Format("({0})", s)));
+            var sourceDsl = parserCommand.JoinCondition(andDsl.Select(s => parserCommand.BracketCommand(s)));
 
             // 执行where解析
             var workContext = Singleton<IEngine>.Instance.Resolve<IWorkContext>();

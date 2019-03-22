@@ -1,0 +1,886 @@
+{
+  "App": {
+    "AppKey": "TMPM",
+    "AppName": "重大项目",
+    "ExtendConfig": {
+      "IsGlobal": null,
+      "DefaultFields": [
+        {
+          "FieldType": "FormType",
+          "FieldName": "创建时间",
+          "DefaultType": [ "Insert" ],
+          "Maxlength": null,
+          "ColumnType": "DateTime",
+          "ColumnName": "CreatedTime",
+          "Precision": null
+        },
+        {
+          "FieldType": "FormType",
+          "FieldName": "更新时间",
+          "DefaultType": [ "Insert", "Update", "Delete" ],
+          "Maxlength": null,
+          "ColumnType": "DateTime",
+          "ColumnName": "UpdatedTime",
+          "Precision": null
+        },
+        {
+          "FieldType": "EmployeeType",
+          "FieldName": "创建者",
+          "DefaultType": [ "Insert" ],
+          "Maxlength": 50,
+          "ColumnType": "String",
+          "ColumnName": "CreatedBy",
+          "Precision": null
+        },
+        {
+          "FieldType": "EmployeeType",
+          "FieldName": "更新者",
+          "DefaultType": [ "Insert", "Update", "Delete" ],
+          "Maxlength": 50,
+          "ColumnType": "String",
+          "ColumnName": "UpdatedBy",
+          "Precision": null
+        },
+        {
+          "FieldType": "DeptType",
+          "FieldName": "创建部门",
+          "DefaultType": [ "Insert" ],
+          "Maxlength": 50,
+          "ColumnType": "String",
+          "ColumnName": "CreatedDept",
+          "Precision": null
+        },
+        {
+          "FieldType": "DeptType",
+          "FieldName": "更新部门",
+          "DefaultType": [ "Insert", "Update", "Delete" ],
+          "Maxlength": 50,
+          "ColumnType": "String",
+          "ColumnName": "UpdatedDept",
+          "Precision": null
+        },
+        {
+          "FieldType": "FromType",
+          "FieldName": "是否删除",
+          "DefaultType": [ "Insert", "Delete" ],
+          "Maxlength": null,
+          "ColumnType": "Bool",
+          "ColumnName": "IsDelete",
+          "Precision": null
+        }
+      ]
+    }
+  },
+  "DataSet": {
+    "AppKey": "TMPM",
+    "DataSetKey": "TMPM_FullSet",
+    "RelationIds": [ "00258118102C4F6F902B8687424926F7", "3E295801DC0C4D34BDCE392F7C802972", "512A1DC59C91445484DD19F2F468CE1C" ]
+  },
+  "Forms": [
+    {
+      "FormKey": "TMPM_Project",
+      "ExtendConfig": {
+        "DisplayFieldKey": "TMPM_Project_Name",
+        "UniqueFields": [
+          {
+            "FieldKey": "TMPM_Project_Name"
+          }
+        ]
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "ExtendConfig": {
+        "DisplayFieldKey": "TMPM_Task_Name",
+        "UniqueFields": [
+          {
+            "FieldKey": "TMPM_Task_Name",
+            "ScopeFieldKeys": [ "TMPM_Task_ProjectId" ]
+          }
+        ]
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "ExtendConfig": {
+        "DisplayFieldKey": "TMPM_Record_Name",
+        "UniqueFields": [
+          {
+            "FieldKey": "TMPM_Record_Name",
+            "ScopeFieldKeys": [ "TMPM_Record_TaskId" ]
+          }
+        ]
+      }
+    }
+  ],
+  "FormRelations": [
+    {
+      "Id": "00258118102C4F6F902B8687424926F7",
+      "SourceFormKey": "TMPM_Task",
+      "SourceFieldKey": "TMPM_Task_ProjectId",
+      "RelationFormKey": "TMPM_Project",
+      "RelationFieldKey": "TMPM_Project_Id"
+    },
+    {
+      "Id": "3E295801DC0C4D34BDCE392F7C802972",
+      "SourceFormKey": "TMPM_Record",
+      "SourceFieldKey": "TMPM_Record_ProjectId",
+      "RelationFormKey": "TMPM_Project",
+      "RelationFieldKey": "TMPM_Project_Id"
+    },
+    {
+      "Id": "512A1DC59C91445484DD19F2F468CE1C",
+      "SourceFormKey": "TMPM_Record",
+      "SourceFieldKey": "TMPM_Record_TaskId",
+      "RelationFormKey": "TMPM_Task",
+      "RelationFieldKey": "TMPM_Task_Id"
+    }
+  ],
+  "FormFields": [
+    // 项目
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_Id",
+      "FieldName": "Id",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": 32,
+        "ColumnType": "String",
+        "ColumnName": "Id",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_Name",
+      "FieldName": "项目名称",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": 100,
+        "ColumnType": "String",
+        "ColumnName": "Name",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_ProjectContact",
+      "FieldName": "项目联系人",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": 200,
+        "ColumnType": "String",
+        "ColumnName": "ProjectContact",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": false
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_StartDate",
+      "FieldName": "开始日期",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "StartDate",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": false
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_PlanEndDate",
+      "FieldName": "计划结束日期",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "PlanEndDate",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": false
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_DutyPersons",
+      "FieldName": "报警责任人",
+      "FieldType": "EmployeeType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "DutyPersons",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": false
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_CreatedTime",
+      "FieldName": "创建时间",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "CreatedTime",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_UpdatedTime",
+      "FieldName": "更新时间",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "UpdatedTime",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_CreatedBy",
+      "FieldName": "创建者",
+      "FieldType": "EmployeeType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "CreatedBy",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_UpdatedBy",
+      "FieldName": "更新者",
+      "FieldType": "EmployeeType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "UpdatedBy",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_CreatedDept",
+      "FieldName": "创建部门",
+      "FieldType": "DeptType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "CreatedDept",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_UpdatedDept",
+      "FieldName": "更新部门",
+      "FieldType": "DeptType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "UpdatedDept",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Project",
+      "FieldKey": "TMPM_Project_IsDelete",
+      "FieldName": "是否删除",
+      "FieldType": "FromType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "Bool",
+        "ColumnName": "IsDelete",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+
+    // 任务
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_Id",
+      "FieldName": "Id",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": 32,
+        "ColumnType": "String",
+        "ColumnName": "Id",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_Name",
+      "FieldName": "任务名称",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": 100,
+        "ColumnType": "String",
+        "ColumnName": "Name",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_ProjectId",
+      "FieldName": "所属项目",
+      "FieldType": "RelationType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "ProjectId",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_StartDate",
+      "FieldName": "开始日期",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "StartDate",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": false
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_EndDate",
+      "FieldName": "结束日期",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "EndDate",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": false
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_IsInvolve",
+      "FieldName": "是否涉及",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "Bool",
+        "ColumnName": "IsInvolve",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": false
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_CreatedTime",
+      "FieldName": "创建时间",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "CreatedTime",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_UpdatedTime",
+      "FieldName": "更新时间",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "UpdatedTime",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_CreatedBy",
+      "FieldName": "创建者",
+      "FieldType": "EmployeeType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "CreatedBy",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_UpdatedBy",
+      "FieldName": "更新者",
+      "FieldType": "EmployeeType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "UpdatedBy",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_CreatedDept",
+      "FieldName": "创建部门",
+      "FieldType": "DeptType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "CreatedDept",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_UpdatedDept",
+      "FieldName": "更新部门",
+      "FieldType": "DeptType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "UpdatedDept",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Task",
+      "FieldKey": "TMPM_Task_IsDelete",
+      "FieldName": "是否删除",
+      "FieldType": "FromType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "Bool",
+        "ColumnName": "IsDelete",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+
+    // 履历
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_Id",
+      "FieldName": "Id",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": 32,
+        "ColumnType": "String",
+        "ColumnName": "Id",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_Name",
+      "FieldName": "履历名称",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": 100,
+        "ColumnType": "String",
+        "ColumnName": "Name",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_TaskId",
+      "FieldName": "所属任务",
+      "FieldType": "RelationType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "TaskId",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_ProjectId",
+      "FieldName": "所属项目",
+      "FieldType": "RelationType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "ProjectId",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_CreatedTime",
+      "FieldName": "创建时间",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "CreatedTime",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_UpdatedTime",
+      "FieldName": "更新时间",
+      "FieldType": "FormType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "DateTime",
+        "ColumnName": "UpdatedTime",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_CreatedBy",
+      "FieldName": "创建者",
+      "FieldType": "EmployeeType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "CreatedBy",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_UpdatedBy",
+      "FieldName": "更新者",
+      "FieldType": "EmployeeType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "UpdatedBy",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_CreatedDept",
+      "FieldName": "创建部门",
+      "FieldType": "DeptType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "CreatedDept",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_UpdatedDept",
+      "FieldName": "更新部门",
+      "FieldType": "DeptType",
+      "DbConfig": {
+        "Maxlength": 50,
+        "ColumnType": "String",
+        "ColumnName": "UpdatedDept",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    },
+    {
+      "FormKey": "TMPM_Record",
+      "FieldKey": "TMPM_Record_IsDelete",
+      "FieldName": "是否删除",
+      "FieldType": "FromType",
+      "DbConfig": {
+        "Maxlength": null,
+        "ColumnType": "Bool",
+        "ColumnName": "IsDelete",
+        "IsMulti": false,
+        "Precision": null,
+        "DefaultValue": null,
+        "InitDefaultValue": null
+      },
+      "VerificationConfig": [],
+      "ExtendConfig": {
+        "GroupKey": null,
+        "IsRequired": true
+      }
+    }
+  ]
+}

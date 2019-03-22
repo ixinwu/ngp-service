@@ -27,6 +27,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns></returns>
         public override bool Process(QueryResolveContext ctx)
         {
+            var parserCommand = Singleton<IEngine>.Instance.Resolve<ILinqParserCommand>();
             var sortExpression = ctx.Request.SortExpression;
             if (string.IsNullOrWhiteSpace(sortExpression))
             {
@@ -39,7 +40,7 @@ namespace NGP.Foundation.Service.Analysis
             var parserResult = engine.Resolve(new LinqParserRequest
             {
                 Current = workContext.Current,
-                DslContent = string.Format("ORDER BY {0}", sortExpression)
+                DslContent = parserCommand.OrderCommand(sortExpression)
             });
 
             // 设定结果

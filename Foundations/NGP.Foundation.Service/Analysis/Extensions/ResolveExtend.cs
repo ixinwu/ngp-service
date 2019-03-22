@@ -14,6 +14,7 @@
 using NGP.Framework.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NGP.Foundation.Service.Analysis
 {
@@ -48,6 +49,53 @@ namespace NGP.Foundation.Service.Analysis
                 default:
                     return typeof(string);
             }
+        }
+
+        /// <summary>
+        /// 获取主表单key
+        /// </summary>
+        /// <param name="fieldKeys"></param>
+        /// <param name="relations"></param>
+        /// <returns></returns>
+        public static string GetMainFormKey(List<string> fieldKeys, List<App_Config_FormRelation> relations)
+        {
+            // 分析当前解析的主表
+            var formKeys = fieldKeys.Select(s => AppConfigExtend.GetFormKey(s)).Distinct();
+            var findFormKeys = formKeys.ToList();
+            var mainKey = string.Empty;
+            foreach (var item in formKeys)
+            {
+                var sourceKey = FindSourceKey(item, relations, findFormKeys);
+                if (findFormKeys.Contains(sourceKey))
+                {
+                    mainKey = sourceKey;
+                    break;
+                }
+            }
+            return mainKey;
+        }
+
+        /// <summary>
+        /// find source key
+        /// </summary>
+        /// <param name="mainKey"></param>
+        /// <param name="relations"></param>
+        /// <param name="formKeys"></param>
+        /// <returns></returns>
+        private static string FindSourceKey(string mainKey, List<App_Config_FormRelation> relations, List<string> formKeys)
+        {
+            // 取第一个源
+            var sourceKey = relations
+                .Where(s => s.RelationFormKey == mainKey && formKeys.Contains(s.SourceFormKey))
+                .Select(s => s.SourceFormKey)
+                .Distinct()
+                .FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(sourceKey))
+            {
+                return mainKey;
+            }
+            formKeys.Remove(mainKey);
+            return FindSourceKey(sourceKey, relations, formKeys);
         }
     }
 }

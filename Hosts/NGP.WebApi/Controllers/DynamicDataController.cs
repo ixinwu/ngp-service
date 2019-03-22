@@ -39,17 +39,6 @@ namespace NGP.WebApi
         }
 
         /// <summary>
-        /// 删除动态数据(包含详情)
-        /// </summary>
-        /// <param name="info">删除对象</param>
-        /// <returns>操作结果</returns>
-        [HttpPost("deleteDynamicData")]
-        public ActionResult<NGPResponse<List<string>>> DeleteDynamicData(DynamicDeleteRequest info)
-        {
-            return Ok(_dynamicDataService.DeleteDynamicData(info));
-        }
-
-        /// <summary>
         /// 获取列表页面数据
         /// </summary>
         /// <param name="query">查询对象</param>
@@ -87,10 +76,10 @@ namespace NGP.WebApi
         /// </summary>
         /// <param name="info">追加对象</param>        
         /// <returns>操作结果</returns>
-        [HttpPost("addDynamicData")]
-        public ActionResult<NGPResponse> AddDynamicData(DynamicOperatorRequest info)
+        [HttpPost("insertDynamicData")]
+        public ActionResult<NGPResponse> InsertDynamicData(DynamicInsertRequest info)
         {
-            return Ok(_dynamicDataService.AddDynamicData(info));
+            return Ok(_dynamicDataService.InsertDynamicData(info));
         }
 
         /// <summary>
@@ -99,9 +88,20 @@ namespace NGP.WebApi
         /// <param name="info">更新对象</param>
         /// <returns>操作结果</returns>
         [HttpPost("updateDynamicData")]
-        public ActionResult<NGPResponse> UpdateDynamicData(DynamicOperatorRequest info)
+        public ActionResult<NGPResponse> UpdateDynamicData(DynamicUpdateRequest info)
         {
             return Ok(_dynamicDataService.UpdateDynamicData(info));
+        }
+
+        /// <summary>
+        /// 删除动态数据(包含详情)
+        /// </summary>
+        /// <param name="info">删除对象</param>
+        /// <returns>操作结果</returns>
+        [HttpPost("deleteDynamicData")]
+        public ActionResult<NGPResponse> DeleteDynamicData(DynamicDeleteRequest info)
+        {
+            return Ok(_dynamicDataService.DeleteDynamicData(info));
         }
     }
 }

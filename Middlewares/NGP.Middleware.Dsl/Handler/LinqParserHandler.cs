@@ -161,23 +161,33 @@ namespace NGP.Middleware.Dsl.Handler
                 SetStatement(context, GetStatement(context.orderStatement()));
                 return;
             }
+            if (context.updateStatements() != null)
+            {
+                SetStatement(context, GetStatement(context.updateStatements()));
+                return;
+            }
+            if (context.insertStatements() != null)
+            {
+                SetStatement(context, GetStatement(context.insertStatements()));
+                return;
+            }
             SetStatement(context, GetStatement(context.whereStatement()));
         }
         #endregion
 
-        #region select,join,from,order,group statemelt define
+        #region select,insert,update,join,form,order,group statemelt define
         /// <summary>
         /// select statement
         /// </summary>
         /// <param name="context"></param>
         public override void ExitSelectStatement([NotNull] LinqParserParser.SelectStatementContext context)
         {
-            var fromList = new List<string>();
-            foreach (var from in context.fromStatement())
+            var formList = new List<string>();
+            foreach (var form in context.formStatement())
             {
-                fromList.Add(GetStatement(from));
+                formList.Add(GetStatement(form));
             }
-            var fromCommand = _parserCommand.FromJoin(fromList);
+            var formCommand = _parserCommand.JoinForm(formList);
 
             var joinCommand = "";
             if (context.joinStatement() != null)
@@ -187,7 +197,7 @@ namespace NGP.Middleware.Dsl.Handler
                 {
                     joinList.Add(GetStatement(join));
                 }
-                joinCommand = _parserCommand.JoinJoin(joinList);
+                joinCommand = _parserCommand.JoinLine(joinList);
             }
 
             var whereCommand = "";
@@ -215,25 +225,32 @@ namespace NGP.Middleware.Dsl.Handler
                 distinct = _parserCommand.DistinctCommand;
             }
             var commandText = "";
-            if (context.NUMBER() == null)
+            var topCommand = string.Empty;
+            if (context.TOP() != null)
+            {
+                topCommand = _parserCommand.TopCommand(context.INT().LastOrDefault().GetText().To(1));
+            }
+
+            if (context.LIMIT() == null)
             {
                 commandText = _parserCommand.SelectQuery(distinct,
-                        selectCommand,
-                        fromCommand,
-                        joinCommand,
-                        whereCommand,
-                        orderCommand,
-                        groupCommand);
+                    topCommand,
+                    selectCommand,
+                    formCommand,
+                    joinCommand,
+                    whereCommand,
+                    orderCommand,
+                    groupCommand);
                 SetStatement(context, commandText);
                 return;
             }
 
-            var startIndex = context.NUMBER(0).GetText().To<int>();
+            var startIndex = context.INT(0).GetText().To<int>();
             var startParamKey = GetParamCommandByValue(startIndex);
-            var endIndex = context.NUMBER(1).GetText().To<int>() + startIndex;
+            var endIndex = context.INT(1).GetText().To<int>() + startIndex;
             var endParamKey = GetParamCommandByValue(endIndex);
             commandText = _parserCommand.SelectPageQuery(selectCommand,
-                    fromCommand,
+                    formCommand,
                     joinCommand,
                     whereCommand,
                     groupCommand,
@@ -244,10 +261,10 @@ namespace NGP.Middleware.Dsl.Handler
         }
 
         /// <summary>
-        /// from statement
+        /// form statement
         /// </summary>
         /// <param name="context"></param>
-        public override void ExitFromStatement([NotNull] LinqParserParser.FromStatementContext context)
+        public override void ExitFormStatement([NotNull] LinqParserParser.FormStatementContext context)
         {
             SetStatement(context, _parserCommand.RenameCommand(
                 GetStatement(context.schemaStatement()),
@@ -276,7 +293,7 @@ namespace NGP.Middleware.Dsl.Handler
                 joinConditionList.Add(_parserCommand.EqualCommand(leftFields[index],
                         rightFields[index]));
             }
-            var joinCondition = _parserCommand.JoinConditionJoin(joinConditionList);
+            var joinCondition = _parserCommand.JoinCondition(joinConditionList);
             var joinCommand = _parserCommand.JoinCommand(joinDirection,
                     schema,
                     GetStatement(context.asParam()),
@@ -322,8 +339,76 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 orderList.Add(GetStatement(field));
             }
-            var orderFields = _parserCommand.OrderJoin(orderList);
+            var orderFields = _parserCommand.JoinOrder(orderList);
             SetStatement(context, _parserCommand.OrderCommand(orderFields));
+        }
+
+        /// <summary>
+        /// update statements
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitUpdateStatements([NotNull] LinqParserParser.UpdateStatementsContext context)
+        {
+            var statementList = new List<string>();
+            foreach (var child in context.updateStatement())
+            {
+                statementList.Add(GetStatement(child));
+            }
+            SetStatement(context, _parserCommand.JoinUpdate(statementList));
+        }
+
+        /// <summary>
+        /// update statement
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitUpdateStatement([NotNull] LinqParserParser.UpdateStatementContext context)
+        {
+            var formCommand = GetStatement(context.formParam());
+            var setCommand = GetStatement(context.updateSetElements());
+            var whereCommand = string.Empty;
+            if (context.WHERE() != null)
+            {
+                whereCommand = _parserCommand.WhereCommand(GetStatement(context.whereStatement()));
+            }
+            SetStatement(context, _parserCommand.UpdateCommand(formCommand, setCommand, whereCommand));
+        }
+
+        /// <summary>
+        /// insert statement
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitInsertStatements([NotNull] LinqParserParser.InsertStatementsContext context)
+        {
+            var statementList = new List<string>();
+            foreach (var child in context.insertStatement())
+            {
+                statementList.Add(GetStatement(child));
+            }
+            SetStatement(context, _parserCommand.JoinUpdate(statementList));
+        }
+
+        /// <summary>
+        /// insert values
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitInsertValues([NotNull] LinqParserParser.InsertValuesContext context)
+        {
+            var formCommand = GetStatement(context.formParam());
+            var fieldCommand = GetStatement(context.fieldElements());
+            var valueCommand = _parserCommand.ValuesCommand(GetStatement(context.insertParamElements()));
+            SetStatement(context, _parserCommand.InsertCommand(formCommand, fieldCommand, valueCommand));
+        }
+
+        /// <summary>
+        /// insert select
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitInsertSelect([NotNull] LinqParserParser.InsertSelectContext context)
+        {
+            var formCommand = GetStatement(context.formParam());
+            var fieldCommand = GetStatement(context.fieldElements());
+            var selectCommand = _parserCommand.BracketCommand(GetStatement(context.selectStatement()));
+            SetStatement(context, _parserCommand.InsertCommand(formCommand, fieldCommand, selectCommand));
         }
         #endregion
 
@@ -466,6 +551,45 @@ namespace NGP.Middleware.Dsl.Handler
 
         #region element define
         /// <summary>
+        /// set elements
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitUpdateSetElements([NotNull] LinqParserParser.UpdateSetElementsContext context)
+        {
+            var elementList = new List<string>();
+            foreach (var child in context.updateSetElement())
+            {
+                elementList.Add(GetStatement(child));
+            }
+            SetStatement(context, _parserCommand.JoinSet(elementList));
+        }
+
+        /// <summary>
+        /// set element
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitUpdateSetElement([NotNull] LinqParserParser.UpdateSetElementContext context)
+        {
+            var fieldCommand = GetStatement(context.fieldParam());
+            var paramCommand = GetStatement(context.parameter());
+            SetStatement(context, _parserCommand.EqualCommand(fieldCommand, paramCommand));
+        }
+
+        /// <summary>
+        /// insert params
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitInsertParamElements([NotNull] LinqParserParser.InsertParamElementsContext context)
+        {
+            var elementList = new List<string>();
+            foreach (var child in context.parameter())
+            {
+                elementList.Add(GetStatement(child));
+            }
+            SetStatement(context, _parserCommand.JoinSet(elementList));
+        }
+
+        /// <summary>
         /// order element
         /// </summary>
         /// <param name="context"></param>
@@ -509,7 +633,7 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 elementList.Add(GetStatement(child));
             }
-            SetStatement(context, _parserCommand.FieldJoin(elementList));
+            SetStatement(context, _parserCommand.JoinField(elementList));
         }
 
         /// <summary>
@@ -523,7 +647,7 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 elementList.Add(GetStatement(child));
             }
-            SetStatement(context, _parserCommand.SelectJoin(elementList));
+            SetStatement(context, _parserCommand.JoinSelect(elementList));
         }
 
         /// <summary>
@@ -635,11 +759,6 @@ namespace NGP.Middleware.Dsl.Handler
                 SetStatement(context, GetStatement(context.dateParam()));
                 return;
             }
-            if (context.boolParam() != null)
-            {
-                SetStatement(context, GetStatement(context.boolParam()));
-                return;
-            }
             if (context.intParam() != null)
             {
                 SetStatement(context, GetStatement(context.intParam()));
@@ -727,7 +846,7 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 paramKeyList.Add(GetStatement(inCtx));
             }
-            SetStatement(context, _parserCommand.ParamJoin(paramKeyList));
+            SetStatement(context, _parserCommand.JoinParam(paramKeyList));
         }
 
         /// <summary>
@@ -755,12 +874,6 @@ namespace NGP.Middleware.Dsl.Handler
             if (context.dateValidateMethod() != null)
             {
                 SetStatement(context, GetStatement(context.dateValidateMethod()));
-                return;
-            }
-
-            if (context.dateRepeatMethod() != null)
-            {
-                SetStatement(context, GetStatement(context.dateRepeatMethod()));
                 return;
             }
 
@@ -850,15 +963,6 @@ namespace NGP.Middleware.Dsl.Handler
                 context.DATEINTERVAL().GetText(),
                 GetStatement(context.validateDateParam(0)),
                 GetStatement(context.validateDateParam(1))));
-        }
-
-        /// <summary>
-        /// todo
-        /// </summary>
-        /// <param name="context"></param>
-        public override void ExitDateRepeatMethod([NotNull] LinqParserParser.DateRepeatMethodContext context)
-        {
-            base.ExitDateRepeatMethod(context);
         }
 
         /// <summary>
@@ -962,21 +1066,6 @@ namespace NGP.Middleware.Dsl.Handler
         {
             var text = context.GetText().Replace("T", " ");
             var value = text.To<DateTime>();
-            SetStatement(context, GetParamCommandByValue(value));
-        }
-
-        /// <summary>
-        /// boolParam
-        /// </summary>
-        /// <param name="context"></param>
-        public override void ExitBoolParam([NotNull] LinqParserParser.BoolParamContext context)
-        {
-            var text = context.GetText().Replace("[", "").Replace("]", "").ToUpper();
-            var value = false;
-            if (text.Equals("T"))
-            {
-                value = true;
-            }
             SetStatement(context, GetParamCommandByValue(value));
         }
 

@@ -39,65 +39,64 @@ namespace NGP.Framework.Core
         public string ParamKey { get => string.Format("@{0}", index++); }
 
         /// <summary>
+        /// param command
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string ParamCommand(string key) => string.Format("@{0}", key);
+
+        /// <summary>
+        /// linq set命令
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public string LinqSetCommand<T>(string left, T right) => string.Format("{0} : {1}", left, right);
+
+        /// <summary>
+        /// linq string formatter
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string LinqStringFormatter(string value) => string.Format("\"{0}\"", value);
+
+        /// <summary>
         /// select query
         /// </summary>
         /// <param name="distinct"></param>
+        /// <param name="topCommand"></param>
         /// <param name="selectCommand"></param>
-        /// <param name="fromCommand"></param>
+        /// <param name="formCommand"></param>
         /// <param name="joinCommand"></param>
         /// <param name="whereCommand"></param>
         /// <param name="orderCommand"></param>
         /// <param name="groupCommand"></param>
         /// <returns>query string</returns>
         public string SelectQuery(string distinct,
-                                   string selectCommand,
-                                   string fromCommand,
-                                   string joinCommand,
-                                   string whereCommand,
-                                   string orderCommand,
-                                   string groupCommand)
-        => string.Format("SELECT {0} {1} \r\n FROM {2} \r\n {3} \r\n {4} \r\n {5} \r\n {6}",
+            string topCommand,
+            string selectCommand,
+            string formCommand,
+            string joinCommand,
+            string whereCommand,
+            string orderCommand,
+            string groupCommand)
+        => string.Format("SELECT {0} {7} {1} \r\n FROM {2} \r\n {3} \r\n {4} \r\n {5} \r\n {6}",
                distinct,
                selectCommand,
-               fromCommand,
+               formCommand,
                joinCommand,
                whereCommand,
                orderCommand,
-               groupCommand);
-
-        /// <summary>
-        /// select single query
-        /// </summary>
-        /// <param name="distinct"></param>
-        /// <param name="selectCommand"></param>
-        /// <param name="fromCommand"></param>
-        /// <param name="joinCommand"></param>
-        /// <param name="whereCommand"></param>
-        /// <param name="orderCommand"></param>
-        /// <param name="groupCommand"></param>
-        /// <returns>query string</returns>
-       public string SelectSingleQuery(string distinct,
-                                   string selectCommand,
-                                   string fromCommand,
-                                   string joinCommand,
-                                   string whereCommand,
-                                   string orderCommand,
-                                   string groupCommand)
-         => string.Format("SELECT TOP 1 {0} {1} \r\n FROM {2} \r\n {3} \r\n {4} \r\n {5} \r\n {6}",
-               distinct,
-               selectCommand,
-               fromCommand,
-               joinCommand,
-               whereCommand,
-               orderCommand,
-               groupCommand);
+               groupCommand,
+               topCommand);
 
         /// <summary>
         /// select page query
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="selectCommand"></param>
-        /// <param name="fromCommand"></param>
+        /// <param name="formCommand"></param>
         /// <param name="joinCommand"></param>
         /// <param name="whereCommand"></param>
         /// <param name="groupCommand"></param>
@@ -106,18 +105,18 @@ namespace NGP.Framework.Core
         /// <param name="pageEnd"></param>
         /// <returns>query string</returns>
         public string SelectPageQuery<T>(string selectCommand,
-                                        string fromCommand,
-                                        string joinCommand,
-                                        string whereCommand,
-                                        string groupCommand,
-                                        string orderCommand,
-                                        T pageStart,
-                                        T pageEnd)
+            string formCommand,
+            string joinCommand,
+            string whereCommand,
+            string groupCommand,
+            string orderCommand,
+            T pageStart,
+            T pageEnd)
         => string.Format("SELECT * FROM \r\n (SELECT ROW_NUMBER() OVER ({5}) RowNumber,{0} \r\n" +
                         " FROM {1} \r\n {2} \r\n {3} \r\n {4}) temp \r\n" +
                         " WHERE temp.RowNumber > {6} and temp.RowNumber <= {7} \r\n",
                 selectCommand,
-                fromCommand,
+                formCommand,
                 joinCommand,
                 whereCommand,
                 groupCommand,
@@ -128,67 +127,114 @@ namespace NGP.Framework.Core
         /// <summary>
         /// select count query
         /// </summary>
-        /// <param name="fromCommand"></param>
+        /// <param name="formCommand"></param>
         /// <param name="joinCommand"></param>
         /// <param name="whereCommand"></param>
         /// <returns></returns>
-        public string SelectTotalCountQuery(string fromCommand,
+        public string SelectTotalCountQuery(string formCommand,
             string joinCommand,
             string whereCommand)
         => string.Format("SELECT COUNT(1) \r\n FROM {0} \r\n {1} \r\n {2}",
-            fromCommand,
+            formCommand,
             joinCommand,
             whereCommand);
 
+        /// <summary>
+        /// 插入command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="insertCommand"></param>
+        /// <param name="parameterCommand"></param>
+        /// <returns></returns>
+        public string InsertCommand(string formCommand, string insertCommand, string parameterCommand)
+        => string.Format("INSERT INTO {0} \r\n ({1}) \r\n {2}",
+            formCommand,
+            insertCommand,
+            parameterCommand);
 
         /// <summary>
-        /// from join
+        /// 更新command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="setCommand"></param>
+        /// <param name="whereCommand"></param>
+        /// <returns></returns>
+        public string UpdateCommand(string formCommand, string setCommand, string whereCommand)
+        => string.Format("UPDATE {0} \r\n SET {1} \r\n {2} \r\n",
+            formCommand,
+            setCommand,
+            whereCommand);
+
+        /// <summary>
+        /// form join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public string FromJoin(List<string> list) => string.Join(",", list);
+        public string JoinForm(IEnumerable<string> list) => string.Join(",", list);
 
         /// <summary>
         /// param join
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public string ParamJoin(List<string> list) => string.Join(",", list);
+        public string JoinParam<T>(IEnumerable<T> list) => string.Join(",", list);
 
         /// <summary>
         /// order join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public string OrderJoin(List<string> list) => string.Join(",", list);
+        public string JoinOrder(IEnumerable<string> list) => string.Join(",", list);
 
         /// <summary>
         /// join condition join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public string JoinConditionJoin(List<string> list) => string.Join(AndCommand, list);
+        public string JoinCondition(IEnumerable<string> list) => string.Join(AndCommand, list);
 
         /// <summary>
         /// field join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public string FieldJoin(List<string> list) => string.Join(",", list);
+        public string JoinField(IEnumerable<string> list) => string.Join(",", list);
 
         /// <summary>
         /// join join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public string JoinJoin(List<string> list) => string.Join(" \r\n", list);
+        public string JoinLine(IEnumerable<string> list) => string.Join(" \r\n", list);
+
+        /// <summary>
+        /// join insert
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public string JoinInsert(IEnumerable<string> list) => string.Join(" ; \r\n", list);
+
+        /// <summary>
+        /// join update
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public string JoinUpdate(IEnumerable<string> list) => string.Join(" ; \r\n", list);
 
         /// <summary>
         /// select join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public string SelectJoin(List<string> list) => string.Join(",", list);
+        public string JoinSelect(IEnumerable<string> list) => string.Join(",", list);
+
+        /// <summary>
+        /// field join
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public string JoinSet(IEnumerable<string> list) => string.Join(",", list);
 
         /// <summary>
         /// where command
@@ -196,6 +242,13 @@ namespace NGP.Framework.Core
         /// <param name="whereText"></param>
         /// <returns></returns>
         public string WhereCommand(string whereText) => string.Format("WHERE {0}", whereText);
+
+        /// <summary>
+        /// values command
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public string ValuesCommand(string values) => string.Format("VALUES ({0})", values);
 
         /// <summary>
         /// distinct command
@@ -220,10 +273,11 @@ namespace NGP.Framework.Core
         /// <summary>
         /// equal command
         /// </summary>
+        /// <typeparam name="TValue"></typeparam>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public string EqualCommand(string left, string right) => string.Format("{0} = {1}", left, right);
+        public string EqualCommand<TValue>(string left, TValue right) => string.Format("{0} = {1}", left, right);
 
         /// <summary>
         /// and
@@ -244,6 +298,17 @@ namespace NGP.Framework.Core
                  joinDirection,
                  joinSchema,
                  rename,
+                 joinCondition);
+
+        /// <summary>
+        ///  join command
+        /// </summary>
+        /// <param name="joinSchema"></param>
+        /// <param name="joinCondition"></param>
+        /// <returns></returns>
+        public string LeftJoinCommand(string joinSchema, string joinCondition)
+             => string.Format("LEFT JOIN {0} ON {1}",
+                 joinSchema,
                  joinCondition);
 
         /// <summary>
@@ -356,7 +421,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// sum command key
         /// </summary>
-       public  string SumCommandKey { get => "SUM"; }
+        public string SumCommandKey { get => "SUM"; }
 
         /// <summary>
         /// count command
@@ -381,6 +446,18 @@ namespace NGP.Framework.Core
         /// avg command key
         /// </summary>
         public string AvgCommandKey { get => "AVG"; }
+
+        /// <summary>
+        /// null command key
+        /// </summary>
+        public string NullCommandKey { get => "NULL"; }
+
+        /// <summary>
+        /// top command
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public string TopCommand(int number) => string.Format("TOP {0}", number);
 
         /// <summary>
         /// like value command

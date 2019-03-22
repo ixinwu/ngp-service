@@ -12,6 +12,7 @@
  * ------------------------------------------------------------------------------*/
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 using NGP.Framework.Core;
 
 namespace NGP.Framework.DataAccess
@@ -37,6 +38,11 @@ namespace NGP.Framework.DataAccess
                 .HasMaxLength(100);
             builder.Property(t => t.ShortName)
                .HasMaxLength(200);
+
+            builder.Property(t => t.ExtendConfig)
+                .HasConversion(
+                v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                v => JsonConvert.DeserializeObject<AppExtendConfig>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
 
             base.PostConfigure(builder);
         }

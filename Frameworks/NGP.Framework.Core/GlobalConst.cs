@@ -69,5 +69,16 @@ namespace NGP.Framework.Core
         /// 策略数据映射key
         /// </summary>
         public const string __ServiceDataMapKey = "ServiceDataMapKey";
+
+        /// <summary>
+        /// 正则表达式常量
+        /// </summary>
+        public struct RegexConst
+        {
+            /// <summary>
+            /// 匹配字段key
+            /// </summary>
+            public const string __FieldKeyRule = @"(([a-zA-Z]([a-zA-Z]|\d)*)*[_]){2}[a-zA-Z]([a-zA-Z]|\d)*";
+        }
     }
 }

@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * DynamicDetailOperateInfo Description:
- * 动态详情页面操作对象
+ * DynamicUpdateRequest Description:
+ * 动态更新请求对象
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -16,13 +16,18 @@ using System.Collections.Generic;
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态详情页面操作对象
+    /// 动态更新请求对象
     /// </summary>
-    public class DynamicOperatorRequest : DynamicBaseRequest
+    public class DynamicUpdateRequest : DynamicBaseRequest
     {
         /// <summary>
         /// 操作字段列表
         /// </summary>
         public List<DynamicOperateFieldRequest> OperateFields { get; set; }
+
+        /// <summary>
+        /// 查询表达式
+        /// </summary>
+        public List<string> WhereExpressions { get; set; }
     }
 }

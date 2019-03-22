@@ -32,49 +32,55 @@ namespace NGP.Framework.Core
         string ParamKey { get; }
 
         /// <summary>
+        /// param command
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        string ParamCommand(string key);
+
+        /// <summary>
+        /// linq set命令
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        string LinqSetCommand<T>(string left, T right);
+
+        /// <summary>
+        /// linq string formatter
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        string LinqStringFormatter(string value);
+
+        /// <summary>
         /// select query
         /// </summary>
         /// <param name="distinct"></param>
+        /// <param name="topCommand"></param>
         /// <param name="selectCommand"></param>
-        /// <param name="fromCommand"></param>
+        /// <param name="formCommand"></param>
         /// <param name="joinCommand"></param>
         /// <param name="whereCommand"></param>
         /// <param name="orderCommand"></param>
         /// <param name="groupCommand"></param>
         /// <returns>query string</returns>
         string SelectQuery(string distinct,
-                                   string selectCommand,
-                                   string fromCommand,
-                                   string joinCommand,
-                                   string whereCommand,
-                                   string orderCommand,
-                                   string groupCommand);
-
-        /// <summary>
-        /// select single query
-        /// </summary>
-        /// <param name="distinct"></param>
-        /// <param name="selectCommand"></param>
-        /// <param name="fromCommand"></param>
-        /// <param name="joinCommand"></param>
-        /// <param name="whereCommand"></param>
-        /// <param name="orderCommand"></param>
-        /// <param name="groupCommand"></param>
-        /// <returns>query string</returns>
-        string SelectSingleQuery(string distinct,
-                                   string selectCommand,
-                                   string fromCommand,
-                                   string joinCommand,
-                                   string whereCommand,
-                                   string orderCommand,
-                                   string groupCommand);
+            string topCommand,
+            string selectCommand,
+            string formCommand,
+            string joinCommand,
+            string whereCommand,
+            string orderCommand,
+            string groupCommand);
 
         /// <summary>
         /// select page query
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="selectCommand"></param>
-        /// <param name="fromCommand"></param>
+        /// <param name="formCommand"></param>
         /// <param name="joinCommand"></param>
         /// <param name="whereCommand"></param>
         /// <param name="groupCommand"></param>
@@ -83,73 +89,113 @@ namespace NGP.Framework.Core
         /// <param name="pageEnd"></param>
         /// <returns>query string</returns>
         string SelectPageQuery<T>(string selectCommand,
-                                        string fromCommand,
-                                        string joinCommand,
-                                        string whereCommand,
-                                        string groupCommand,
-                                        string orderCommand,
-                                        T pageStart,
-                                        T pageEnd);
+            string formCommand,
+            string joinCommand,
+            string whereCommand,
+            string groupCommand,
+            string orderCommand,
+            T pageStart,
+            T pageEnd);
 
         /// <summary>
         /// select count query
         /// </summary>
-        /// <param name="fromCommand"></param>
+        /// <param name="formCommand"></param>
         /// <param name="joinCommand"></param>
         /// <param name="whereCommand"></param>
         /// <returns></returns>
-        string SelectTotalCountQuery(string fromCommand,
+        string SelectTotalCountQuery(string formCommand,
             string joinCommand,
             string whereCommand);
+
+        /// <summary>
+        /// 插入command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="insertCommand"></param>
+        /// <param name="parameterCommand"></param>
+        /// <returns></returns>
+        string InsertCommand(string formCommand, string insertCommand, string parameterCommand);
+
+        /// <summary>
+        /// 更新command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="setCommand"></param>
+        /// <param name="whereCommand"></param>
+        /// <returns></returns>
+        string UpdateCommand(string formCommand, string setCommand, string whereCommand);
 
         /// <summary>
         /// from join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        string FromJoin(List<string> list);
+        string JoinForm(IEnumerable<string> list);
 
         /// <summary>
         /// param join
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        string ParamJoin(List<string> list);
+        string JoinParam<T>(IEnumerable<T> list);
 
         /// <summary>
         /// order join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        string OrderJoin(List<string> list);
+        string JoinOrder(IEnumerable<string> list);
 
         /// <summary>
         /// join condition join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        string JoinConditionJoin(List<string> list);
+        string JoinCondition(IEnumerable<string> list);
 
         /// <summary>
         /// field join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        string FieldJoin(List<string> list);
+        string JoinField(IEnumerable<string> list);
 
         /// <summary>
         /// join join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        string JoinJoin(List<string> list);
+        string JoinLine(IEnumerable<string> list);
+
+        /// <summary>
+        /// join insert
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        string JoinInsert(IEnumerable<string> list);
+
+        /// <summary>
+        /// join update
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        string JoinUpdate(IEnumerable<string> list);
 
         /// <summary>
         /// select join
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        string SelectJoin(List<string> list);
+        string JoinSelect(IEnumerable<string> list);
+
+        /// <summary>
+        /// set join
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        string JoinSet(IEnumerable<string> list);
 
         /// <summary>
         /// where command
@@ -162,6 +208,13 @@ namespace NGP.Framework.Core
         /// distinct command
         /// </summary>
         string DistinctCommand { get; }
+
+        /// <summary>
+        /// values command
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        string ValuesCommand(string values);
 
         /// <summary>
         /// order command
@@ -180,10 +233,11 @@ namespace NGP.Framework.Core
         /// <summary>
         /// equal command
         /// </summary>
+        /// <typeparam name="TValue"></typeparam>
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        string EqualCommand(string left, string right);
+        string EqualCommand<TValue>(string left, TValue right);
 
         /// <summary>
         /// and
@@ -199,6 +253,14 @@ namespace NGP.Framework.Core
         /// <param name="joinCondition"></param>
         /// <returns></returns>
         string JoinCommand(string joinDirection, string joinSchema, string rename, string joinCondition);
+
+        /// <summary>
+        ///  join command
+        /// </summary>
+        /// <param name="joinSchema"></param>
+        /// <param name="joinCondition"></param>
+        /// <returns></returns>
+        string LeftJoinCommand(string joinSchema, string joinCondition);
 
         /// <summary>
         /// rename command
@@ -331,6 +393,18 @@ namespace NGP.Framework.Core
         /// avg command key
         /// </summary>
         string AvgCommandKey { get; }
+
+        /// <summary>
+        /// null command key
+        /// </summary>
+        string NullCommandKey { get; }
+
+        /// <summary>
+        /// top command
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        string TopCommand(int number);
 
         /// <summary>
         /// like value command

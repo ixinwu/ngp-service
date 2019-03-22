@@ -2,12 +2,12 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * DynamicDeleteRequest Description:
- * 动态删除请求对象
+ * DynamicAddRequest Description:
+ * 动态追加请求对象
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
- * Created							1.0		    2019/2/19  hulei@ixinwu.com
+ * Created							1.0		    2017/3/14  hulei@ixinwu.com
  *
  * ------------------------------------------------------------------------------*/
 
@@ -16,13 +16,13 @@ using System.Collections.Generic;
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
-    /// 动态删除请求对象
+    /// 动态追加请求对象
     /// </summary>
-    public class DynamicDeleteRequest : DynamicBaseRequest
+    public class DynamicInsertRequest : DynamicBaseRequest
     {
         /// <summary>
-        /// 查询表达式
+        /// 操作字段列表
         /// </summary>
-        public List<string> WhereExpressions { get; set; }
+        public List<DynamicOperateFieldRequest> OperateFields { get; set; }
     }
 }

@@ -4,18 +4,20 @@ linqStatement
     : selectStatement
     | whereStatement
 	| orderStatement
+	| updateStatements
+	| insertStatements
 ;
 
 selectStatement
-    : fromStatement (fromStatement)*
+    : formStatement (formStatement)*
       (joinStatement)*
       (WHERE whereStatement)?
-      (orderStatement (LIMIT NUMBER OFFSET NUMBER)?)?
+      (orderStatement (LIMIT INT OFFSET INT)?)?
       (groupStatement)?
-      (DISTINCT)? SELECT  selectElements
+      (DISTINCT)? SELECT (TOP INT)?  selectElements
 ;
 
-fromStatement
+formStatement
     : FROM asParam IN schemaStatement
 ;
 
@@ -37,6 +39,25 @@ orderStatement
     : ORDER BY LBRACE orderElement (COMMA orderElement)* RBRACE
 ;
 
+updateStatements
+	: updateStatement SEMIC (updateStatement SEMIC)*
+	| updateStatement
+;
+
+updateStatement
+	: UPDATE formParam SET updateSetElements (WHERE whereStatement)?
+;
+
+insertStatements
+	: insertStatement SEMIC (insertStatement SEMIC)*
+	| insertStatement
+;
+
+insertStatement
+	: INSERT  formParam LPAREN fieldElements RPAREN VALUES LPAREN insertParamElements RPAREN    #InsertValues
+	| INSERT formParam LPAREN fieldElements RPAREN LPAREN selectStatement RPAREN                 #InsertSelect 
+;
+
 whereStatement
 	:
 	  LPAREN whereStatement  RPAREN													#WhereBracket
@@ -55,21 +76,31 @@ whereStatement
 /*
  * element define
  */
+ updateSetElements
+	: updateSetElement (COMMA updateSetElement)*
+;
+ updateSetElement
+	: fieldParam op = COLON parameter
+;
+
+insertParamElements
+	: parameter (COMMA parameter)*
+;
+
 orderElement
     : fieldParam (ORDERDIRECTION)?
 ;
 
 joinLeftElements
-    : fieldElements
+    : LBRACE fieldElements RBRACE
 ;
 
 joinRightElements
-    : fieldElements
+    : LBRACE fieldElements RBRACE
 ;
 
 fieldElements
-    : LBRACE fieldParam (COMMA fieldParam)* RBRACE
-    | fieldParam
+    : fieldParam (COMMA fieldParam)*
 ;
 
 /*
@@ -77,7 +108,6 @@ fieldElements
  */
 selectElements
     : LBRACE selectAsElement (COMMA selectAsElement)* RBRACE
-    | selectAsElement
 ;
 selectAsElement
     : TEXT op = COLON selectElement                 #SelectElementRename
@@ -103,7 +133,6 @@ parameter
 	| stringParam
 	| likeParam
 	| dateParam
-	| boolParam
 	| intParam
 	| nullParam
 	| getDateMethod
@@ -148,7 +177,6 @@ inParameter
  */
 extendMethod
     : dateValidateMethod
-    | dateRepeatMethod
     | checkSingleMethod
     | checkMultiMethod
 ;
@@ -218,19 +246,6 @@ dateValidateMethod
 ;
 
 /*
- * 验证日期是否在（年，季度，月份，天数）内
- * 方法签名 datarepeat(type,comparedate,startdate,interval,isnatural)
- * type:y:年；q：季度；m：月份；d:天数
- * comparedate : 待比较日期
- * startdate : 有效起始日期
- * repeat interval: 重复间隔
- * isnatural:是否从自然月开始
- */
-dateRepeatMethod
-	:DATEREPEAT LPAREN DATEINTERVAL COMMA validateDateParam COMMA validateDateParam COMMA NUMBER COMMA BOOL RPAREN
-;
-
-/*
  * 日期追加
  * 方法签名 dateadd(type,,paramdate,count)
  * type:y:年；q：季度；m：月份；d:天数
@@ -277,7 +292,6 @@ numberParam : NUMBER;
 intParam : INT;
 likeParam : STRING;
 dateParam : DATE;
-boolParam : BOOL;
 nullParam : NULL;
 asParam : TEXT;
 sqlParam : ART TEXT;
@@ -307,6 +321,12 @@ ORDER : [oO][rR][dD][eE][rR];
 ORDERDIRECTION : [aA][sS][cC] | [dD][eE][sS][cC];
 LIMIT : [lL][iI][mM][iI][tT];
 OFFSET : [oO][fF][fF][sS][eE][tT];
+TOP : [tT][oO][pP];
+UPDATE:[uU][pP][dD][aA][tT][eE];
+DELETE : [dD][eE][lL][eE][tT][eE];
+INSERT : [iI][nN][sS][eE][rR][tT];
+SET : [sS][eE][tT];
+VALUES : [vV][aA][lL][uU][sS];
 
 /*
  *  operator Lexer Definitions
@@ -319,6 +339,7 @@ LBRACKET :'[';
 RBRACKET :']';
 COMMA : ',';
 POINT :'.';
+SEMIC :';';
 UNDERLINE :'_';
 COLON : ':';
 CALCULATION :  '+' | '-' | '*' | '/';
@@ -404,11 +425,6 @@ FORMKEY
 FIELDKEY
     : FORMKEY UNDERLINE TEXT
 ;
-
-// bool
-BOOL
-    :LBRACKET ([tT] | [fF]) RBRACKET
-;
 //日期格式
 DATE
     : DATENUM ('/'|'-') DATENUM ('/'|'-')  DATENUM ([tT]? DATENUM  ':' DATENUM ':' DATENUM)?
@@ -418,7 +434,7 @@ NUMBER
     : '-'? INT '.' [0-9]+ EXP? // 1.35, 1.35E-9, 0.3, -4.5
 ;
 // leading zeros
-fragment INT
+INT
     :'-'? '0' | [1-9] [0-9]*
 ;
 fragment DATENUM
