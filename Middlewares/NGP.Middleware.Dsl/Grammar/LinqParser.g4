@@ -111,7 +111,7 @@ selectElements
 ;
 selectAsElement
     : TEXT op = COLON selectElement                 #SelectElementRename
-    | fieldParam                           #SelectFieldElement
+    | (TEXT POINT)? FIELDKEY                          #SelectFieldElement
 ;
 
 selectElement

@@ -36,6 +36,17 @@ namespace NGP.Foundation.Service.Analysis
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
+            if (query == null || query.RequestData == null)
+            {
+                return new NGPResponse<NGPPageQueryResponse>
+                {
+                    AffectedRows = 0,
+                    ErrorCode = ErrorCode.ParamEmpty,
+                    Message = CommonResource.ParameterError,
+                    Status = OperateStatus.Error
+                };
+            }
+
             var context = new QueryResolveContext
             {
                 Request = query.RequestData,
@@ -64,6 +75,17 @@ namespace NGP.Foundation.Service.Analysis
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
+            if (query == null)
+            {
+                return new NGPResponse<dynamic>
+                {
+                    AffectedRows = 0,
+                    ErrorCode = ErrorCode.ParamEmpty,
+                    Message = CommonResource.ParameterError,
+                    Status = OperateStatus.Error
+                };
+            }
+
             var context = new QueryResolveContext
             {
                 Request = query,
@@ -91,6 +113,17 @@ namespace NGP.Foundation.Service.Analysis
             IEnumerable<DynamicGenerateObject> extendTypes = null,
             Action<dynamic> setItem = null)
         {
+            if (query == null)
+            {
+                return new NGPResponse<dynamic>
+                {
+                    AffectedRows = 0,
+                    ErrorCode = ErrorCode.ParamEmpty,
+                    Message = CommonResource.ParameterError,
+                    Status = OperateStatus.Error
+                };
+            }
+
             var context = new QueryResolveContext
             {
                 Request = query,
@@ -114,6 +147,17 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns>操作结果</returns>
         public NGPResponse InsertDynamicData(DynamicInsertRequest info)
         {
+            if (info == null)
+            {
+                return new NGPResponse
+                {
+                    AffectedRows = 0,
+                    ErrorCode = ErrorCode.ParamEmpty,
+                    Message = CommonResource.ParameterError,
+                    Status = OperateStatus.Error
+                };
+            }
+
             var context = new OperatorResolveContext<DynamicInsertRequest>()
             {
                 Request = info
@@ -130,6 +174,17 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns>操作结果</returns>
         public NGPResponse UpdateDynamicData(DynamicUpdateRequest info)
         {
+            if (info == null)
+            {
+                return new NGPResponse
+                {
+                    AffectedRows = 0,
+                    ErrorCode = ErrorCode.ParamEmpty,
+                    Message = CommonResource.ParameterError,
+                    Status = OperateStatus.Error
+                };
+            }
+
             var context = new OperatorResolveContext<DynamicUpdateRequest>()
             {
                 Request = info
@@ -146,6 +201,17 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns>操作结果</returns>
         public NGPResponse DeleteDynamicData(DynamicDeleteRequest info)
         {
+            if (info == null)
+            {
+                return new NGPResponse
+                {
+                    AffectedRows = 0,
+                    ErrorCode = ErrorCode.ParamEmpty,
+                    Message = CommonResource.ParameterError,
+                    Status = OperateStatus.Error
+                };
+            }
+
             var context = new OperatorResolveContext<DynamicDeleteRequest>()
             {
                 Request = info

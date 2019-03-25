@@ -2,7 +2,7 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved.
  * 
- * DynamicAddRequest Description:
+ * DynamicInsertRequest Description:
  * 动态追加请求对象
  *
  * Comment 					        Revision	Date        Author

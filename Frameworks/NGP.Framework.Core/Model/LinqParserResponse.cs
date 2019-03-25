@@ -32,8 +32,13 @@ namespace NGP.Framework.Core
         public List<DynamicGenerateObject> GenerateObjects { get; set; }
 
         /// <summary>
-        /// 涉及到的字段key
+        /// 解析类型
         /// </summary>
-        public List<string> IncludeFieldKeys { get; set; }
+        public LinqParserType ParserType { get; set; }
+
+        /// <summary>
+        /// 查询字段key列表
+        /// </summary>
+        public List<string> SelectFieldKeys { get; set; }
     }
 }

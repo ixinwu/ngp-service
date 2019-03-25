@@ -44,19 +44,24 @@ namespace NGP.Middleware.Dsl.Handler
         private readonly List<DynamicGenerateObject> _generateObjects = new List<DynamicGenerateObject>();
 
         /// <summary>
+        /// 查询字段key
+        /// </summary>
+        private readonly List<string> _selectFieldKeys = new List<string>();
+
+        /// <summary>
         /// 参数树
         /// </summary>
         private readonly ParseTreeProperty<string> _statementTree = new ParseTreeProperty<string>();
 
         /// <summary>
-        /// 包含的字段列表
-        /// </summary>
-        private readonly List<string> _includeFieldKeys = new List<string>();
-
-        /// <summary>
         /// 请求对象
         /// </summary>
         private LinqParserRequest _parserRequest;
+
+        /// <summary>
+        /// 解析类型
+        /// </summary>
+        private LinqParserType _linqParserType;
         #endregion
 
         #region ctor
@@ -138,7 +143,8 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 Command = command,
                 GenerateObjects = _generateObjects,
-                IncludeFieldKeys = _includeFieldKeys
+                SelectFieldKeys = _selectFieldKeys,
+                ParserType = _linqParserType
             };
         }
         #endregion
@@ -151,19 +157,23 @@ namespace NGP.Middleware.Dsl.Handler
         /// <param name="context"></param>
         public override void ExitLinqStatement([NotNull] LinqParserParser.LinqStatementContext context)
         {
-            if (context.selectStatement() != null)
-            {
-                SetStatement(context, GetStatement(context.selectStatement()));
-                return;
-            }
             if (context.orderStatement() != null)
             {
                 SetStatement(context, GetStatement(context.orderStatement()));
                 return;
             }
+
+            if (context.selectStatement() != null)
+            {
+                _linqParserType = LinqParserType.Query;
+                SetStatement(context, GetStatement(context.selectStatement()));
+                return;
+            }
+
+            _linqParserType = LinqParserType.ExecuteNonQuery;
             if (context.updateStatements() != null)
             {
-                SetStatement(context, GetStatement(context.updateStatements()));
+                SetStatement(context, GetStatement(context.updateStatements()));                
                 return;
             }
             if (context.insertStatements() != null)
@@ -656,7 +666,20 @@ namespace NGP.Middleware.Dsl.Handler
         /// <param name="context"></param>
         public override void ExitSelectFieldElement([NotNull] LinqParserParser.SelectFieldElementContext context)
         {
-            SetStatement(context, GetStatement(context.fieldParam()));
+            var fieldKey = context.FIELDKEY().GetText().Trim();
+
+            var column = AppConfigExtend.GetColumn(fieldKey);
+            var command = string.Empty;
+            if (context.TEXT() == null || string.IsNullOrWhiteSpace(context.TEXT().GetText()))
+            {
+                command = AppConfigExtend.GetSqlFullName(fieldKey);
+            }
+            else
+            {
+                command = string.Format("{0}.[{1}]", context.TEXT().GetText().Trim(), column);
+            }
+            _selectFieldKeys.Add(fieldKey);
+            SetStatement(context, command);
         }
 
         /// <summary>
@@ -1123,11 +1146,6 @@ namespace NGP.Middleware.Dsl.Handler
         public override void ExitFieldParam([NotNull] LinqParserParser.FieldParamContext context)
         {
             var fieldKey = context.FIELDKEY().GetText().Trim();
-
-            if (!_includeFieldKeys.Contains(fieldKey))
-            {
-                _includeFieldKeys.Add(fieldKey);
-            }
 
             var column = AppConfigExtend.GetColumn(fieldKey);
             var command = string.Empty;
