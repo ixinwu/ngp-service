@@ -49,7 +49,7 @@ namespace NGP.Foundation.Service.Analysis
                 string.Empty,
                 string.Empty,
                 selectString,
-                ctx.InitContext.MainFormKey,
+                ctx.MainFormKey,
                 ctx.CommandContext.JoinCommand,
                 whereString,
                 ctx.CommandContext.SortCommand,

@@ -21,6 +21,11 @@ namespace NGP.Foundation.Service.Analysis
     public class QueryResolveContext
     {
         /// <summary>
+        /// 主表key
+        /// </summary>
+        public string MainFormKey { get; set; }
+
+        /// <summary>
         /// 请求对象
         /// </summary>
         public DynamicQueryRequest Request { get; set; }

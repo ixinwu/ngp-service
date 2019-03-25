@@ -104,11 +104,20 @@ namespace NGP.Foundation.Service.Analysis
                         // 组装验证逻辑
                         var andDsls = new List<string>();
 
+                        // 添加当前字段的值
+                        var currentUniqueDsl = parserCommand.EqualCommand(operatorField.FieldKey, operatorField.OperateField.Value);
+                        if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.String)
+                        {
+                            currentUniqueDsl = parserCommand.EqualCommand(operatorField.FieldKey,
+                                parserCommand.LinqStringFormatter(Convert.ToString(operatorField.OperateField.Value)));
+                        }
+                        andDsls.Add(currentUniqueDsl);
+
                         // 获取应用配置里是删除标记的字段
                         var defaultField = ctx.InitContext.App.ExtendConfig.DefaultFields.FirstOrDefault(s =>
                         s.DefaultType.Contains(AppDefaultFieldType.Delete.ToString("G")) &&
                         s.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.Bool);
-                        andDsls.Add(parserCommand.EqualCommand(operatorField.FieldKey, 0));
+                        andDsls.Add(parserCommand.EqualCommand(AppConfigExtend.GenerateFieldKey(operatorForm.FormKey, defaultField.ColumnName), 0));
 
                         // 约束验证
                         if (!uniqueField.ScopeFieldKeys.IsNullOrEmpty())
@@ -186,6 +195,16 @@ namespace NGP.Foundation.Service.Analysis
                         });
                         continue;
                     }
+                    // 日期
+                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.DateTime)
+                    {
+                        insertElementList.Add(new NGPKeyValuePair<object>
+                        {
+                            Key = operatorField.FieldKey,
+                            Value = parserCommand.LinqDateFormatter(operatorField.OperateField.Value)
+                        });
+                        continue;
+                    }
                     insertElementList.Add(new NGPKeyValuePair<object>
                     {
                         Key = operatorField.FieldKey,
@@ -205,7 +224,7 @@ namespace NGP.Foundation.Service.Analysis
                                 insertElementList.Add(new NGPKeyValuePair<object>
                                 {
                                     Key = fieldKey,
-                                    Value = parserCommand.LinqStringFormatter(value)
+                                    Value = value
                                 });
                                 break;
                             }
@@ -215,7 +234,7 @@ namespace NGP.Foundation.Service.Analysis
                                 insertElementList.Add(new NGPKeyValuePair<object>
                                 {
                                     Key = fieldKey,
-                                    Value = parserCommand.LinqStringFormatter(value)
+                                    Value = value
                                 });
                                 break;
                             }
@@ -268,7 +287,7 @@ namespace NGP.Foundation.Service.Analysis
                 var selectElementCommand = parserCommand.JoinSelect(insertElementList.Select(s => s.Key));
                 var paramElementCommand = parserCommand.JoinParam(insertElementList.Select(s => s.Value));
 
-                var insertCommand = parserCommand.InsertCommand(operatorForm.FormKey, selectElementCommand, paramElementCommand);
+                var insertCommand = parserCommand.LinqInsertCommand(operatorForm.FormKey, selectElementCommand, paramElementCommand);
                 commandList.Add(insertCommand);
             }
             ctx.ExcuteLinqText = parserCommand.JoinInsert(commandList);

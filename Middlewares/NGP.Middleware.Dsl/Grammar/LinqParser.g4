@@ -326,7 +326,7 @@ UPDATE:[uU][pP][dD][aA][tT][eE];
 DELETE : [dD][eE][lL][eE][tT][eE];
 INSERT : [iI][nN][sS][eE][rR][tT];
 SET : [sS][eE][tT];
-VALUES : [vV][aA][lL][uU][sS];
+VALUES : [vV][aA][lL][uU][eE][sS];
 
 /*
  *  operator Lexer Definitions

@@ -85,9 +85,9 @@ namespace NGP.Framework.DataAccess
             var filedList = new List<string>();
             for (int i = 0; i < rdr.FieldCount; i++)
             {
-                filedList.Add(rdr.GetName(i).ToLower());
+                filedList.Add(rdr.GetName(i).ToUpper());
             }
-            var properties = typeof(TEntity).GetProperties().Where(s => filedList.Contains(s.Name.ToLower()));
+            var properties = typeof(TEntity).GetProperties().Where(s => filedList.Contains(s.Name.ToUpper()));
             foreach (var property in properties)
             {
                 item.SetValue(property, rdr);
@@ -111,11 +111,11 @@ namespace NGP.Framework.DataAccess
             var filedList = new List<string>();
             for (int i = 0; i < rdr.FieldCount; i++)
             {
-                filedList.Add(rdr.GetName(i).ToLower());
+                filedList.Add(rdr.GetName(i).ToUpper());
             }
 
             var properties = (from s in type.GetProperties()
-                              let name = s.Name.ToLower()
+                              let name = s.Name.ToUpper()
                               where filedList.Contains(name)
                               select new
                               {
@@ -152,7 +152,7 @@ namespace NGP.Framework.DataAccess
         {
             for (int i = 0; i < rdr.FieldCount; i++)
             {
-                result[rdr.GetName(i).ToLower()] = rdr[i];
+                result[rdr.GetName(i).ToUpper()] = rdr[i];
             }
         }
 

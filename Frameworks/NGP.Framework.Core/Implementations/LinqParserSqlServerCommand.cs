@@ -12,6 +12,7 @@
  * ------------------------------------------------------------------------------*/
 
 
+using System;
 using System.Collections.Generic;
 
 namespace NGP.Framework.Core
@@ -60,6 +61,13 @@ namespace NGP.Framework.Core
         /// <param name="value"></param>
         /// <returns></returns>
         public string LinqStringFormatter(string value) => string.Format("\"{0}\"", value);
+
+        /// <summary>
+        /// linq date formatter
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string LinqDateFormatter(object value) => Convert.ToString(value).To<DateTime>().ToString(GlobalConst.DateFormatConst.__DateLinqFormat);
 
         /// <summary>
         /// select query
@@ -140,13 +148,39 @@ namespace NGP.Framework.Core
             whereCommand);
 
         /// <summary>
-        /// 插入command
+        /// 查询插入command
         /// </summary>
         /// <param name="formCommand"></param>
         /// <param name="insertCommand"></param>
         /// <param name="parameterCommand"></param>
         /// <returns></returns>
-        public string InsertCommand(string formCommand, string insertCommand, string parameterCommand)
+        public string InsertSelectCommand(string formCommand, string insertCommand, string parameterCommand)
+        => string.Format("INSERT INTO {0} \r\n ({1}) \r\n {2}",
+            formCommand,
+            insertCommand,
+            parameterCommand);
+
+        /// <summary>
+        /// linq 插入command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="insertCommand"></param>
+        /// <param name="parameterCommand"></param>
+        /// <returns></returns>
+        public string LinqInsertCommand(string formCommand, string insertCommand, string parameterCommand)
+        => string.Format("INSERT {0} \r\n ({1}) \r\n VALUES ({2})",
+            formCommand,
+            insertCommand,
+            parameterCommand);
+
+        /// <summary>
+        /// 查询插入command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="insertCommand"></param>
+        /// <param name="parameterCommand"></param>
+        /// <returns></returns>
+        public string InsertParamCommand(string formCommand, string insertCommand, string parameterCommand)
         => string.Format("INSERT INTO {0} \r\n ({1}) \r\n {2}",
             formCommand,
             insertCommand,

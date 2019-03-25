@@ -117,7 +117,7 @@ namespace NGP.Foundation.Service.Analysis
                     string.Empty,
                     parserCommand.TopCommand(1),
                     selectString,
-                    ctx.InitContext.MainFormKey,
+                    formKey,
                     string.Empty,
                     whereString,
                     string.Empty,
@@ -139,11 +139,20 @@ namespace NGP.Foundation.Service.Analysis
                         // 添加当前条件的取反
                         andDsls.Add(parserCommand.NotCommand(whereExpression));
 
+                        // 添加当前字段的值
+                        var currentUniqueDsl = parserCommand.EqualCommand(operatorField.FieldKey, operatorField.OperateField.Value);
+                        if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.String)
+                        {
+                            currentUniqueDsl = parserCommand.EqualCommand(operatorField.FieldKey,
+                                parserCommand.LinqStringFormatter(Convert.ToString(operatorField.OperateField.Value)));
+                        }
+                        andDsls.Add(currentUniqueDsl);
+
                         // 获取应用配置里是删除标记的字段
                         var defaultField = ctx.InitContext.App.ExtendConfig.DefaultFields.FirstOrDefault(s =>
                         s.DefaultType.Contains(AppDefaultFieldType.Delete.ToString("G")) &&
                         s.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.Bool);
-                        andDsls.Add(parserCommand.EqualCommand(operatorField.FieldKey, 0));
+                        andDsls.Add(parserCommand.EqualCommand(AppConfigExtend.GenerateFieldKey(formKey,defaultField.ColumnName), 0));
 
                         // 约束验证
                         if (!uniqueField.ScopeFieldKeys.IsNullOrEmpty())
@@ -171,11 +180,11 @@ namespace NGP.Foundation.Service.Analysis
                                 {
                                     if (scopeDbValue.GetType() == typeof(string))
                                     {
-                                        andDsls.Add(parserCommand.EqualCommand(scopeItem.FieldKey,
+                                        andDsls.Add(parserCommand.EqualCommand(scopeFieldKey,
                                            parserCommand.LinqStringFormatter(Convert.ToString(scopeDbValue))));
                                         continue;
                                     }
-                                    andDsls.Add(parserCommand.EqualCommand(scopeItem.FieldKey, scopeDbValue));
+                                    andDsls.Add(parserCommand.EqualCommand(scopeFieldKey, scopeDbValue));
                                 }
                             }
                         }
@@ -225,6 +234,13 @@ namespace NGP.Foundation.Service.Analysis
                     {
                         setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey, 
                             parserCommand.LinqStringFormatter(Convert.ToString(operatorField.OperateField.Value))));
+                        continue;
+                    }
+                    // 日期
+                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.DateTime)
+                    {
+                        setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey,
+                            parserCommand.LinqDateFormatter(operatorField.OperateField.Value)));
                         continue;
                     }
                     setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey, operatorField.OperateField.Value));

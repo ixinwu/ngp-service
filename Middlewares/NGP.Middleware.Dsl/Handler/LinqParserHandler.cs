@@ -396,7 +396,7 @@ namespace NGP.Middleware.Dsl.Handler
             var formCommand = GetStatement(context.formParam());
             var fieldCommand = GetStatement(context.fieldElements());
             var valueCommand = _parserCommand.ValuesCommand(GetStatement(context.insertParamElements()));
-            SetStatement(context, _parserCommand.InsertCommand(formCommand, fieldCommand, valueCommand));
+            SetStatement(context, _parserCommand.InsertParamCommand(formCommand, fieldCommand, valueCommand));
         }
 
         /// <summary>
@@ -408,7 +408,7 @@ namespace NGP.Middleware.Dsl.Handler
             var formCommand = GetStatement(context.formParam());
             var fieldCommand = GetStatement(context.fieldElements());
             var selectCommand = _parserCommand.BracketCommand(GetStatement(context.selectStatement()));
-            SetStatement(context, _parserCommand.InsertCommand(formCommand, fieldCommand, selectCommand));
+            SetStatement(context, _parserCommand.InsertSelectCommand(formCommand, fieldCommand, selectCommand));
         }
         #endregion
 

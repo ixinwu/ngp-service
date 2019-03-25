@@ -31,7 +31,7 @@ namespace NGP.Foundation.Service.Analysis
             var sortExpression = ctx.Request.SortExpression;
             if (string.IsNullOrWhiteSpace(sortExpression))
             {
-                sortExpression = string.Format("{0}_UpdatedTime DESC", ctx.InitContext.MainFormKey);
+                sortExpression = string.Format("{0}_UpdatedTime DESC", ctx.MainFormKey);
             }
 
             // 执行order解析

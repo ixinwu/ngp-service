@@ -55,6 +55,13 @@ namespace NGP.Framework.Core
         string LinqStringFormatter(string value);
 
         /// <summary>
+        /// linq date formatter
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        string LinqDateFormatter(object value);
+
+        /// <summary>
         /// select query
         /// </summary>
         /// <param name="distinct"></param>
@@ -109,13 +116,31 @@ namespace NGP.Framework.Core
             string whereCommand);
 
         /// <summary>
-        /// 插入command
+        /// 查询插入command
         /// </summary>
         /// <param name="formCommand"></param>
         /// <param name="insertCommand"></param>
         /// <param name="parameterCommand"></param>
         /// <returns></returns>
-        string InsertCommand(string formCommand, string insertCommand, string parameterCommand);
+        string InsertSelectCommand(string formCommand, string insertCommand, string parameterCommand);
+
+        /// <summary>
+        /// linq 插入command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="insertCommand"></param>
+        /// <param name="parameterCommand"></param>
+        /// <returns></returns>
+        string LinqInsertCommand(string formCommand, string insertCommand, string parameterCommand);
+
+        /// <summary>
+        /// 查询插入command
+        /// </summary>
+        /// <param name="formCommand"></param>
+        /// <param name="insertCommand"></param>
+        /// <param name="parameterCommand"></param>
+        /// <returns></returns>
+        string InsertParamCommand(string formCommand, string insertCommand, string parameterCommand);
 
         /// <summary>
         /// 更新command

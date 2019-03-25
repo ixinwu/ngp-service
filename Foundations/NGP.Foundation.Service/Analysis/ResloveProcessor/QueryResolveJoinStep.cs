@@ -32,7 +32,7 @@ namespace NGP.Foundation.Service.Analysis
             var parserCommand = Singleton<IEngine>.Instance.Resolve<ILinqParserCommand>();
 
             // 获取关联列表
-            var relationList = ctx.InitContext.FormRelations.Where(s => s.SourceFormKey == ctx.InitContext.MainFormKey);
+            var relationList = ctx.InitContext.FormRelations.Where(s => s.SourceFormKey == ctx.MainFormKey);
 
             var joinList = new List<string>();
 

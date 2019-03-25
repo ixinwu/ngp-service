@@ -60,6 +60,11 @@ namespace NGP.Framework.Core
             public const string __DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
             /// <summary>
+            /// 日期Linq格式
+            /// </summary>
+            public const string __DateLinqFormat = "yyyy-MM-ddTHH:mm:ss";
+
+            /// <summary>
             /// 时间格式
             /// </summary>
             public const string __DateTimeFormatNotBar = "yyyyMMddHHmmss";

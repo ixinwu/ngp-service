@@ -33,7 +33,7 @@ namespace NGP.Foundation.Service.Analysis
             // 处理参数上下文
             ctx.InitContext = dataProvider.InitResolveContext(ctx.Request);
 
-            ctx.InitContext.MainFormKey = ResolveExtend.GetMainFormKey(ctx.Request.QueryFieldKeys, ctx.InitContext.FormRelations);
+            ctx.MainFormKey = ResolveExtend.GetMainFormKey(ctx.Request.QueryFieldKeys, ctx.InitContext.FormRelations);
             return true;
         }
 

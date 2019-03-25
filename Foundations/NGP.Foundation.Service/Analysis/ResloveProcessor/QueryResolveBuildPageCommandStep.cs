@@ -54,7 +54,7 @@ namespace NGP.Foundation.Service.Analysis
             var selectString = parserCommand.JoinField(selectList);
 
             // 总条数命令
-            var totalCommand = parserCommand.SelectTotalCountQuery(ctx.InitContext.MainFormKey,
+            var totalCommand = parserCommand.SelectTotalCountQuery(ctx.MainFormKey,
                 ctx.CommandContext.JoinCommand,
                 whereString);
 
@@ -66,7 +66,7 @@ namespace NGP.Foundation.Service.Analysis
 
             // 分页命令
             var pageCommand = parserCommand.SelectPageQuery(selectString,
-                ctx.InitContext.MainFormKey,
+                ctx.MainFormKey,
                 ctx.CommandContext.JoinCommand,
                 whereString,
                 string.Empty,
