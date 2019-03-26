@@ -42,12 +42,30 @@ namespace NGP.Framework.Core
         }
 
         /// <summary>
+        /// 匹配查询字段key列表
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static List<string> MatchSelectFieldKeys(string content)
+        {
+            var fieldKeys = new List<string>();
+            var regex = new Regex(GlobalConst.RegexConst.__SelectFieldKeyRule);
+            var matchs = regex.Matches(content);
+            foreach (Match item in matchs)
+            {
+                fieldKeys.Add(item.Value.Replace("[", "").Replace("]", "").Split(".").LastOrDefault());
+            }
+            fieldKeys = fieldKeys.RemoveEmptyRepeat().ToList();
+            return fieldKeys;
+        }
+
+        /// <summary>
         /// 生成字段key
         /// </summary>
         /// <param name="formKey"></param>
         /// <param name="columnName"></param>
         /// <returns></returns>
-        public static string GenerateFieldKey(string formKey,string columnName)
+        public static string GenerateFieldKey(string formKey, string columnName)
         {
             return string.Format("{0}_{1}", formKey, columnName);
         }

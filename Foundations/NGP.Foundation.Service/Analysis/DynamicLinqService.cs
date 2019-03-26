@@ -13,7 +13,6 @@
 
 using NGP.Foundation.Resources;
 using NGP.Framework.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,8 +50,8 @@ namespace NGP.Foundation.Service.Analysis
         /// <param name="linqParserHandler"></param>
         /// <param name="workContext"></param>
         /// <param name="resolveDataProvider"></param>
-        public DynamicLinqService(IUnitRepository unitRepository, 
-            ILinqParserHandler linqParserHandler, 
+        public DynamicLinqService(IUnitRepository unitRepository,
+            ILinqParserHandler linqParserHandler,
             IWorkContext workContext,
             IResolveDataProvider resolveDataProvider)
         {
@@ -85,17 +84,17 @@ namespace NGP.Foundation.Service.Analysis
                 Current = _workContext.Current,
                 DslContent = request.Dsl
             });
-
+            var selectFieldKeys = AppConfigExtend.MatchSelectFieldKeys(request.Dsl);
             switch (parserResult.ParserType)
             {
-                
+
                 case LinqParserType.Query:
                     {
                         var initContext = _resolveDataProvider.InitResolveContext(request);
 
                         // 获取查询字段列表
                         var generateList = initContext.FormFields
-                             .Where(s => parserResult.SelectFieldKeys.Contains(s.FieldKey))
+                             .Where(s => selectFieldKeys.Contains(s.FieldKey))
                              .Select(s => new DynamicGenerateObject
                              {
                                  CodeType = s.DbConfig.ColumnType.ToEnum<FieldColumnType>().GetCodeType(),
@@ -125,7 +124,7 @@ namespace NGP.Foundation.Service.Analysis
                             Status = OperateStatus.Success
                         };
                     }
-                case LinqParserType.None:                    
+                case LinqParserType.None:
                 default:
                     {
                         return new NGPResponse<dynamic>

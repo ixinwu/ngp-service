@@ -44,11 +44,6 @@ namespace NGP.Middleware.Dsl.Handler
         private readonly List<DynamicGenerateObject> _generateObjects = new List<DynamicGenerateObject>();
 
         /// <summary>
-        /// 查询字段key
-        /// </summary>
-        private readonly List<string> _selectFieldKeys = new List<string>();
-
-        /// <summary>
         /// 参数树
         /// </summary>
         private readonly ParseTreeProperty<string> _statementTree = new ParseTreeProperty<string>();
@@ -143,7 +138,6 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 Command = command,
                 GenerateObjects = _generateObjects,
-                SelectFieldKeys = _selectFieldKeys,
                 ParserType = _linqParserType
             };
         }
@@ -678,7 +672,12 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 command = string.Format("{0}.[{1}]", context.TEXT().GetText().Trim(), column);
             }
-            _selectFieldKeys.Add(fieldKey);
+
+            if (context.LBRACKET() != null && context.RBRACKET() != null)
+            {
+                SetStatement(context, _parserCommand.RenameCommand(command, fieldKey));
+                return;
+            }
             SetStatement(context, command);
         }
 
@@ -703,11 +702,23 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 type = typeof(int?);
             }
-            _generateObjects.Add(new DynamicGenerateObject
+            if (!_generateObjects.Any(s => s.ObjectKey.ToUpper() == objectKey.ToUpper()))
             {
-                ObjectKey = objectKey,
-                CodeType = type
-            });
+                _generateObjects.Add(new DynamicGenerateObject
+                {
+                    ObjectKey = objectKey,
+                    CodeType = type
+                });
+            }
+        }
+
+        /// <summary>
+        /// select text element
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ExitSelectTextElement([NotNull] LinqParserParser.SelectTextElementContext context)
+        {
+            SetStatement(context, context.GetText());
         }
 
         /// <summary>

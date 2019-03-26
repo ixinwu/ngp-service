@@ -35,10 +35,5 @@ namespace NGP.Framework.Core
         /// 解析类型
         /// </summary>
         public LinqParserType ParserType { get; set; }
-
-        /// <summary>
-        /// 查询字段key列表
-        /// </summary>
-        public List<string> SelectFieldKeys { get; set; }
     }
 }

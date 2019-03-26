@@ -110,8 +110,9 @@ selectElements
     : LBRACE selectAsElement (COMMA selectAsElement)* RBRACE
 ;
 selectAsElement
-    : TEXT op = COLON selectElement                 #SelectElementRename
-    | (TEXT POINT)? FIELDKEY                          #SelectFieldElement
+    : TEXT op = COLON selectElement											#SelectElementRename
+    | (LBRACKET)? (TEXT POINT)? FIELDKEY  (RBRACKET)?                      #SelectFieldElement
+	| TEXT POINT TEXT														#SelectTextElement
 ;
 
 selectElement

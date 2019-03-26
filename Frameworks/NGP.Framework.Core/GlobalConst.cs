@@ -84,6 +84,11 @@ namespace NGP.Framework.Core
             /// 匹配字段key
             /// </summary>
             public const string __FieldKeyRule = @"(([a-zA-Z]([a-zA-Z]|\d)*)*[_]){2}[a-zA-Z]([a-zA-Z]|\d)*";
+
+            /// <summary>
+            /// 匹配查询字段key
+            /// </summary>
+            public const string __SelectFieldKeyRule = @"\[([^\[\]]+)\]";
         }
     }
 }
