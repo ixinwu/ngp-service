@@ -31,11 +31,14 @@ namespace NGP.Framework.Core
         public static List<string> MatchFieldKeys(string content)
         {
             var fieldKeys = new List<string>();
-            var regex = new Regex(GlobalConst.RegexConst.__FieldKeyRule);
+            var regex = new Regex(GlobalConst.RegexConst.__FieldKeyRule, RegexOptions.IgnoreCase);
             var matchs = regex.Matches(content);
             foreach (Match item in matchs)
             {
-                fieldKeys.Add(item.Value);
+                if (!fieldKeys.Any(s => s.ToUpper() == item.Value.ToUpper()))
+                {
+                    fieldKeys.Add(item.Value);
+                }
             }
             fieldKeys = fieldKeys.RemoveEmptyRepeat().ToList();
             return fieldKeys;
@@ -49,11 +52,14 @@ namespace NGP.Framework.Core
         public static List<string> MatchSelectFieldKeys(string content)
         {
             var fieldKeys = new List<string>();
-            var regex = new Regex(GlobalConst.RegexConst.__SelectFieldKeyRule);
+            var regex = new Regex(GlobalConst.RegexConst.__SelectFieldKeyRule, RegexOptions.IgnoreCase);
             var matchs = regex.Matches(content);
             foreach (Match item in matchs)
             {
-                fieldKeys.Add(item.Value.Replace("[", "").Replace("]", "").Split(".").LastOrDefault());
+                if (!fieldKeys.Any(s=>s.ToUpper() == item.Value.ToUpper()))
+                {
+                    fieldKeys.Add(item.Value);
+                }                
             }
             fieldKeys = fieldKeys.RemoveEmptyRepeat().ToList();
             return fieldKeys;

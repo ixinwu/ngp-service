@@ -88,7 +88,7 @@ namespace NGP.Framework.Core
             /// <summary>
             /// 匹配查询字段key
             /// </summary>
-            public const string __SelectFieldKeyRule = @"\[([^\[\]]+)\]";
+            public const string __SelectFieldKeyRule = @"(?<=\[([a-zA-Z]([a-zA-Z]|\d)*.)?)(([a-zA-Z]([a-zA-Z]|\d)*)*[_]){2}[a-zA-Z]([a-zA-Z]|\d)*(?=\])";
         }
     }
 }
