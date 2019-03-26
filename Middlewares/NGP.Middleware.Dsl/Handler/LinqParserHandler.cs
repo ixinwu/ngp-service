@@ -1044,7 +1044,7 @@ namespace NGP.Middleware.Dsl.Handler
             // 当前DSL配置的字符串是用双引号来标记，因此字符串中包含"，则会写为 \"的形式
             // 但是sql中字符串是单引号标记的，包含"的时候不需要加\
             // 此处将操作将输入的 \" 转化为 "
-            var text = context.GetText().Replace("\\\"", "\"").Replace("\"", "");
+            var text = context.GetText().Replace("\\\'", "\'").Replace("\'", "'");
             text = text.Substring(0, text.Length - 1);
             text = text.Substring(1);
             SetStatement(context, GetParamCommandByValue(text));
@@ -1078,7 +1078,7 @@ namespace NGP.Middleware.Dsl.Handler
         /// <param name="context"></param>
         public override void ExitLikeParam([NotNull] LinqParserParser.LikeParamContext context)
         {
-            var text = context.GetText().Replace("\\\"", "\"").Replace("\"", "");
+            var text = context.GetText().Replace("\\\'", "\'").Replace("\'", "'");
             text = text.Substring(0, text.Length - 1);
             text = text.Substring(1);
             var value = _parserCommand.LikeValueCommand(text);
@@ -1129,7 +1129,7 @@ namespace NGP.Middleware.Dsl.Handler
         /// <param name="context"></param>
         public override void ExitCheckSingleParam([NotNull] LinqParserParser.CheckSingleParamContext context)
         {
-            var text = context.GetText().Replace("\\\"", "\"").Replace("\"", "");
+            var text = context.GetText().Replace("\\\'", "\'").Replace("\'", "'");
             var value = _parserCommand.CheckSingleValueCommand(text);
             SetStatement(context, GetParamCommandByValue(value));
         }
