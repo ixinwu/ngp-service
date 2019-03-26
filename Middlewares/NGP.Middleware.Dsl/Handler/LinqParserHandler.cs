@@ -173,7 +173,7 @@ namespace NGP.Middleware.Dsl.Handler
             _linqParserType = LinqParserType.ExecuteNonQuery;
             if (context.updateStatements() != null)
             {
-                SetStatement(context, GetStatement(context.updateStatements()));                
+                SetStatement(context, GetStatement(context.updateStatements()));
                 return;
             }
             if (context.insertStatements() != null)
@@ -1045,6 +1045,8 @@ namespace NGP.Middleware.Dsl.Handler
             // 但是sql中字符串是单引号标记的，包含"的时候不需要加\
             // 此处将操作将输入的 \" 转化为 "
             var text = context.GetText().Replace("\\\"", "\"").Replace("\"", "");
+            text = text.Substring(0, text.Length - 1);
+            text = text.Substring(1);
             SetStatement(context, GetParamCommandByValue(text));
         }
 
@@ -1077,6 +1079,8 @@ namespace NGP.Middleware.Dsl.Handler
         public override void ExitLikeParam([NotNull] LinqParserParser.LikeParamContext context)
         {
             var text = context.GetText().Replace("\\\"", "\"").Replace("\"", "");
+            text = text.Substring(0, text.Length - 1);
+            text = text.Substring(1);
             var value = _parserCommand.LikeValueCommand(text);
             SetStatement(context, GetParamCommandByValue(value));
         }

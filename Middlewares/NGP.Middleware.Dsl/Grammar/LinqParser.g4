@@ -55,7 +55,7 @@ insertStatements
 
 insertStatement
 	: INSERT  formParam LPAREN fieldElements RPAREN VALUES LPAREN insertParamElements RPAREN    #InsertValues
-	| INSERT formParam LPAREN fieldElements RPAREN LPAREN selectStatement RPAREN                 #InsertSelect 
+	| INSERT formParam LPAREN fieldElements RPAREN LPAREN selectStatement RPAREN                 #InsertSelect
 ;
 
 whereStatement
@@ -291,7 +291,7 @@ stringParam : STRING;
 numberParam : NUMBER;
 intParam : INT;
 likeParam : STRING;
-dateParam : DATE;
+dateParam : DATETIME;
 nullParam : NULL;
 asParam : TEXT;
 sqlParam : ART TEXT;
@@ -414,7 +414,7 @@ TEXT
 ;
 //字符串
 STRING
-    : '"'('\\'["\\/bfnrt] | ~["\\])*'"'
+    : [']([\\/bfnrt] | ~['])*[']
 ;
 //表单Key
 FORMKEY
@@ -425,9 +425,15 @@ FORMKEY
 FIELDKEY
     : FORMKEY UNDERLINE TEXT
 ;
-//日期格式
+// 日期
+DATETIME
+	:DATE ([tT ]? TIME)?
+;
 DATE
-    : DATENUM ('/'|'-') DATENUM ('/'|'-')  DATENUM ([tT]? DATENUM  ':' DATENUM ':' DATENUM)?
+    : DATENUM ('/'|'-') DATENUM ('/'|'-')  DATENUM
+;
+TIME
+	:DATENUM COLON DATENUM COLON DATENUM ('.' DATENUM)?
 ;
 // double number
 NUMBER

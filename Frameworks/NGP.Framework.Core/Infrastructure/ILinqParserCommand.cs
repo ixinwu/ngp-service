@@ -55,13 +55,6 @@ namespace NGP.Framework.Core
         string LinqStringFormatter(string value);
 
         /// <summary>
-        /// linq date formatter
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        string LinqDateFormatter(object value);
-
-        /// <summary>
         /// select query
         /// </summary>
         /// <param name="distinct"></param>

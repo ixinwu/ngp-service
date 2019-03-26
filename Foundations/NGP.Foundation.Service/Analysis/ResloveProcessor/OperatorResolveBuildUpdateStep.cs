@@ -236,13 +236,6 @@ namespace NGP.Foundation.Service.Analysis
                             parserCommand.LinqStringFormatter(Convert.ToString(operatorField.OperateField.Value))));
                         continue;
                     }
-                    // 日期
-                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.DateTime)
-                    {
-                        setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey,
-                            parserCommand.LinqDateFormatter(operatorField.OperateField.Value)));
-                        continue;
-                    }
                     setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey, operatorField.OperateField.Value));
                 }
 

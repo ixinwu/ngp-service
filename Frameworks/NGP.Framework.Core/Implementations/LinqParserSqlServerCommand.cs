@@ -60,14 +60,7 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public string LinqStringFormatter(string value) => string.Format("\"{0}\"", value);
-
-        /// <summary>
-        /// linq date formatter
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string LinqDateFormatter(object value) => Convert.ToString(value).To<DateTime>().ToString(GlobalConst.DateFormatConst.__DateLinqFormat);
+        public string LinqStringFormatter(string value) => string.Format("'{0}'", value);
 
         /// <summary>
         /// select query

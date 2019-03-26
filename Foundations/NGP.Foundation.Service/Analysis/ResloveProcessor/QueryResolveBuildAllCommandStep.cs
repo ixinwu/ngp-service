@@ -45,7 +45,7 @@ namespace NGP.Foundation.Service.Analysis
             var selectString = parserCommand.JoinField(selectList);
 
             // 分页命令
-            var singleCommand = parserCommand.SelectQuery(
+            var allCommand = parserCommand.SelectQuery(
                 string.Empty,
                 string.Empty,
                 selectString,
@@ -55,7 +55,7 @@ namespace NGP.Foundation.Service.Analysis
                 ctx.CommandContext.SortCommand,
                 string.Empty);
 
-            ctx.CommandContext.ExcuteCommand = new ExcuteSqlCommand(singleCommand);
+            ctx.CommandContext.ExcuteCommand = new ExcuteSqlCommand(allCommand);
             foreach (var param in ctx.CommandContext.WhereCommand.ParameterCollection)
             {
                 ctx.CommandContext.ExcuteCommand.ParameterCollection[param.Key] = param.Value;

@@ -195,16 +195,6 @@ namespace NGP.Foundation.Service.Analysis
                         });
                         continue;
                     }
-                    // 日期
-                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.DateTime)
-                    {
-                        insertElementList.Add(new NGPKeyValuePair<object>
-                        {
-                            Key = operatorField.FieldKey,
-                            Value = parserCommand.LinqDateFormatter(operatorField.OperateField.Value)
-                        });
-                        continue;
-                    }
                     insertElementList.Add(new NGPKeyValuePair<object>
                     {
                         Key = operatorField.FieldKey,
