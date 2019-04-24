@@ -12,17 +12,20 @@
  * ------------------------------------------------------------------------------*/
 
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace NGP.Foundation.Service.Analysis
 {
     /// <summary>
     /// 动态删除请求对象
     /// </summary>
+    [DataContract]
     public class DynamicDeleteRequest : DynamicBaseRequest
     {
         /// <summary>
         /// 查询表达式
         /// </summary>
+        [DataMember(Name = "whereExpressions")]
         public List<string> WhereExpressions { get; set; }
     }
 }

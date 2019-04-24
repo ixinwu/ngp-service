@@ -44,7 +44,7 @@ namespace NGP.Framework.WebApi.Core
             mvcBuilder.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // 配置json序列化
-            //mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
         /// <summary>

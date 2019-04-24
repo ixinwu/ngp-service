@@ -19,26 +19,31 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 基本树类型
     /// </summary>
+    [DataContract]
     public class NGPTree
     {
         /// <summary>
         /// Key
         /// </summary>
+        [DataMember(Name = "key")]
         public string Key { get; set; }
 
         /// <summary>
         /// 显示名称
         /// </summary>
+        [DataMember(Name = "text")]
         public string Text { get; set; }
 
         /// <summary>
         /// 子列表
         /// </summary>
+        [DataMember(Name = "children")]
         public List<NGPTree> Children { get; set; }
 
         /// <summary>
         /// 上级Id
         /// </summary>
+        [DataMember(Name = "parentId")]
         public string ParentId { get; set; }
     }
 }

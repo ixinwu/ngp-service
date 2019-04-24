@@ -35,6 +35,10 @@ namespace NGP.Foundation.Service.Analysis
 
             andDsl.Add(ctx.CommandContext.PermissionWhere);
             andDsl = andDsl.RemoveEmptyRepeat().ToList();
+            if (andDsl.Count == 0)
+            {
+                return true;
+            }
             var sourceDsl = parserCommand.JoinCondition(andDsl.Select(s => parserCommand.BracketCommand(s)));
 
             // 执行where解析
