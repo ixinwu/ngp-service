@@ -30,7 +30,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <summary>
         /// where命令
         /// </summary>
-        public ExcuteSqlCommand WhereCommand { get; set; }
+        public ExcuteSqlCommand WhereCommand { get; set; } = new ExcuteSqlCommand();
 
         /// <summary>
         /// 权限表达式
