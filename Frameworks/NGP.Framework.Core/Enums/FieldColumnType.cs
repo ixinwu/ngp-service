@@ -58,5 +58,10 @@ namespace NGP.Framework.Core
         /// 字节流
         /// </summary>
         Bits,
+
+        /// <summary>
+        /// mongo图片
+        /// </summary>
+        MongoImage
     }
 }

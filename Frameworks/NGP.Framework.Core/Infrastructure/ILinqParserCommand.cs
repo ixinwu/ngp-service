@@ -377,6 +377,11 @@ namespace NGP.Framework.Core
         string DateCommand { get; }
 
         /// <summary>
+        /// linq data command
+        /// </summary>
+        string LinqDateCommand { get; }
+
+        /// <summary>
         /// sum command key
         /// </summary>
         string SumCommandKey { get; }

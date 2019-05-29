@@ -18,9 +18,9 @@ using System.Collections.Generic;
 namespace NGP.Framework.Core
 {
     /// <summary>
-    /// linq解析sqlserver命令
+    /// linq解析mysql命令
     /// </summary>
-    public class LinqParserSqlServerCommand : ILinqParserCommand
+    public class LinqParserMySqlCommand : ILinqParserCommand
     {
         /// <summary>
         /// 参数索引
@@ -31,7 +31,7 @@ namespace NGP.Framework.Core
         /// new guid id methods
         /// </summary>
         /// <returns>guid command</returns>
-        public string NewId { get => "NEWID()"; }
+        public string NewId { get => "UUID()"; }
 
         /// <summary>
         /// get param key
@@ -113,9 +113,9 @@ namespace NGP.Framework.Core
             string orderCommand,
             T pageStart,
             T pageEnd)
-        => string.Format("SELECT * FROM \r\n (SELECT ROW_NUMBER() OVER ({5}) RowNumber,{0} \r\n" +
-                        " FROM {1} \r\n {2} \r\n {3} \r\n {4}) temp \r\n" +
-                        " WHERE temp.RowNumber > {6} and temp.RowNumber <= {7} \r\n",
+        => string.Format("SELECT {0} \r\n" +
+                        " FROM {1} \r\n {2} \r\n {3} \r\n {4} {5} \r\n" +
+                        " LIMIT  {7}  OFFSET  {6} \r\n",
                 selectCommand,
                 formCommand,
                 joinCommand,
@@ -436,7 +436,7 @@ namespace NGP.Framework.Core
         /// <summary>
         /// date command
         /// </summary>
-        public string DateCommand { get => "GETDATE()"; }
+        public string DateCommand { get => "NOW()"; }
 
         /// <summary>
         /// linq date command

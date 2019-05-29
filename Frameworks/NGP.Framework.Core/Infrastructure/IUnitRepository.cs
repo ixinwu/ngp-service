@@ -242,14 +242,6 @@ namespace NGP.Framework.Core
         /// <param name="parameters">参数列表</param>
         /// <returns>影响条数</returns>
         int ExecuteNonQuery(string commandText, IDictionary<string, object> parameters = null);
-
-        /// <summary>
-        /// 执行大批量插入数据库操作
-        /// </summary>
-        /// <param name="tableName">指定表</param>
-        /// <param name="insertData">指定DataTable数据源</param>
-        /// <returns></returns>
-        string InsertSqlBulkNonQuery(string tableName, DataTable insertData);
         #endregion
     }
 }

@@ -60,7 +60,7 @@ namespace NGP.Foundation.Service.Analysis
         /// </summary>
         /// <param name="info">追加对象</param>
         /// <returns>操作结果</returns>
-        NGPResponse InsertDynamicData(DynamicInsertRequest info);
+        NGPResponse<List<NGPKeyValuePair>> InsertDynamicData(DynamicInsertRequest info);
 
         /// <summary>
         /// 更新动态数据

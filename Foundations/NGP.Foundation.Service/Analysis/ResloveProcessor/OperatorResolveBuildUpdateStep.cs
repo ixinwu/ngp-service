@@ -265,7 +265,7 @@ namespace NGP.Foundation.Service.Analysis
                                     case FieldColumnType.Date:
                                     case FieldColumnType.DateTime:
                                         {
-                                            setList.Add(parserCommand.LinqSetCommand(fieldKey, parserCommand.DateCommand));
+                                            setList.Add(parserCommand.LinqSetCommand(fieldKey, parserCommand.LinqDateCommand));
                                             break;
                                         }
                                     case FieldColumnType.Bool:

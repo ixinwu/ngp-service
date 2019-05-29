@@ -41,7 +41,6 @@ orderStatement
 
 updateStatements
 	: updateStatement SEMIC (updateStatement SEMIC)*
-	| updateStatement
 ;
 
 updateStatement
@@ -50,7 +49,6 @@ updateStatement
 
 insertStatements
 	: insertStatement SEMIC (insertStatement SEMIC)*
-	| insertStatement
 ;
 
 insertStatement

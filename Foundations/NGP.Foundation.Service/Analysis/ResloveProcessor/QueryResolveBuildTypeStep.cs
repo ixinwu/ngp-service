@@ -49,16 +49,28 @@ namespace NGP.Foundation.Service.Analysis
                 {
                     case FieldType.GroupType:
                     case FieldType.EmployeeType:
-                    case FieldType.DeptType:
+                    //case FieldType.DeptType:
                         {
-                            generateList.Add(new DynamicGenerateObject
+                            if (field.DbConfig.IsMulti == true)
                             {
-                                CodeType = typeof(string),
-                                ObjectKey = AppConfigExtend.GetFieldNameKey(field.FieldKey)
-                            });
+                                generateList.Add(new DynamicGenerateObject
+                                {
+                                    CodeType = typeof(List<string>),
+                                    ObjectKey = AppConfigExtend.GetFieldNameKey(field.FieldKey)
+                                });
+                            }
+                            else
+                            {
+                                generateList.Add(new DynamicGenerateObject
+                                {
+                                    CodeType = typeof(string),
+                                    ObjectKey = AppConfigExtend.GetFieldNameKey(field.FieldKey)
+                                });
+                            }
                             ctx.GenerateContext.GenerateNameFields.Add(field);
+                            break;
                         }
-                        break;
+                       
                     case FieldType.FormType:
                     case FieldType.RelationType:
                     default:

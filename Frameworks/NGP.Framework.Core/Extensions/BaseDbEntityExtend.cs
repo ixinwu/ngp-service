@@ -31,8 +31,7 @@ namespace NGP.Framework.Core
         public static void InitAddDefaultFields<T>(this T entity,IWorkContext workContext)
             where T : BaseDBEntity
         {
-            entity.CreatedBy = workContext.Current.EmplId;
-            entity.CreatedDept = workContext.Current.DeptId;
+            entity.CreatedBy = workContext.Current.EmplId;            
             entity.CreatedTime = DateTime.Now;
             entity.OrderIndex = 0;
             entity.InitUpdateDefaultFields(workContext);
@@ -48,7 +47,6 @@ namespace NGP.Framework.Core
             where T : BaseDBEntity
         {
             entity.UpdatedBy = workContext.Current.EmplId;
-            entity.UpdatedDept = workContext.Current.DeptId;
             entity.UpdatedTime = DateTime.Now;
         }
     }

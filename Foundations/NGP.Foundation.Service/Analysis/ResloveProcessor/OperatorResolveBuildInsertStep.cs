@@ -89,10 +89,17 @@ namespace NGP.Foundation.Service.Analysis
                 var insertElementList = new List<NGPKeyValuePair<object>>();
 
                 // 添加主键
+                var primaryKey = AppConfigExtend.GetFormPrimaryKey(operatorForm.FormKey);
+                var primaryKeyValue = GuidExtend.NewGuid();
+                ctx.InsertPrimaryKeys.Add(new NGPKeyValuePair
+                {
+                    Key = primaryKey,
+                    Value = primaryKeyValue
+                });
                 insertElementList.Add(new NGPKeyValuePair<object>
                 {
-                    Key = AppConfigExtend.GetFormPrimaryKey(operatorForm.FormKey),
-                    Value = parserCommand.LinqStringFormatter(GuidExtend.NewGuid())
+                    Key = primaryKey,
+                    Value = parserCommand.LinqStringFormatter(primaryKeyValue)
                 });
 
                 foreach (var operatorField in operatorForm.FieldList)
@@ -239,7 +246,7 @@ namespace NGP.Foundation.Service.Analysis
                                             insertElementList.Add(new NGPKeyValuePair<object>
                                             {
                                                 Key = fieldKey,
-                                                Value = parserCommand.DateCommand
+                                                Value = parserCommand.LinqDateCommand
                                             });
                                             break;
                                         }

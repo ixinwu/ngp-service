@@ -126,7 +126,7 @@ namespace NGP.Framework.Core
         /// <returns></returns>
         public static string GetSqlFullName(string fieldKey)
         {
-            return string.Format("{0}.[{1}]", GetFormKey(fieldKey), GetColumn(fieldKey));
+            return string.Format("{0}.{1}", GetFormKey(fieldKey), GetColumn(fieldKey));
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace NGP.Framework.Core
         /// <returns></returns>
         public static string GenerateSqlFullName(string formKey, string columnName)
         {
-            return string.Format("{0}.[{1}]", formKey, columnName);
+            return string.Format("{0}.{1}", formKey, columnName);
         }
     }
 }

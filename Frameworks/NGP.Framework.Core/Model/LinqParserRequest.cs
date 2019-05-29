@@ -18,6 +18,7 @@ namespace NGP.Framework.Core
     /// <summary>
     /// linq解析请求对象
     /// </summary>
+    
     public class LinqParserRequest
     {
         /// <summary>

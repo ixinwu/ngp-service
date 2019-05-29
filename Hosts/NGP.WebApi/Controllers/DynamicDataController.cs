@@ -77,7 +77,7 @@ namespace NGP.WebApi
         /// <param name="info">追加对象</param>        
         /// <returns>操作结果</returns>
         [HttpPost("insertDynamicData")]
-        public ActionResult<NGPResponse> InsertDynamicData(DynamicInsertRequest info)
+        public ActionResult<NGPResponse<List<NGPKeyValuePair>>> InsertDynamicData(DynamicInsertRequest info)
         {
             return Ok(_dynamicDataService.InsertDynamicData(info));
         }

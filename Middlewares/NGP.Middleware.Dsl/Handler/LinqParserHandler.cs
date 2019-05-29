@@ -670,7 +670,7 @@ namespace NGP.Middleware.Dsl.Handler
             }
             else
             {
-                command = string.Format("{0}.[{1}]", context.TEXT().GetText().Trim(), column);
+                command = string.Format("{0}.{1}", context.TEXT().GetText().Trim(), column);
             }
 
             if (context.LBRACKET() != null && context.RBRACKET() != null)
@@ -984,7 +984,7 @@ namespace NGP.Middleware.Dsl.Handler
         /// <param name="context"></param>
         public override void ExitGetDeptidMethod([NotNull] LinqParserParser.GetDeptidMethodContext context)
         {
-            SetStatement(context, GetParamCommandByValue(_parserRequest.Current.DeptId));
+            SetStatement(context, GetParamCommandByValue(_parserRequest.Current.EmplId));
         }
 
         /// <summary>
@@ -1171,7 +1171,7 @@ namespace NGP.Middleware.Dsl.Handler
                 return;
             }
 
-            command = string.Format("{0}.[{1}]", context.TEXT().GetText().Trim(), column);
+            command = string.Format("{0}.{1}", context.TEXT().GetText().Trim(), column);
             SetStatement(context, command);
         }
         #endregion
