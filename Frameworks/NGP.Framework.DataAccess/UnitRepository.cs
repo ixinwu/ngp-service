@@ -15,9 +15,11 @@ using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using NGP.Framework.Core;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using Z.EntityFramework.Plus;
@@ -27,19 +29,19 @@ namespace NGP.Framework.DataAccess
     /// <summary>
     /// 工作单元仓储
     /// </summary>
-    public class UnitRepository : IUnitRepository
+    public abstract class UnitRepository : IUnitRepository
     {
         /// <summary>
         /// ef上下文
         /// </summary>
-        private readonly IDbContext _context;
+        protected readonly IDbContext _context;
 
         #region Ctor
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="context"></param>
-        public UnitRepository(IDbContext context)
+        protected UnitRepository(IDbContext context)
           => _context = context;
         #endregion
 
@@ -238,27 +240,24 @@ namespace NGP.Framework.DataAccess
         /// <typeparam name="TEntity">返回结果类型</typeparam>
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>返回结果</returns>
-        public List<TEntity> ReadValues<TEntity>(string commandText,
-            IDictionary<string, object> parameters = null,
-            Action<TEntity> setItem = null)
-            where TEntity : class, new()
+        public List<TEntity> QueryListEntity<TEntity>(string commandText,
+             IDictionary<string, object> parameters = null)
+             where TEntity : class, new()
         {
-            Func<SqlCommand, List<TEntity>> excute = (dbCommand) =>
+            Func<IDbCommand, List<TEntity>> excute = (dbCommand) =>
             {
-                var result = new List<TEntity>();
-
-                using (IDataReader dataReader = dbCommand.ExecuteReader())
+                using (IDataReader reader = dbCommand.ExecuteReader())
                 {
-                    while (dataReader.Read())
+                    var result = new List<TEntity>();
+                    var converter = new DbReaderConverter<TEntity>(reader);
+                    while (reader.Read())
                     {
-                        var item = dataReader.GetReaderData<TEntity>();
-                        setItem?.Invoke(item);
+                        var item = converter.CreateItemFromRow();
                         result.Add(item);
                     }
+                    return result;
                 }
-                return result;
             };
             return CreateDbCommondAndExcute(commandText, parameters,
                 excute);
@@ -268,33 +267,34 @@ namespace NGP.Framework.DataAccess
         /// 读取列表数据
         /// </summary>
         /// <param name="commandText">执行语句</param>
-        /// <param name="type">返回结果类型</param>
         /// <param name="parameters">参数列表</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>返回结果</returns>
-        public List<object> ReadValues(string commandText,
-            Type type,
-             IDictionary<string, object> parameters = null
-            , Action<dynamic> setItem = null)
+        public IEnumerable<dynamic> QueryListDynamic(string commandText,
+             IDictionary<string, object> parameters = null)
         {
-            Func<SqlCommand, List<object>> excute = (dbCommand) =>
+            return CreateDbCommondAndExcute(commandText, parameters, ExcuteQueryListDynamic);
+        }
+
+        /// <summary>
+        /// 执行动态列表读取
+        /// </summary>
+        /// <param name="dbCommand"></param>
+        /// <returns></returns>
+        private IEnumerable<dynamic> ExcuteQueryListDynamic(IDbCommand dbCommand)
+        {
+            using (IDataReader reader = dbCommand.ExecuteReader())
             {
-                var result = new List<object>();
-
-                using (IDataReader dataReader = dbCommand.ExecuteReader())
+                var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                foreach (IDataRecord record in reader as IEnumerable)
                 {
-                    while (dataReader.Read())
+                    var expando = new ExpandoObject() as IDictionary<string, object>;
+                    foreach (var name in names)
                     {
-                        var item = dataReader.GetReaderData(type);
-                        setItem?.Invoke(item);
-                        result.Add(item);
-
+                        expando[name] = record[name];
                     }
+                    yield return expando;
                 }
-                return result;
-            };
-            return CreateDbCommondAndExcute(commandText, parameters,
-                excute);
+            }
         }
 
         /// <summary>
@@ -303,44 +303,110 @@ namespace NGP.Framework.DataAccess
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>        
         /// <returns>返回结果</returns>
-        public List<IDictionary<string, object>> ReadValues(string commandText,
+        public IEnumerable<IDictionary<string, object>> QueryListDictionary(string commandText,
             IDictionary<string, object> parameters = null)
         {
-            Func<SqlCommand, List<IDictionary<string, object>>> excute = (dbCommand) =>
-            {
-                var result = new List<IDictionary<string, object>>();
+            return CreateDbCommondAndExcute(commandText, parameters, ExcuteQueryListDictionary);
+        }
 
-                using (IDataReader dataReader = dbCommand.ExecuteReader())
+        /// <summary>
+        /// 读取列表数据,根据回调设定值,值通过key,value提供
+        /// </summary>
+        /// <param name="dbCommand"></param>
+        /// <returns></returns>
+        private IEnumerable<IDictionary<string, object>> ExcuteQueryListDictionary(IDbCommand dbCommand)
+        {
+            using (var reader = dbCommand.ExecuteReader())
+            {
+                var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                foreach (IDataRecord record in reader as IEnumerable)
+                    yield return names.ToDictionary(n => n, n => record[n]);
+            }
+        }
+
+        /// <summary>
+        /// 执行数据行读取
+        /// </summary>
+        /// <param name="commandText">执行语句</param>
+        /// <param name="parameters">参数列表</param>        
+        /// <returns>返回结果</returns>
+        public IEnumerable<DataRow> QueryListDataRow(string commandText,
+            IDictionary<string, object> parameters = null)
+        {
+            return CreateDbCommondAndExcute(commandText, parameters, ExcuteQueryListDataRow);
+        }
+
+        /// <summary>
+        /// 执行数据行读取
+        /// </summary>
+        /// <param name="dbCommand"></param>
+        /// <returns></returns>
+        private IEnumerable<DataRow> ExcuteQueryListDataRow(IDbCommand dbCommand)
+        {
+            using (var reader = dbCommand.ExecuteReader())
+            {
+                var table = new DataTable();
+                table.BeginLoadData();
+                table.Load(reader);
+                table.EndLoadData();
+                return table.AsEnumerable();
+            }
+        }
+
+        /// <summary>
+        /// 读取单条记录（泛型）
+        /// </summary>
+        /// <typeparam name="TEntity">返回结果类型</typeparam>
+        /// <param name="commandText">执行语句</param>
+        /// <param name="parameters">参数列表</param>
+        /// <returns>返回结果</returns>
+        public TEntity QuerySingleEntity<TEntity>(string commandText,
+            IDictionary<string, object> parameters = null)
+            where TEntity : class, new()
+        {
+            Func<IDbCommand, TEntity> excute = (dbCommand) =>
+            {
+                using (IDataReader reader = dbCommand.ExecuteReader())
                 {
-                    while (dataReader.Read())
+                    var converter = new DbReaderConverter<TEntity>(reader);
+                    if (reader.Read())
                     {
-                        var item = new Dictionary<string, object>();
-                        item.SetReaderValue(dataReader);
-                        result.Add(item);
+                        return converter.CreateItemFromRow();
                     }
+                    return null;
                 }
-                return result;
             };
             return CreateDbCommondAndExcute(commandText, parameters,
                 excute);
         }
 
         /// <summary>
-        /// 读取datatable
+        /// 读取列表数据
         /// </summary>
         /// <param name="commandText">执行语句</param>
-        /// <param name="parameters">参数列表</param>        
+        /// <param name="parameters">参数列表</param>
         /// <returns>返回结果</returns>
-        public DataTable ReadTable(string commandText,
-            IDictionary<string, object> parameters = null)
+        public dynamic QuerySingleDynamic(string commandText,
+             IDictionary<string, object> parameters = null)
         {
-            Func<SqlCommand, DataTable> excute = (dbCommand) =>
-            {
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(dbCommand);
-                da.Fill(dt);
-                return dt;
-            };
+            Func<IDbCommand, dynamic> excute = (dbCommand) =>
+             {
+                 using (IDataReader reader = dbCommand.ExecuteReader())
+                 {
+                     var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                     foreach (IDataRecord record in reader as IEnumerable)
+                     {
+                         var expando = new ExpandoObject() as IDictionary<string, object>;
+                         foreach (var name in names)
+                         {
+                             expando[name] = record[name];
+                         }
+                         return expando;
+                     }
+                     return null;
+                 }
+             };
+
             return CreateDbCommondAndExcute(commandText, parameters, excute);
         }
 
@@ -350,103 +416,36 @@ namespace NGP.Framework.DataAccess
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>        
         /// <returns>返回结果</returns>
-        public IDictionary<string, object> ExecuteReader(string commandText,
-             IDictionary<string, object> parameters = null)
+        public IDictionary<string, object> QuerySingleDictionary(string commandText,
+            IDictionary<string, object> parameters = null)
         {
-            Func<SqlCommand, IDictionary<string, object>> excute = (dbCommand) =>
+            Func<IDbCommand, dynamic> excute = (dbCommand) =>
             {
-                var result = new Dictionary<string, object>();
-
-                using (IDataReader dataReader = dbCommand.ExecuteReader())
+                using (var reader = dbCommand.ExecuteReader())
                 {
-                    if (dataReader.Read())
+                    var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                    foreach (IDataRecord record in reader as IEnumerable)
                     {
-                        result.SetReaderValue(dataReader);
+                        return names.ToDictionary(n => n, n => record[n]);
                     }
+                    return null;
                 }
-                return result;
-            };
-            return CreateDbCommondAndExcute(commandText, parameters,
-                excute);
-        }
-
-        /// <summary>
-        /// 读取详细记录,根据回调设定值
-        /// </summary>
-        /// <param name="commandText">执行语句</param>
-        /// <param name="type">类型</param>
-        /// <param name="parameters">参数列表</param>
-        /// <param name="valueFormatters">值格式化</param>
-        /// <param name="propertyMapping">属性映射</param>
-        /// <param name="setItem">对象格式化</param>     
-        /// <returns>返回结果</returns>
-        public object ExecuteReader(string commandText,
-              Type type,
-              IDictionary<string, object> parameters = null,
-              IDictionary<string, Func<object, object>> valueFormatters = null,
-              IDictionary<string, string> propertyMapping = null,
-              Action<dynamic> setItem = null)
-        {
-            Func<SqlCommand, object> excute = (dbCommand) =>
-            {
-                using (IDataReader dataReader = dbCommand.ExecuteReader())
-                {
-                    if (dataReader.Read())
-                    {
-                        var result = dataReader.GetReaderData(type, valueFormatters, propertyMapping);
-                        setItem?.Invoke(result);
-                        return result;
-                    }
-                }
-                return null;
-            };
-            return CreateDbCommondAndExcute(commandText, parameters,
-                excute);
-        }
-
-        /// <summary>
-        /// 读取单条记录（泛型）
-        /// </summary>
-        /// <typeparam name="TEntity">返回结果类型</typeparam>
-        /// <param name="commandText">执行语句</param>
-        /// <param name="parameters">参数列表</param>
-        /// <param name="setItem">设定值回调</param>
-        /// <returns>返回结果</returns>
-        public TEntity ExecuteReader<TEntity>(string commandText,
-             IDictionary<string, object> parameters = null
-             , Action<TEntity> setItem = null)
-             where TEntity : class, new()
-        {
-            Func<SqlCommand, TEntity> excute = (dbCommand) =>
-            {
-                var result = default(TEntity);
-                using (IDataReader dataReader = dbCommand.ExecuteReader())
-                {
-                    if (dataReader.Read())
-                    {
-                        result = dataReader.GetReaderData<TEntity>();
-                        setItem?.Invoke(result);
-                    }
-                }
-                return result;
             };
 
-            return CreateDbCommondAndExcute<TEntity>(commandText, parameters, excute);
+            return CreateDbCommondAndExcute(commandText, parameters, excute);
         }
 
         /// <summary>
         /// 读取第一条第一列的结果（泛型）
         /// </summary>
-        /// <typeparam name="TValue">结果类型</typeparam>
+        /// <typeparam name="T">结果类型</typeparam>
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>
         /// <returns>返回结果</returns>
-        public TValue ExecuteScalar<TValue>(string commandText, IDictionary<string, object> parameters = null)
+        public T ExecuteScalar<T>(string commandText, IDictionary<string, object> parameters = null)
         {
-            Func<SqlCommand, object> excute = (dbCommand) => dbCommand.ExecuteScalar();
-            var obj = CreateDbCommondAndExcute(commandText,
-                parameters, excute);
-            return obj.ToObject<TValue>();
+            return CreateDbCommondAndExcute(commandText,
+                parameters, (dbCommand) => dbCommand.ExecuteScalar().ToObject<T>());
         }
 
         /// <summary>
@@ -457,90 +456,31 @@ namespace NGP.Framework.DataAccess
         /// <returns>影响条数</returns>
         public int ExecuteNonQuery(string commandText, IDictionary<string, object> parameters = null)
         {
-            Func<SqlCommand, int> excute = (dbCommand) => dbCommand.ExecuteNonQuery();
             return CreateDbCommondAndExcute(commandText,
-                parameters, excute);
+                parameters, (dbCommand) => dbCommand.ExecuteNonQuery());
         }
+        #endregion
 
+        #region abstract methods
         /// <summary>
-        /// 大批量插入数据操作
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="insertData"></param>
-        /// <returns></returns>
-        public string InsertSqlBulkNonQuery(string tableName, DataTable insertData)
-        {
-            DataTable dtResult = insertData;
-            //在处理前 需要把数据库表中列顺序和DataTable列的顺序一样
-            //var strSql = string.Format(@"Select ColumnIndex = b.colorder, FieldKey = b.name FROM sysobjects A
-            //                            Join syscolumns B ON A.ID = B.ID
-            //                            Where A.Name ='{0}' Order by b.colorder",
-            //                           tableName);
-            var strSql = string.Format(@"Select ColumnIndex =row_number()OVER(ORDER BY A.name DESC), FieldKey = b.name FROM sysobjects A
-                                        Join syscolumns B ON A.ID = B.ID
-                                        Where A.Name ='{0}' Order by b.colorder",
-                           tableName);
-            var resultTemp = ReadValues<FieldOrderInfo>(strSql);
-
-            try
-            {
-                for (int i = 0; i < resultTemp.Count; i++)
-                {
-                    dtResult.Columns[resultTemp[i].FieldKey].SetOrdinal(resultTemp[i].ColumnIndex - 1);
-                }
-                var conn = _context.Database.GetDbConnection() as SqlConnection;
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                SqlBulkCopy bulkCopy = new SqlBulkCopy(conn);
-                bulkCopy.DestinationTableName = tableName;
-                bulkCopy.BatchSize = dtResult.Rows.Count > 100000 ? 100000 : dtResult.Rows.Count;
-                conn.Open();
-                if (dtResult != null && dtResult.Rows.Count != 0)
-                {
-                    bulkCopy.WriteToServer(dtResult);
-                }
-
-                return string.Empty;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-
-        #region private methods
-        /// <summary>
-        /// 创建DBCommand执行
+        /// 创建MySqlCommand执行
         /// </summary>
         /// <typeparam name="T">结果泛型</typeparam>
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>
         /// <param name="excute">执行回调</param>
         /// <returns>执行结果</returns>
-        private T CreateDbCommondAndExcute<T>(string commandText,
-           IDictionary<string, object> parameters, Func<SqlCommand, T> excute)
-        {
-            var conn = _context.Database.GetDbConnection() as SqlConnection;
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
-            }
+        protected abstract T CreateDbCommondAndExcute<T>(string commandText,
+           IDictionary<string, object> parameters, Func<IDbCommand, T> excute);
 
-            using (SqlCommand dbCommand = new SqlCommand())
-            {
-
-                dbCommand.CommandType = CommandType.Text;
-                dbCommand.Connection = conn;
-                dbCommand.SetParameters(parameters);
-                dbCommand.CommandText = commandText;
-
-                return excute(dbCommand);
-            }
-        }
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="dbCommand"></param>
+        /// <param name="parameters"></param>
+        protected abstract void SetParameters(IDbCommand dbCommand, IDictionary<string, object> parameters);
         #endregion
-        #endregion
+
 
         /// <summary>
         /// 释放资源

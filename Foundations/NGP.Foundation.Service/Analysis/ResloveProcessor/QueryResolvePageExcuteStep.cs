@@ -34,10 +34,8 @@ namespace NGP.Foundation.Service.Analysis
                 ctx.CommandContext.TotalCommand.ParameterCollection);
             if (ctx.Response.TotalCount > 0)
             {
-                ctx.Response.Data = unitRepository.ReadValues(ctx.CommandContext.ExcuteCommand.CommandText,
-                    ctx.GenerateContext.GenerateType,
-                    ctx.CommandContext.ExcuteCommand.ParameterCollection,
-                    ctx.GenerateContext.ExtendSetItem);
+                ctx.Response.Data = unitRepository.QueryListDynamic(ctx.CommandContext.ExcuteCommand.CommandText,
+                    ctx.CommandContext.ExcuteCommand.ParameterCollection);
             }
 
             return true;

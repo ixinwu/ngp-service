@@ -39,11 +39,6 @@ namespace NGP.Middleware.Dsl.Handler
         private readonly IDictionary<string, object> _params = new Dictionary<string, object>();
 
         /// <summary>
-        /// 生成对象列表
-        /// </summary>
-        private readonly List<DynamicGenerateObject> _generateObjects = new List<DynamicGenerateObject>();
-
-        /// <summary>
         /// 参数树
         /// </summary>
         private readonly ParseTreeProperty<string> _statementTree = new ParseTreeProperty<string>();
@@ -137,7 +132,6 @@ namespace NGP.Middleware.Dsl.Handler
             return new LinqParserResponse
             {
                 Command = command,
-                GenerateObjects = _generateObjects,
                 ParserType = _linqParserType
             };
         }
@@ -702,14 +696,6 @@ namespace NGP.Middleware.Dsl.Handler
             {
                 type = typeof(int?);
             }
-            if (!_generateObjects.Any(s => s.ObjectKey.ToUpper() == objectKey.ToUpper()))
-            {
-                _generateObjects.Add(new DynamicGenerateObject
-                {
-                    ObjectKey = objectKey,
-                    CodeType = type
-                });
-            }
         }
 
         /// <summary>
@@ -984,7 +970,7 @@ namespace NGP.Middleware.Dsl.Handler
         /// <param name="context"></param>
         public override void ExitGetDeptidMethod([NotNull] LinqParserParser.GetDeptidMethodContext context)
         {
-            SetStatement(context, GetParamCommandByValue(_parserRequest.Current.EmplId));
+            SetStatement(context, GetParamCommandByValue(_parserRequest.Current.DeptId));
         }
 
         /// <summary>

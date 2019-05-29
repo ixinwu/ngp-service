@@ -46,21 +46,22 @@ namespace NGP.Foundation.Service.Analysis
             // 扩展设定字段列表
             var getSetFields = ctx.GenerateContext.GenerateNameFields.Select(s => new
             {
-                GetProperty = ctx.GenerateContext.GenerateType.GetProperty(s.FieldKey),
-                SetProperty = ctx.GenerateContext.GenerateType.GetProperty(AppConfigExtend.GetFieldNameKey(s.FieldKey)),
+                GetPropertyName = s.FieldKey,
+                SetPropertyName = AppConfigExtend.GetFieldNameKey(s.FieldKey),
                 s.FieldKey,
-                FieldType = s.FieldType.ToEnum<FieldType>(),
-                s.DbConfig.IsMulti
+                s.DbConfig.IsMulti,
+                FieldType = s.FieldType.ToEnum<FieldType>()
             });
 
             // 设定名称处理
             Action<dynamic> setNameAction = (item) =>
             {
+                var dicItem = item as IDictionary<string, object>;
                 // 单条数据赋值
                 foreach (var field in getSetFields)
                 {
                     // 获取key值
-                    dynamic key = field.GetProperty.GetValue(item);
+                    dynamic getValue = item[field.GetPropertyName];
                     var value = string.Empty;
 
                     // 根据类型筛选
@@ -73,8 +74,8 @@ namespace NGP.Foundation.Service.Analysis
                                 if (field.IsMulti == true)
                                 {
                                     var listValue = new List<string>();
-                                    var keys = key.Split(',');
-                                    foreach (var keyItem in keys)
+                                    var getValues = getValue.Split(',');
+                                    foreach (var keyItem in getValues)
                                     {
                                         groupItem = ctx.AssociatedContext.GroupTypes.FirstOrDefault(s => s.TypeKey == keyItem);
                                         if (groupItem != null)
@@ -83,16 +84,16 @@ namespace NGP.Foundation.Service.Analysis
                                         }
                                     }
                                     // 设定name值
-                                    field.SetProperty.SetValue(item, listValue, new object[0]);
+                                    item[field.SetPropertyName] = listValue;
                                     break;
                                 }
-                                groupItem = ctx.AssociatedContext.GroupTypes.FirstOrDefault(s => s.TypeKey == key);
+                                groupItem = ctx.AssociatedContext.GroupTypes.FirstOrDefault(s => s.TypeKey == getValue);
                                 if (groupItem != null)
                                 {
                                     value = groupItem.TypeValue;
                                 }
                                 // 设定name值
-                                field.SetProperty.SetValue(item, value, new object[0]);
+                                item[field.SetPropertyName] = value;
                                 break;
                             }
                         case FieldType.EmployeeType:
@@ -102,7 +103,7 @@ namespace NGP.Foundation.Service.Analysis
                                 if (field.IsMulti == true)
                                 {
                                     var listValue = new List<string>();
-                                    var keys = key.Split(',');
+                                    var keys = getValue.Split(',');
                                     foreach (var keyItem in keys)
                                     {
                                         accountItem = ctx.AssociatedContext.Employees.FirstOrDefault(s => s.Id == keyItem);
@@ -112,21 +113,45 @@ namespace NGP.Foundation.Service.Analysis
                                         }
                                     }
                                     // 设定name值
-                                    field.SetProperty.SetValue(item, listValue, new object[0]);
+                                    item[field.SetPropertyName] = listValue;
                                     break;
                                 }
-                                accountItem = ctx.AssociatedContext.Employees.FirstOrDefault(s => s.Id == key);
+                                accountItem = ctx.AssociatedContext.Employees.FirstOrDefault(s => s.Id == getValue);
                                 if (accountItem != null)
                                 {
                                     value = accountItem.EmplName;
                                 }
                                 // 设定name值
-                                field.SetProperty.SetValue(item, value, new object[0]);
+                                item[field.SetPropertyName] = value;
                                 break;
                             }
                         case FieldType.DeptType:
                             {
-                                //value = (ctx.AssociatedContext.Departments.FirstOrDefault(s => s.Id == key) ?? new Sys_Org_Department()).DeptShortName;
+                                Sys_Org_Department deptItem = null;
+                                // 多选的场景
+                                if (field.IsMulti == true)
+                                {
+                                    var listValue = new List<string>();
+                                    var keys = getValue.Split(',');
+                                    foreach (var keyItem in keys)
+                                    {
+                                        deptItem = ctx.AssociatedContext.Departments.FirstOrDefault(s => s.Id == keyItem);
+                                        if (deptItem != null)
+                                        {
+                                            listValue.Add(deptItem.DeptName);
+                                        }
+                                    }
+                                    // 设定name值
+                                    item[field.SetPropertyName] = listValue;
+                                    break;
+                                }
+                                deptItem = ctx.AssociatedContext.Departments.FirstOrDefault(s => s.Id == getValue);
+                                if (deptItem != null)
+                                {
+                                    value = deptItem.DeptName;
+                                }
+                                // 设定name值
+                                item[field.SetPropertyName] = value;
                                 break;
                             }
                         case FieldType.FormType:

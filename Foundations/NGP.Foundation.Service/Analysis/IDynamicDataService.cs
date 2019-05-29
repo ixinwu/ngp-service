@@ -26,34 +26,22 @@ namespace NGP.Foundation.Service.Analysis
         /// 获取列表页面数据
         /// </summary>
         /// <param name="query">查询对象</param>
-        /// <param name="extendTypes">扩展类型定义</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<NGPPageQueryResponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query,
-            IEnumerable<DynamicGenerateObject> extendTypes = null,
-            Action<dynamic> setItem = null);
+        NGPResponse<NGPPageQueryResponse> QueryDynamicListPageData(NGPPageQueryRequest<DynamicQueryRequest> query);
 
         /// <summary>
         /// 获取列表页面数据
         /// </summary>
         /// <param name="query">查询对象</param>
-        /// <param name="extendTypes">扩展类型定义</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<dynamic> QueryDynamicAllData(DynamicQueryRequest query,
-            IEnumerable<DynamicGenerateObject> extendTypes = null,
-            Action<dynamic> setItem = null);
+        NGPResponse<dynamic> QueryDynamicAllData(DynamicQueryRequest query);
 
         /// <summary>
         /// 获取列表页面数据
         /// </summary>
         /// <param name="query">查询对象</param>
-        /// <param name="extendTypes">扩展类型定义</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>查询结果</returns>
-        NGPResponse<dynamic> QueryDynamicSingleData(DynamicQueryRequest query,
-            IEnumerable<DynamicGenerateObject> extendTypes = null,
-            Action<dynamic> setItem = null);
+        NGPResponse<dynamic> QueryDynamicSingleData(DynamicQueryRequest query);
 
         /// <summary>
         /// 添加动态数据

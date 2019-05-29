@@ -26,20 +26,5 @@ namespace NGP.Foundation.Service.Analysis
         /// 生成名称字段的列表
         /// </summary>
         public List<App_Config_FormField> GenerateNameFields { get; set; } = new List<App_Config_FormField>();
-
-        /// <summary>
-        /// 生成类型
-        /// </summary>
-        public Type GenerateType { get; set; }
-
-        /// <summary>
-        /// 扩展类型
-        /// </summary>
-        public IEnumerable<DynamicGenerateObject> ExtendTypes { get; set; }
-
-        /// <summary>
-        /// 扩展设定回调
-        /// </summary>
-        public Action<dynamic> ExtendSetItem { get; set; }
     }
 }

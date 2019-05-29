@@ -28,10 +28,8 @@ namespace NGP.Foundation.Service.Analysis
         public override bool Process(QueryResolveContext ctx)
         {
             var unitRepository = Singleton<IEngine>.Instance.Resolve<IUnitRepository>();
-            ctx.Response.Data = unitRepository.ReadValues(ctx.CommandContext.ExcuteCommand.CommandText,
-                    ctx.GenerateContext.GenerateType,
-                    ctx.CommandContext.ExcuteCommand.ParameterCollection,
-                    ctx.GenerateContext.ExtendSetItem);
+            ctx.Response.Data = unitRepository.QueryListDynamic(ctx.CommandContext.ExcuteCommand.CommandText,
+                    ctx.CommandContext.ExcuteCommand.ParameterCollection);
             return true;
         }
     }

@@ -124,7 +124,7 @@ namespace NGP.Foundation.Service.Analysis
                     string.Empty);
 
                     // 执行查询
-                    dbValue = unitRepository.ExecuteReader(singleCommandText, parserResult.Command.ParameterCollection);
+                    dbValue = unitRepository.QuerySingleDictionary(singleCommandText, parserResult.Command.ParameterCollection);
                 }
 
                 foreach (var operatorField in operatorFields)

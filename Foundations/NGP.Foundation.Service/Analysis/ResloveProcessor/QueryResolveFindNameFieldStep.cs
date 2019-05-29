@@ -20,7 +20,7 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 页面解析组装命令处理
     /// </summary>
-    public class QueryResolveBuildTypeStep : StepBase<QueryResolveContext>
+    public class QueryResolveFindNameFieldStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
@@ -33,17 +33,8 @@ namespace NGP.Foundation.Service.Analysis
             var fieldList = ctx.InitContext.FormFields
                  .Where(s => ctx.Request.QueryFieldKeys.Contains(s.FieldKey));
 
-            var generateList = new List<DynamicGenerateObject>();
-
             foreach (var field in fieldList)
             {
-                // 转换字段类型
-                generateList.Add(new DynamicGenerateObject
-                {
-                    CodeType = field.DbConfig.ColumnType.ToEnum<FieldColumnType>().GetCodeType(),
-                    ObjectKey = field.FieldKey
-                });
-
                 // 添加名称key
                 switch (field.FieldType.ToEnum<FieldType>())
                 {
@@ -51,22 +42,6 @@ namespace NGP.Foundation.Service.Analysis
                     case FieldType.EmployeeType:
                     //case FieldType.DeptType:
                         {
-                            if (field.DbConfig.IsMulti == true)
-                            {
-                                generateList.Add(new DynamicGenerateObject
-                                {
-                                    CodeType = typeof(List<string>),
-                                    ObjectKey = AppConfigExtend.GetFieldNameKey(field.FieldKey)
-                                });
-                            }
-                            else
-                            {
-                                generateList.Add(new DynamicGenerateObject
-                                {
-                                    CodeType = typeof(string),
-                                    ObjectKey = AppConfigExtend.GetFieldNameKey(field.FieldKey)
-                                });
-                            }
                             ctx.GenerateContext.GenerateNameFields.Add(field);
                             break;
                         }
@@ -77,11 +52,6 @@ namespace NGP.Foundation.Service.Analysis
                         break;
                 }
             }
-
-            generateList.AddRange(ctx.GenerateContext.ExtendTypes ?? new List<DynamicGenerateObject>());
-
-            // 生成类型
-            ctx.GenerateContext.GenerateType = generateList.CompileType();
 
             return true;
         }

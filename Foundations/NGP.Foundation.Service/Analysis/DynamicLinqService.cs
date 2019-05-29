@@ -90,23 +90,7 @@ namespace NGP.Foundation.Service.Analysis
 
                 case LinqParserType.Query:
                     {
-                        var initContext = _resolveDataProvider.InitResolveContext(request);
-
-                        // 获取查询字段列表
-                        var generateList = initContext.FormFields
-                             .Where(s => selectFieldKeys.Contains(s.FieldKey))
-                             .Select(s => new DynamicGenerateObject
-                             {
-                                 CodeType = s.DbConfig.ColumnType.ToEnum<FieldColumnType>().GetCodeType(),
-                                 ObjectKey = s.FieldKey
-                             }).ToList(); ;
-
-                        generateList.AddRange(parserResult.GenerateObjects ?? new List<DynamicGenerateObject>());
-
-                        // 生成类型
-                        var generateType = generateList.CompileType();
-
-                        var data = _unitRepository.ReadValues(parserResult.Command.CommandText, generateType, parserResult.Command.ParameterCollection);
+                        var data = _unitRepository.QueryListDynamic(parserResult.Command.CommandText,  parserResult.Command.ParameterCollection);
                         return new NGPResponse<dynamic>
                         {
                             Message = CommonResource.OperatorSuccess,

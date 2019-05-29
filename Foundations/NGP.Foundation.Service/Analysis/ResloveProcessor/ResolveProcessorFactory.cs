@@ -63,7 +63,7 @@ namespace NGP.Foundation.Service.Analysis
                 .AddNextStep(new QueryResolveOrderStep())
                 .AddNextStep(new QueryResolveJoinStep())
                 .AddNextStep(new QueryResolveBuildPageCommandStep())
-                .AddNextStep(new QueryResolveBuildTypeStep())
+                .AddNextStep(new QueryResolveFindNameFieldStep())
                 .AddNextStep(new QueryResolveAssociatedQueryStep())
                 .AddNextStep(new QueryResolvePageExcuteStep())
                 .AddNextStep(new QueryResolveExtendAssignmentStep());
@@ -73,7 +73,7 @@ namespace NGP.Foundation.Service.Analysis
                .AddNextStep(new QueryResolveOrderStep())
                .AddNextStep(new QueryResolveJoinStep())
                .AddNextStep(new QueryResolveBuildSingleCommandStep())
-               .AddNextStep(new QueryResolveBuildTypeStep())
+               .AddNextStep(new QueryResolveFindNameFieldStep())
                .AddNextStep(new QueryResolveAssociatedQueryStep())
                .AddNextStep(new QueryResolveSingleExcuteStep())
                .AddNextStep(new QueryResolveExtendAssignmentStep());
@@ -83,7 +83,7 @@ namespace NGP.Foundation.Service.Analysis
               .AddNextStep(new QueryResolveOrderStep())
               .AddNextStep(new QueryResolveJoinStep())
               .AddNextStep(new QueryResolveBuildAllCommandStep())
-              .AddNextStep(new QueryResolveBuildTypeStep())
+              .AddNextStep(new QueryResolveFindNameFieldStep())
               .AddNextStep(new QueryResolveAssociatedQueryStep())
               .AddNextStep(new QueryResolveAllExcuteStep())
               .AddNextStep(new QueryResolveExtendAssignmentStep());

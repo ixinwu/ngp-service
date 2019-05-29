@@ -14,7 +14,7 @@
     },
     // IUnitRepository
     {
-      "type": "NGP.Framework.DataAccess.UnitRepository,NGP.Framework.DataAccess",
+      "type": "NGP.Framework.DataAccess.SqlserverRepository,NGP.Framework.DataAccess",
       "services": [
         {
           "type": "NGP.Framework.Core.IUnitRepository,NGP.Framework.Core"

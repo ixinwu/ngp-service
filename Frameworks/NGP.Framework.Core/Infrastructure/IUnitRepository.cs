@@ -149,25 +149,19 @@ namespace NGP.Framework.Core
         /// <typeparam name="TEntity">返回结果类型</typeparam>
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>返回结果</returns>
-        List<TEntity> ReadValues<TEntity>(string commandText,
-            IDictionary<string, object> parameters = null,
-            Action<TEntity> setItem = null)
+        List<TEntity> QueryListEntity<TEntity>(string commandText,
+            IDictionary<string, object> parameters = null)
             where TEntity : class, new();
 
         /// <summary>
         /// 读取列表数据
         /// </summary>
         /// <param name="commandText">执行语句</param>
-        /// <param name="type">返回结果类型</param>
         /// <param name="parameters">参数列表</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>返回结果</returns>
-        List<object> ReadValues(string commandText,
-            Type type,
-             IDictionary<string, object> parameters = null
-            , Action<dynamic> setItem = null);
+        IEnumerable<dynamic> QueryListDynamic(string commandText,
+             IDictionary<string, object> parameters = null);
 
         /// <summary>
         /// 读取列表数据,根据回调设定值,值通过key,value提供
@@ -175,7 +169,7 @@ namespace NGP.Framework.Core
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>        
         /// <returns>返回结果</returns>
-        List<IDictionary<string, object>> ReadValues(string commandText,
+        IEnumerable<IDictionary<string, object>> QueryListDictionary(string commandText,
             IDictionary<string, object> parameters = null);
 
         /// <summary>
@@ -184,7 +178,7 @@ namespace NGP.Framework.Core
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>        
         /// <returns>返回结果</returns>
-        DataTable ReadTable(string commandText,
+        IEnumerable<DataRow> QueryListDataRow(string commandText,
             IDictionary<string, object> parameters = null);
 
         /// <summary>
@@ -193,11 +187,9 @@ namespace NGP.Framework.Core
         /// <typeparam name="TEntity">返回结果类型</typeparam>
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>
-        /// <param name="setItem">设定值回调</param>
         /// <returns>返回结果</returns>
-        TEntity ExecuteReader<TEntity>(string commandText,
-            IDictionary<string, object> parameters = null
-            , Action<TEntity> setItem = null)
+        TEntity QuerySingleEntity<TEntity>(string commandText,
+            IDictionary<string, object> parameters = null)
             where TEntity : class, new();
 
         /// <summary>
@@ -206,25 +198,17 @@ namespace NGP.Framework.Core
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>        
         /// <returns>返回结果</returns>
-        IDictionary<string, object> ExecuteReader(string commandText,
+        IDictionary<string, object> QuerySingleDictionary(string commandText,
             IDictionary<string, object> parameters = null);
 
         /// <summary>
         /// 读取详细记录,根据回调设定值,值通过key,value提供
         /// </summary>
         /// <param name="commandText">执行语句</param>
-        /// <param name="type">类型</param>
-        /// <param name="parameters">参数列表</param>
-        /// <param name="valueFormatters">值格式化</param>
-        /// <param name="propertyMapping">属性映射</param>
-        /// <param name="setItem">对象格式化</param>     
+        /// <param name="parameters">参数列表</param> 
         /// <returns>返回结果</returns>
-        object ExecuteReader(string commandText,
-             Type type,
-             IDictionary<string, object> parameters = null,
-             IDictionary<string, Func<object, object>> valueFormatters = null,
-             IDictionary<string, string> propertyMapping = null,
-             Action<dynamic> setItem = null);
+        dynamic QuerySingleDynamic(string commandText,
+             IDictionary<string, object> parameters = null);
 
         /// <summary>
         /// 读取第一条第一列的结果（泛型）
