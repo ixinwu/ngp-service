@@ -13,6 +13,7 @@
 
 
 using NGP.Framework.Core;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NGP.Foundation.Service.Analysis
@@ -40,6 +41,10 @@ namespace NGP.Foundation.Service.Analysis
             var app = CommonHelper.DefaultFileProvider.GetFileContent<App_Config_BaseInfo>(appPath);
 
             result.App = app;
+            if(result.FormRelations == null)
+            {
+                result.FormRelations = new List<App_Config_FormRelation>();
+            }
             return result;
         }
     }
