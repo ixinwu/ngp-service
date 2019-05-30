@@ -2,8 +2,8 @@
 后端开发工程，包含脚手架功能，配置驱动数据处理，各种中间件集成
 用于快速搭建应用服务
 
-# docker 发布
-- 在web目录下打开 powershell
+# docker 发布g
+- 在根目录下打开 powershell
 - 执行命令 docker build -t aspnetapp .
 - 执行命令运行容器 docker run -d -p 8099：80 -name ngp aspnetapp
 
