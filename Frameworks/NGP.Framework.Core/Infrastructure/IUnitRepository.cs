@@ -160,7 +160,7 @@ namespace NGP.Framework.Core
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>
         /// <returns>返回结果</returns>
-        IEnumerable<dynamic> QueryListDynamic(string commandText,
+        List<dynamic> QueryListDynamic(string commandText,
              IDictionary<string, object> parameters = null);
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace NGP.Framework.Core
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>        
         /// <returns>返回结果</returns>
-        IEnumerable<IDictionary<string, object>> QueryListDictionary(string commandText,
+        List<IDictionary<string, object>> QueryListDictionary(string commandText,
             IDictionary<string, object> parameters = null);
 
         /// <summary>

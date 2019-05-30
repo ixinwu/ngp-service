@@ -50,14 +50,15 @@ namespace NGP.Framework.DataAccess
             {
                 conn.Open();
             }
-            var dbCommand = new MySqlCommand();
+            using (var dbCommand = new MySqlCommand())
+            {
+                dbCommand.CommandType = CommandType.Text;
+                dbCommand.Connection = conn;
+                SetParameters(dbCommand, parameters);
+                dbCommand.CommandText = commandText;
 
-            dbCommand.CommandType = CommandType.Text;
-            dbCommand.Connection = conn;
-            SetParameters(dbCommand, parameters);
-            dbCommand.CommandText = commandText;
-
-            return excute(dbCommand);
+                return excute(dbCommand);
+            }
         }
 
         /// <summary>

@@ -269,32 +269,28 @@ namespace NGP.Framework.DataAccess
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>
         /// <returns>返回结果</returns>
-        public IEnumerable<dynamic> QueryListDynamic(string commandText,
+        public List<dynamic> QueryListDynamic(string commandText,
              IDictionary<string, object> parameters = null)
         {
-            return CreateDbCommondAndExcute(commandText, parameters, ExcuteQueryListDynamic);
-        }
-
-        /// <summary>
-        /// 执行动态列表读取
-        /// </summary>
-        /// <param name="dbCommand"></param>
-        /// <returns></returns>
-        private IEnumerable<dynamic> ExcuteQueryListDynamic(IDbCommand dbCommand)
-        {
-            using (IDataReader reader = dbCommand.ExecuteReader())
+            Func<IDbCommand, List<dynamic>> excute = dbCommand =>
             {
-                var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
-                foreach (IDataRecord record in reader as IEnumerable)
+                using (IDataReader reader = dbCommand.ExecuteReader())
                 {
-                    var expando = new ExpandoObject() as IDictionary<string, object>;
-                    foreach (var name in names)
+                    var result = new List<dynamic>();
+                    var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                    foreach (IDataRecord record in reader as IEnumerable)
                     {
-                        expando[name] = record[name];
+                        var expando = new ExpandoObject() as IDictionary<string, object>;
+                        foreach (var name in names)
+                        {
+                            expando[name] = record[name];
+                        }
+                        result.Add(expando);
                     }
-                    yield return expando;
+                    return result;
                 }
-            }
+            };
+            return CreateDbCommondAndExcute(commandText, parameters, excute);
         }
 
         /// <summary>
@@ -303,25 +299,23 @@ namespace NGP.Framework.DataAccess
         /// <param name="commandText">执行语句</param>
         /// <param name="parameters">参数列表</param>        
         /// <returns>返回结果</returns>
-        public IEnumerable<IDictionary<string, object>> QueryListDictionary(string commandText,
+        public List<IDictionary<string, object>> QueryListDictionary(string commandText,
             IDictionary<string, object> parameters = null)
         {
-            return CreateDbCommondAndExcute(commandText, parameters, ExcuteQueryListDictionary);
-        }
-
-        /// <summary>
-        /// 读取列表数据,根据回调设定值,值通过key,value提供
-        /// </summary>
-        /// <param name="dbCommand"></param>
-        /// <returns></returns>
-        private IEnumerable<IDictionary<string, object>> ExcuteQueryListDictionary(IDbCommand dbCommand)
-        {
-            using (var reader = dbCommand.ExecuteReader())
+            Func<IDbCommand, List<IDictionary<string, object>>> excute = dbCommand =>
             {
-                var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
-                foreach (IDataRecord record in reader as IEnumerable)
-                    yield return names.ToDictionary(n => n, n => record[n]);
-            }
+                using (IDataReader reader = dbCommand.ExecuteReader())
+                {
+                    var result = new List<IDictionary<string, object>>();
+                    var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                    foreach (IDataRecord record in reader as IEnumerable)
+                    {
+                        result.Add(names.ToDictionary(n => n, n => record[n]));
+                    }
+                    return result;
+                }
+            };
+            return CreateDbCommondAndExcute(commandText, parameters, excute);
         }
 
         /// <summary>
@@ -333,24 +327,18 @@ namespace NGP.Framework.DataAccess
         public IEnumerable<DataRow> QueryListDataRow(string commandText,
             IDictionary<string, object> parameters = null)
         {
-            return CreateDbCommondAndExcute(commandText, parameters, ExcuteQueryListDataRow);
-        }
-
-        /// <summary>
-        /// 执行数据行读取
-        /// </summary>
-        /// <param name="dbCommand"></param>
-        /// <returns></returns>
-        private IEnumerable<DataRow> ExcuteQueryListDataRow(IDbCommand dbCommand)
-        {
-            using (var reader = dbCommand.ExecuteReader())
+            Func<IDbCommand, IEnumerable<DataRow>> excute = dbCommand =>
             {
-                var table = new DataTable();
-                table.BeginLoadData();
-                table.Load(reader);
-                table.EndLoadData();
-                return table.AsEnumerable();
-            }
+                using (var reader = dbCommand.ExecuteReader())
+                {
+                    var table = new DataTable();
+                    table.BeginLoadData();
+                    table.Load(reader);
+                    table.EndLoadData();
+                    return table.AsEnumerable();
+                }
+            };
+            return CreateDbCommondAndExcute(commandText, parameters, excute);
         }
 
         /// <summary>
@@ -390,22 +378,22 @@ namespace NGP.Framework.DataAccess
              IDictionary<string, object> parameters = null)
         {
             Func<IDbCommand, dynamic> excute = (dbCommand) =>
-             {
-                 using (IDataReader reader = dbCommand.ExecuteReader())
-                 {
-                     var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
-                     foreach (IDataRecord record in reader as IEnumerable)
-                     {
-                         var expando = new ExpandoObject() as IDictionary<string, object>;
-                         foreach (var name in names)
-                         {
-                             expando[name] = record[name];
-                         }
-                         return expando;
-                     }
-                     return null;
-                 }
-             };
+            {
+                using (IDataReader reader = dbCommand.ExecuteReader())
+                {
+                    var names = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                    foreach (IDataRecord record in reader as IEnumerable)
+                    {
+                        var expando = new ExpandoObject() as IDictionary<string, object>;
+                        foreach (var name in names)
+                        {
+                            expando[name] = record[name];
+                        }
+                        return expando;
+                    }
+                    return null;
+                }
+            };
 
             return CreateDbCommondAndExcute(commandText, parameters, excute);
         }

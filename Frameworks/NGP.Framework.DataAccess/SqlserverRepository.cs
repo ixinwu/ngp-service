@@ -51,13 +51,15 @@ namespace NGP.Framework.DataAccess
                 conn.Open();
             }
 
-            var dbCommand = new SqlCommand();
-            dbCommand.CommandType = CommandType.Text;
-            dbCommand.Connection = conn;
-            SetParameters(dbCommand, parameters);
-            dbCommand.CommandText = commandText;
+            using (var dbCommand = new SqlCommand())
+            {
+                dbCommand.CommandType = CommandType.Text;
+                dbCommand.Connection = conn;
+                SetParameters(dbCommand, parameters);
+                dbCommand.CommandText = commandText;
 
-            return excute(dbCommand);
+                return excute(dbCommand);
+            }
         }
 
         /// <summary>
