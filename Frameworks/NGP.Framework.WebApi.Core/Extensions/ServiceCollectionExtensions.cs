@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NGP.Framework.Core;
+using NGP.Framework.DependencyInjection;
 using System;
 using System.Linq;
 using System.Net;
@@ -36,7 +37,7 @@ namespace NGP.Framework.WebApi.Core
         public static IServiceProvider ConfigureApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             // 添加ngpconfig配置参数
-            services.ConfigureStartupConfig<NGPConfig>(configuration.GetSection("NGP"));
+            var config = services.ConfigureStartupConfig<NGPConfig>(configuration.GetSection("NGP"));
             // 向httpContext添加访问器
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -62,9 +63,16 @@ namespace NGP.Framework.WebApi.Core
             var startupConfigurations = typeFinder.FindClassesOfType<INGPStartup>();
 
             // 初始化数据库
-            var dbConfigType = typeFinder.FindClassesOfType<IDbInitConfig>().FirstOrDefault();
-            var dbConfig = Activator.CreateInstance(dbConfigType) as IDbInitConfig;
-            dbConfig.ConfigureDataBase(services, configuration);
+            var dbConfigTypes = typeFinder.FindClassesOfType<IDbInitConfig>();
+            foreach (var dbConfigType in dbConfigTypes)
+            {
+                var dbConfig = Activator.CreateInstance(dbConfigType) as IDbInitConfig;
+                if (dbConfig.DbType == config.DbType)
+                {
+                    dbConfig.ConfigureDataBase(services, configuration);
+                    break;
+                }
+            }
 
             // 创建和排序启动配置的实例
             var instances = startupConfigurations
@@ -84,33 +92,6 @@ namespace NGP.Framework.WebApi.Core
             var serviceProvider = Singleton<IEngine>.Instance.Initialize(services, configuration);
 
             return serviceProvider;
-        }
-
-        /// <summary>
-        /// 创建，绑定和注册服务指定的配置参数
-        /// </summary>
-        /// <typeparam name="TConfig">Configuration parameters</typeparam>
-        /// <param name="services">Collection of service descriptors</param>
-        /// <param name="configuration">一组键/值应用程序配置属性</param>
-        /// <returns>配置参数的实例</returns>
-        public static TConfig ConfigureStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
-        {
-            if (services == null)
-                throw new ArgumentNullException(nameof(services));
-
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-
-            // 创建配置实例
-            var config = new TConfig();
-
-            // 将其绑定到配置的相应部分
-            configuration.Bind(config);
-
-            // 并将其注册为服务
-            services.AddSingleton(config);
-
-            return config;
         }
     }
 }

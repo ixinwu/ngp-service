@@ -22,6 +22,11 @@ namespace NGP.Framework.Core
     public interface IDbInitConfig
     {
         /// <summary>
+        /// 数据库类型
+        /// </summary>
+        string DbType { get; }
+
+        /// <summary>
         /// 配置数据库
         /// </summary>
         /// <param name="services">服务描述符的集合</param>

@@ -41,5 +41,10 @@ namespace NGP.Framework.Core
         /// 是否启用日志
         /// </summary>
         public bool LogEnabled { get; set; }
+
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
+        public string DbType { get; set; }
     }
 }
