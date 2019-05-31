@@ -34,6 +34,7 @@ namespace NGP.Framework.DependencyInjection
         {
             // 添加ngpconfig配置参数
             var config = services.ConfigureStartupConfig<NGPConfig>(configuration.GetSection("NGP"));
+            services.ConfigureStartupConfig<MongoConfig>(configuration.GetSection("MongoSettings"));
 
             // 创建、初始化和配置引擎
             EngineFactory.Create();
@@ -92,6 +93,7 @@ namespace NGP.Framework.DependencyInjection
 
             // 并将其注册为服务
             services.AddSingleton(config);
+            Singleton<TConfig>.Instance = config;
 
             return config;
         }

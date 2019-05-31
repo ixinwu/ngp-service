@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.MessageQueue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.TaskWrapper", "Middlewares\NGP.Middleware.TaskWrapper\NGP.Middleware.TaskWrapper.csproj", "{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.Dsl", "Middlewares\NGP.Middleware.Dsl\NGP.Middleware.Dsl.csproj", "{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.Dsl", "Middlewares\NGP.Middleware.Dsl\NGP.Middleware.Dsl.csproj", "{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.Mongo", "Middlewares\NGP.Middleware.Mongo\NGP.Middleware.Mongo.csproj", "{64E59316-E302-46B9-B0C1-AF8430BD10C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64E59316-E302-46B9-B0C1-AF8430BD10C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E59316-E302-46B9-B0C1-AF8430BD10C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E59316-E302-46B9-B0C1-AF8430BD10C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E59316-E302-46B9-B0C1-AF8430BD10C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{F8F59BC1-649A-422B-BCBF-2062062A17B1} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
 		{B9FDF9A2-46A8-416D-B54C-A9EC8E2E8F78} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
 		{29A34ABE-3D91-4CBC-A314-8BAC8651C3C3} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
+		{64E59316-E302-46B9-B0C1-AF8430BD10C9} = {B0B9AC40-1E2E-466B-976B-E6F8F5F9E223}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B291264-3401-47DE-B70F-EBBBAB794AB1}

@@ -22,32 +22,6 @@ namespace NGP.Foundation.Service.File
     public static class NGPFileExtensions
     {
         /// <summary>
-        /// 获取文件路径
-        /// </summary>
-        /// <param name="areaId"></param>
-        /// <param name="comanpyId"></param>
-        /// <returns></returns>
-        public static string VirtualFilePath(string areaId, string comanpyId)
-        {
-            var index = 0;
-            var path = areaId.Aggregate(string.Empty, (areaPath, next) =>
-             {
-                 areaPath += next;
-                 index++;
-                 if (index % 2 == 0 && index < 7)
-                 {
-                     areaPath += "/";
-                 }
-                 return areaPath;
-             });
-            if (!string.IsNullOrWhiteSpace(comanpyId))
-            {
-                path += string.Format("/{0}", comanpyId);
-            }
-            return GlobalConst.__AttachmentFilesPath + path;
-        }
-
-        /// <summary>
         /// 获取文件url
         /// </summary>
         /// <param name="filePath"></param>

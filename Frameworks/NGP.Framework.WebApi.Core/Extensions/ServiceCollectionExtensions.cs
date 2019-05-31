@@ -38,6 +38,7 @@ namespace NGP.Framework.WebApi.Core
         {
             // 添加ngpconfig配置参数
             var config = services.ConfigureStartupConfig<NGPConfig>(configuration.GetSection("NGP"));
+            services.ConfigureStartupConfig<MongoConfig>(configuration.GetSection("MongoSettings"));
             // 向httpContext添加访问器
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

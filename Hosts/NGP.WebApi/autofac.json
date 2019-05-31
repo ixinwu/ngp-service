@@ -156,6 +156,36 @@
         }
       ],
       "instanceScope": "per-lifetime-scope"
+    },
+    // INGPFileService
+    {
+      "type": "NGP.Foundation.Service.File.NGPFileService,NGP.Foundation.Service",
+      "services": [
+        {
+          "type": "NGP.Foundation.Service.File.INGPFileService,NGP.Foundation.Service"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // IMongoContext
+    {
+      "type": "NGP.Middleware.Mongo.MongoContext,NGP.Middleware.Mongo",
+      "services": [
+        {
+          "type": "NGP.Middleware.Mongo.IMongoContext,NGP.Middleware.Mongo"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
+    },
+    // IMongoRepository
+    {
+      "type": "NGP.Middleware.Mongo.MongoRepository,NGP.Middleware.Mongo",
+      "services": [
+        {
+          "type": "NGP.Framework.Core.IMongoRepository,NGP.Framework.Core"
+        }
+      ],
+      "instanceScope": "per-lifetime-scope"
     }
   ]
 }

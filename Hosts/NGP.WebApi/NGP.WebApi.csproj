@@ -31,6 +31,7 @@
     <ProjectReference Include="..\..\Frameworks\NGP.Framework.WebApi.Core\NGP.Framework.WebApi.Core.csproj" />
     <ProjectReference Include="..\..\Middlewares\NGP.Middleware.Dsl\NGP.Middleware.Dsl.csproj" />
     <ProjectReference Include="..\..\Middlewares\NGP.Middleware.MessageQueue\NGP.Middleware.MessageQueue.csproj" />
+    <ProjectReference Include="..\..\Middlewares\NGP.Middleware.Mongo\NGP.Middleware.Mongo.csproj" />
   </ItemGroup>
 
 
