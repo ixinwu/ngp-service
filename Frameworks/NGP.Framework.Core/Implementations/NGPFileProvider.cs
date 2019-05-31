@@ -424,7 +424,7 @@ namespace NGP.Framework.Core
         /// <returns>ŒÔ¿Ì¬∑æ∂ path. E.g. "c:\inetpub\wwwroot\bin"</returns>
         public virtual string MapPath(string path)
         {
-            path = path.Replace("~/", string.Empty).TrimStart('/').Replace('/', '\\');
+            path = path.Replace("~/", string.Empty).TrimStart('\\').Replace('\\', '/');
             return Path.Combine(BaseDirectory ?? string.Empty, path);
         }
 

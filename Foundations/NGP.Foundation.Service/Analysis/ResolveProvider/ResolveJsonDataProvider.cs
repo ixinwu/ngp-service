@@ -30,12 +30,12 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns></returns>
         public ResolveInitContext InitResolveContext(DynamicBaseRequest request)
         {
-            var dataSetFileName = string.Format("\\{0}.json", request.DataSetKey);
+            var dataSetFileName = string.Format("/{0}.json", request.DataSetKey);
             var dataSetFilePath = CommonHelper.DefaultFileProvider.MapPath(GlobalConst.__ResolveJsons + dataSetFileName);
 
             var result = CommonHelper.DefaultFileProvider.GetFileContent<ResolveInitContext>(dataSetFilePath);
 
-            var appFileName = string.Format("\\{0}.json", request.DataSetKey.Split('_').FirstOrDefault());
+            var appFileName = string.Format("/{0}.json", request.DataSetKey.Split('_').FirstOrDefault());
 
             var appPath = CommonHelper.DefaultFileProvider.MapPath(GlobalConst.__ResolveJsons + appFileName);
             var app = CommonHelper.DefaultFileProvider.GetFileContent<App_Config_BaseInfo>(appPath);

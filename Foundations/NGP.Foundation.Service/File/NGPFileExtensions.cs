@@ -36,13 +36,13 @@ namespace NGP.Foundation.Service.File
                  index++;
                  if (index % 2 == 0 && index < 7)
                  {
-                     areaPath += "\\";
+                     areaPath += "/";
                  }
                  return areaPath;
              });
             if (!string.IsNullOrWhiteSpace(comanpyId))
             {
-                path += string.Format("\\{0}", comanpyId);
+                path += string.Format("/{0}", comanpyId);
             }
             return GlobalConst.__AttachmentFilesPath + path;
         }

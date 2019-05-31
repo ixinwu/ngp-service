@@ -22,17 +22,17 @@ namespace NGP.Framework.Core
         /// <summary>
         /// 附件路径
         /// </summary>
-        public const string __AttachmentFilesPath = "wwwroot\\attachments\\";
+        public const string __AttachmentFilesPath = "wwwroot/attachments/";
 
         /// <summary>
         /// 代码xml文档
         /// </summary>
-        public const string __CodeXmlDocuments = "App_Data\\XmlDocuments\\";
+        public const string __CodeXmlDocuments = "App_Data/XmlDocuments/";
 
         /// <summary>
         /// 解析json文档
         /// </summary>
-        public const string __ResolveJsons = "App_Data\\ResolveJsons\\";
+        public const string __ResolveJsons = "App_Data/ResolveJsons/";
 
         /// <summary>
         /// swagger sjon
