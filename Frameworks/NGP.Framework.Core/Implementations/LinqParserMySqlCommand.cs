@@ -82,7 +82,7 @@ namespace NGP.Framework.Core
             string whereCommand,
             string orderCommand,
             string groupCommand)
-        => string.Format("SELECT {0} {7} {1} \r\n FROM {2} \r\n {3} \r\n {4} \r\n {5} \r\n {6}",
+        => string.Format("SELECT {0} {1} \r\n FROM {2} \r\n {3} \r\n {4} \r\n {5} \r\n {6} {7}",
                distinct,
                selectCommand,
                formCommand,
@@ -489,7 +489,7 @@ namespace NGP.Framework.Core
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public string TopCommand(int number) => string.Format("TOP {0}", number);
+        public string TopCommand(int number) => string.Format(" LIMIT {0}", number);
 
         /// <summary>
         /// like value command
