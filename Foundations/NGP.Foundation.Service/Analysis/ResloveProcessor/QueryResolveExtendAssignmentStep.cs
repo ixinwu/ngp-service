@@ -62,7 +62,7 @@ namespace NGP.Foundation.Service.Analysis
                 foreach (var field in getSetFields)
                 {
                     // 获取key值
-                    dynamic getValue = item[field.GetPropertyName];
+                    dynamic getValue = dicItem[field.GetPropertyName];
                     var value = string.Empty;
 
                     // 根据类型筛选
@@ -85,7 +85,7 @@ namespace NGP.Foundation.Service.Analysis
                                         }
                                     }
                                     // 设定name值
-                                    item[field.SetPropertyName] = listValue;
+                                    dicItem[field.SetPropertyName] = listValue;
                                     break;
                                 }
                                 groupItem = ctx.AssociatedContext.GroupTypes.FirstOrDefault(s => s.TypeKey == getValue);
@@ -94,7 +94,7 @@ namespace NGP.Foundation.Service.Analysis
                                     value = groupItem.TypeValue;
                                 }
                                 // 设定name值
-                                item[field.SetPropertyName] = value;
+                                dicItem[field.SetPropertyName] = value;
                                 break;
                             }
                         case FieldType.EmployeeType:
@@ -114,7 +114,7 @@ namespace NGP.Foundation.Service.Analysis
                                         }
                                     }
                                     // 设定name值
-                                    item[field.SetPropertyName] = listValue;
+                                    dicItem[field.SetPropertyName] = listValue;
                                     break;
                                 }
                                 accountItem = ctx.AssociatedContext.Employees.FirstOrDefault(s => s.Id == getValue);
@@ -123,7 +123,7 @@ namespace NGP.Foundation.Service.Analysis
                                     value = accountItem.EmplName;
                                 }
                                 // 设定name值
-                                item[field.SetPropertyName] = value;
+                                dicItem[field.SetPropertyName] = value;
                                 break;
                             }
                         case FieldType.DeptType:
@@ -143,7 +143,7 @@ namespace NGP.Foundation.Service.Analysis
                                         }
                                     }
                                     // 设定name值
-                                    item[field.SetPropertyName] = listValue;
+                                    dicItem[field.SetPropertyName] = listValue;
                                     break;
                                 }
                                 deptItem = ctx.AssociatedContext.Departments.FirstOrDefault(s => s.Id == getValue);
@@ -152,7 +152,7 @@ namespace NGP.Foundation.Service.Analysis
                                     value = deptItem.DeptName;
                                 }
                                 // 设定name值
-                                item[field.SetPropertyName] = value;
+                                dicItem[field.SetPropertyName] = value;
                                 break;
                             }
                         case FieldType.FormType:
