@@ -38,7 +38,7 @@ namespace NGP.Foundation.Service.Analysis
             }
 
             // 没有数据需要扩展赋值
-            if (ctx.GenerateContext.GenerateNameFields.IsNullOrEmpty())
+            if (ctx.GenerateContext.GenerateNameFields.IsNullOrEmpty() && ctx.GenerateContext.AttachmentFields.IsNullOrEmpty())
             {
                 return true;
             }
