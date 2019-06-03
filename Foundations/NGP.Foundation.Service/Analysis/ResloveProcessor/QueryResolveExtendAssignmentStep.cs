@@ -159,7 +159,7 @@ namespace NGP.Foundation.Service.Analysis
                             // 如果是附件
                             if (field.FieldColumnType == FieldColumnType.Attachment)
                             {
-                                dicItem[field.SetPropertyName] = NGPFileExtensions.FileUrl(GlobalConst.__AttachmentFilesPath, getValue);
+                                dicItem[field.SetPropertyName] = NGPFileExtend.FileUrl(GlobalConst.__AttachmentFilesPath, getValue);
                             }
                             break;
                         case FieldType.RelationType:

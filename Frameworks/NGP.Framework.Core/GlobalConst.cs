@@ -90,5 +90,16 @@ namespace NGP.Framework.Core
             /// </summary>
             public const string __SelectFieldKeyRule = @"(?<=\[([a-zA-Z]([a-zA-Z]|\d)*.)?)(([a-zA-Z]([a-zA-Z]|\d)*)*[_]){2}[a-zA-Z]([a-zA-Z]|\d)*(?=\])";
         }
+
+        /// <summary>
+        /// 通用配置key
+        /// </summary>
+        public struct CommonConfig
+        {
+            /// <summary>
+            /// 爬虫配置
+            /// </summary>
+            public const string __CrawlerConfig = "CrawlerConfig";
+        }
     }
 }

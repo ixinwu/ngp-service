@@ -17,7 +17,7 @@ namespace NGP.Framework.Core
     /// <summary>
     /// 文件扩展
     /// </summary>
-    public static class NGPFileExtensions
+    public static class NGPFileExtend
     {
         /// <summary>
         /// 获取文件url

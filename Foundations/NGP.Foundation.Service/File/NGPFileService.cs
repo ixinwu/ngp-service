@@ -132,7 +132,7 @@ namespace NGP.Foundation.Service.File
                 FilePath = s.FilePath,
                 Extension = s.ExtensionName,
                 Size = s.Size,
-                Url = NGPFileExtensions.FileUrl(s.FilePath, s.FileName)
+                Url = NGPFileExtend.FileUrl(s.FilePath, s.FileName)
             }).ToList();
             return new NGPResponse<List<SingleFileResponse>>
             {
@@ -212,7 +212,7 @@ namespace NGP.Foundation.Service.File
                     FilePath = file.FilePath,
                     Extension = file.ExtensionName,
                     Size = file.Size,
-                    Url = NGPFileExtensions.FileUrl(file.FilePath, file.FileName)
+                    Url = NGPFileExtend.FileUrl(file.FilePath, file.FileName)
                 }
             };
         }
