@@ -50,7 +50,8 @@ namespace NGP.Foundation.Service.Analysis
                 SetPropertyName = AppConfigExtend.GetFieldNameKey(s.FieldKey),
                 s.FieldKey,
                 s.DbConfig.IsMulti,
-                FieldType = s.FieldType.ToEnum<FieldType>()
+                FieldType = s.FieldType.ToEnum<FieldType>(),
+                FieldColumnType  = s.DbConfig.ColumnType.ToEnum<FieldColumnType>()
             });
 
             // 设定名称处理
@@ -155,6 +156,12 @@ namespace NGP.Foundation.Service.Analysis
                                 break;
                             }
                         case FieldType.FormType:
+                            // 如果是附件
+                            if (field.FieldColumnType == FieldColumnType.Attachment)
+                            {
+                                dicItem[field.SetPropertyName] = NGPFileExtensions.FileUrl(GlobalConst.__AttachmentFilesPath, getValue);
+                            }
+                            break;
                         case FieldType.RelationType:
                         default:
                             break;

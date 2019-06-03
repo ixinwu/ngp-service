@@ -20,7 +20,7 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 页面解析组装命令处理
     /// </summary>
-    public class QueryResolveFindNameFieldStep : StepBase<QueryResolveContext>
+    public class QueryResolveInitAssignmentFieldStep : StepBase<QueryResolveContext>
     {
         /// <summary>
         /// 执行上下文
@@ -45,8 +45,14 @@ namespace NGP.Foundation.Service.Analysis
                             ctx.GenerateContext.GenerateNameFields.Add(field);
                             break;
                         }
-                       
+
                     case FieldType.FormType:
+                        // 如果是附件
+                        if (field.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.Attachment)
+                        {
+                            ctx.GenerateContext.AttachmentFields.Add(field);
+                        }
+                        break;
                     case FieldType.RelationType:
                     default:
                         break;

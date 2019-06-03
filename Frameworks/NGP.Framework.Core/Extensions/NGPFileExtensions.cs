@@ -11,10 +11,8 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using NGP.Framework.Core;
-using System.Linq;
 
-namespace NGP.Foundation.Service.File
+namespace NGP.Framework.Core
 {
     /// <summary>
     /// 文件扩展

@@ -26,5 +26,10 @@ namespace NGP.Foundation.Service.Analysis
         /// 生成名称字段的列表
         /// </summary>
         public List<App_Config_FormField> GenerateNameFields { get; set; } = new List<App_Config_FormField>();
+
+        /// <summary>
+        /// 附件列表
+        /// </summary>
+        public List<App_Config_FormField> AttachmentFields { get; set; } = new List<App_Config_FormField>();
     }
 }

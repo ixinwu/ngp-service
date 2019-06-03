@@ -60,6 +60,11 @@ namespace NGP.Framework.Core
         Bits,
 
         /// <summary>
+        /// 附件
+        /// </summary>
+        Attachment,
+
+        /// <summary>
         /// mongo图片
         /// </summary>
         MongoImage
