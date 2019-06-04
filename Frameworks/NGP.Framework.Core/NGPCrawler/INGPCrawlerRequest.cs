@@ -12,7 +12,8 @@
  * ------------------------------------------------------------------------------*/
 
 
-namespace NGP.Middleware.Crawlar
+
+namespace NGP.Framework.Core
 {
     /// <summary>
     /// ngp爬虫请求对象

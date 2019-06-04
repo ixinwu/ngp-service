@@ -36,5 +36,10 @@ namespace NGP.Framework.Core
         /// ÓòÃû
         /// </summary>
         public string Domain { get; set; }
+
+        /// <summary>
+        /// content-type
+        /// </summary>
+        public string ContentType { get; set; }
     }
 }

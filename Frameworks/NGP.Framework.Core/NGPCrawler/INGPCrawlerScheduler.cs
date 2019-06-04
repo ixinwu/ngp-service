@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * INGPCrawlerPipeline Description:
- * ngp爬虫管道
+ * INGPCrawlerScheduler Description:
+ * ngp爬虫任务管理
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -11,23 +11,24 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using NGP.Framework.Core;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NGP.Middleware.Crawlar
+namespace NGP.Framework.Core
 {
     /// <summary>
-    /// ngp爬虫管道
+    /// ngp爬虫任务管理
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    public interface INGPCrawlerPipeline<TEntity> where TEntity : BaseEntity, new()
+    public interface INGPCrawlerScheduler
     {
         /// <summary>
-        /// 执行管道
+        /// 重试次数
         /// </summary>
-        /// <param name="entity"></param>
+        long RetryTime { get; set; }
+
+        /// <summary>
+        /// 计划执行
+        /// </summary>
         /// <returns></returns>
-        Task Run(IEnumerable<TEntity> entity);
+        Task Schedule();
     }
 }

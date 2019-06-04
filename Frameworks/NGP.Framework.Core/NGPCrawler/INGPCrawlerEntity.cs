@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * INGPCrawlerScheduler Description:
- * ngp爬虫任务管理
+ * INGPCrawlerEntity Description:
+ * ngp爬虫返回实体接口
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -11,24 +11,14 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using System.Threading.Tasks;
 
-namespace NGP.Middleware.Crawlar
+
+namespace NGP.Framework.Core
 {
     /// <summary>
-    /// ngp爬虫任务管理
+    /// ngp爬虫返回实体接口
     /// </summary>
-    public interface INGPCrawlerScheduler
+    public interface INGPCrawlerEntity
     {
-        /// <summary>
-        /// 重试次数
-        /// </summary>
-        long RetryTime { get; set; }
-
-        /// <summary>
-        /// 计划执行
-        /// </summary>
-        /// <returns></returns>
-        Task Schedule();
     }
 }

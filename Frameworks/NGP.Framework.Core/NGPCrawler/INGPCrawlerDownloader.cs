@@ -2,8 +2,8 @@
  * Copyright:
  * IXinWu Technology Co., Ltd. All rights reserved. 
  * 
- * INGPCrawlerProcessor Description:
- * ngp爬虫执行器
+ * INGPCrawlerDownloader Description:
+ * ngp爬虫下载器
  *
  * Comment 					        Revision	Date        Author
  * -----------------------------    --------    --------    -----------
@@ -11,23 +11,21 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using HtmlAgilityPack;
-using NGP.Framework.Core;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace NGP.Middleware.Crawlar
+namespace NGP.Framework.Core
 {
     /// <summary>
-    /// ngp爬虫执行器
+    /// ngp爬虫下载器
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    public interface INGPCrawlerProcessor<TEntity> where TEntity : BaseEntity, new()
+    /// <typeparam name="TRequest"></typeparam>
+    public interface INGPCrawlerDownloader<TRequest> where TRequest : INGPCrawlerRequest
     {
         /// <summary>
-        /// 执行解析
+        /// 下载执行
         /// </summary>
-        /// <param name="document"></param>
+        /// <param name="request"></param>
         /// <returns></returns>
-        IEnumerable<TEntity> Process(HtmlDocument document);
+        Task<string> Download(TRequest request);
     }
 }

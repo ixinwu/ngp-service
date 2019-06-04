@@ -52,7 +52,16 @@ namespace NGP.Foundation.Service.Analysis
                 s.DbConfig.IsMulti,
                 FieldType = s.FieldType.ToEnum<FieldType>(),
                 FieldColumnType  = s.DbConfig.ColumnType.ToEnum<FieldColumnType>()
-            });
+            }).ToList();
+            getSetFields.AddRange(ctx.GenerateContext.AttachmentFields.Select(s => new
+            {
+                GetPropertyName = s.FieldKey,
+                SetPropertyName = AppConfigExtend.GetFieldNameKey(s.FieldKey),
+                s.FieldKey,
+                s.DbConfig.IsMulti,
+                FieldType = s.FieldType.ToEnum<FieldType>(),
+                FieldColumnType = s.DbConfig.ColumnType.ToEnum<FieldColumnType>()
+            }));
 
             // 设定名称处理
             Action<dynamic> setNameAction = (item) =>

@@ -19,12 +19,12 @@ namespace NGP.Framework.Core
     /// <summary>
     /// ngp爬虫
     /// </summary>
-    public interface INGPCrawler<TEntity> where TEntity : BaseEntity, new()
+    public interface INGPCrawler<TEntity> where TEntity : INGPCrawlerEntity, new()
     {
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<TEntity>> Crawle();
+        Task<List<TEntity>> Crawle();
     }
 }

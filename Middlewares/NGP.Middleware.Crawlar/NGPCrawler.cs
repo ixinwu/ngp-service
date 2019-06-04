@@ -20,17 +20,19 @@ namespace NGP.Middleware.Crawlar
     /// <summary>
     /// ngp爬虫
     /// </summary>
-    public class NGPCrawler<TEntity> : INGPCrawler<TEntity> where TEntity : BaseEntity, new()
+    public class NGPCrawler<TEntity,TRequest> : INGPCrawler<TEntity> 
+        where TEntity : INGPCrawlerEntity, new()
+        where TRequest : INGPCrawlerRequest
     {
         /// <summary>
         /// 请求对象
         /// </summary>
-        public List<INGPCrawlerRequest> Requests { get; private set; } = new List<INGPCrawlerRequest>();
+        public List<TRequest> Requests { get; private set; } = new List<TRequest>();
 
         /// <summary>
         /// downloader对象
         /// </summary>
-        public INGPCrawlerDownloader Downloader { get; private set; }
+        public INGPCrawlerDownloader<TRequest> Downloader { get; private set; }
 
         /// <summary>
         /// 处理对象
@@ -60,7 +62,7 @@ namespace NGP.Middleware.Crawlar
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public NGPCrawler<TEntity> AddRequest(INGPCrawlerRequest request)
+        public NGPCrawler<TEntity, TRequest> AddRequest(TRequest request)
         {
             Requests.Add(request);
             return this;
@@ -71,7 +73,7 @@ namespace NGP.Middleware.Crawlar
         /// </summary>
         /// <param name="downloader"></param>
         /// <returns></returns>
-        public NGPCrawler<TEntity> AddDownloader(INGPCrawlerDownloader downloader)
+        public NGPCrawler<TEntity, TRequest> AddDownloader(INGPCrawlerDownloader<TRequest> downloader)
         {
             Downloader = downloader;
             return this;
@@ -82,13 +84,13 @@ namespace NGP.Middleware.Crawlar
         /// </summary>
         /// <param name="processor"></param>
         /// <returns></returns>
-        public NGPCrawler<TEntity> AddProcessor(INGPCrawlerProcessor<TEntity> processor)
+        public NGPCrawler<TEntity, TRequest> AddProcessor(INGPCrawlerProcessor<TEntity> processor)
         {
             Processor = processor;
             return this;
         }
 
-        public NGPCrawler<TEntity> AddScheduler(INGPCrawlerScheduler scheduler)
+        public NGPCrawler<TEntity, TRequest> AddScheduler(INGPCrawlerScheduler scheduler)
         {
             Scheduler = scheduler;
             return this;
@@ -99,7 +101,7 @@ namespace NGP.Middleware.Crawlar
         /// </summary>
         /// <param name="pipeline"></param>
         /// <returns></returns>
-        public NGPCrawler<TEntity> AddPipeline(INGPCrawlerPipeline<TEntity> pipeline)
+        public NGPCrawler<TEntity, TRequest> AddPipeline(INGPCrawlerPipeline<TEntity> pipeline)
         {
             Pipelines.Add(pipeline);
             return this;
@@ -110,12 +112,12 @@ namespace NGP.Middleware.Crawlar
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        public async Task<IEnumerable<TEntity>> Crawle()
+        public async Task<List<TEntity>> Crawle()
         {
             var result = new List<TEntity>();
             foreach (var request in Requests)
             {
-                var document = await Downloader.Download(request.Url);
+                var document = await Downloader.Download(request);
                 var entity = Processor.Process(document);
                 result.AddRange(entity);
 
