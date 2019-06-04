@@ -66,7 +66,10 @@ namespace NGP.Framework.WebApi.Core
                 //注册路由
                 Singleton<IEngine>.Instance.Resolve<IRoutePublisher>().RegisterRoutes(routeBuilder);
             });
-        }
+
+            // 配置文件访问
+            application.UseStaticFiles();
+;        }
 
         /// <summary>
         /// 配置顺序

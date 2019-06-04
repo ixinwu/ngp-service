@@ -47,7 +47,7 @@ namespace NGP.Middleware.Crawlar
         /// <summary>
         /// 处理管道
         /// </summary>
-        public List<INGPCrawlerPipeline<TEntity>> Pipelines { get; private set; }
+        public List<INGPCrawlerPipeline<TEntity>> Pipelines { get; private set; } = new List<INGPCrawlerPipeline<TEntity>>();
 
         /// <summary>
         /// ctor
