@@ -39,7 +39,8 @@
 
 ## 部署
 - 在根目录下打开 powershell
-- 执行命令 
+- 执行命令
+
     docker build -t aspnetapp .
 - 执行命令运行容器 
     docker run -d -p 8099:80 --name ngp aspnetapp
