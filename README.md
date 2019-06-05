@@ -44,44 +44,34 @@
 
 ### 以下是每个步骤的说明
 - 步骤1/10：FROM microsoft/dotnet:sdk AS build-env
-
   从docker hub上的Microsoft / dotnet注册表中用标签“sdk”拉出图像 - https://hub.docker.com/r/microsoft/dotnet/tags
   “build-env”名称可以赋予新的构建阶段。这将用于在后面的步骤中复制文件。
   
 - 步骤2/10：WORKDIR / app
-
   WORKDIR指令设置Dockerfile中跟随它的任何RUN，CMD，ENTRYPOINT，COPY和ADD指令的工作目录。如果WORKDIR不存在，即使它未在任何后续Dockerfile指令中使用，也将创建它。
   
 - 步骤3/10：COPY . ./aspnetapp/
-
   文件复制到容器内的工作目录。
   
 - 步骤4/10：COPY ./Hosts/NGP.WebApi/App_Data/ /app/App_Data/
-
   拷贝app_data的目录到容器app根目录
   
 - 步骤5/10：WORKDIR /app/aspnetapp
-
   设定工作目录
  
 - 步骤6/10：RUN dotnet publish -c Release -o out
-
   此步骤使用.NET CLI创建发布版本，输出目录为“out”
   
 - 步骤7/10：FROM microsoft/dotnet:aspnetcore-runtime AS runtime
-
   提供运行ASP.NET Core Web应用程序的最少组件。
   
 - 步骤8/10：WORKDIR /app
-
   与上面的步骤2相同。
   
 - 步骤9/10：COPY --from=build-env /app/aspnetapp/Hosts/NGP.WebApi/out ./
-
   这会将out文件夹的内容从“build-env”复制到此网络容器。
   
 - 步骤10/10：ENTRYPOINT ["dotnet", "NGP.WebApi.dll"]
-
   这允许容器作为可执行文件运行。
   
  
