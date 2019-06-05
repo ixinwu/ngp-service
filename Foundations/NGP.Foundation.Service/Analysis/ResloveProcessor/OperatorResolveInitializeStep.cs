@@ -34,6 +34,12 @@ namespace NGP.Foundation.Service.Analysis
             // 处理参数上下文
             ctx.InitContext = dataProvider.InitResolveContext(ctx.Request);
 
+            if (ctx.InitContext.App == null
+                || ctx.InitContext.App.ExtendConfig == null)
+            {
+                return false;
+            }
+
             return true;
         }
 

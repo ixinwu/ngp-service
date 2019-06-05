@@ -12,7 +12,6 @@
  * ------------------------------------------------------------------------------*/
 
 using NGP.Framework.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,20 +29,9 @@ namespace NGP.Foundation.Service.Analysis
         /// <returns></returns>
         public override bool Process(OperatorResolveContext<DynamicDeleteRequest> ctx)
         {
-            if (ctx.InitContext.App == null
-                || ctx.InitContext.App.ExtendConfig == null
-                || ctx.InitContext.App.ExtendConfig.DefaultFields.IsNullOrEmpty())
-            {
-                return false;
-            }
-
             var defaultFields = ctx.InitContext.App.ExtendConfig.DefaultFields
                 .Where(s => s.DefaultType.Contains(AppDefaultFieldType.Delete.ToString("G")))
                 .ToList();
-            if (defaultFields.IsNullOrEmpty())
-            {
-                return false;
-            }
 
             // 获取解析对象
             var parserCommand = Singleton<IEngine>.Instance.Resolve<ILinqParserCommand>();
@@ -56,6 +44,11 @@ namespace NGP.Foundation.Service.Analysis
                 // 获取表达式的字段列表
                 var whereFieldKeys = AppConfigExtend.MatchFieldKeys(whereExpression);
 
+                if (whereFieldKeys.Count == 0)
+                {
+                    continue;
+                }
+
                 // 表单key
                 var formKey = AppConfigExtend.GetFormKey(whereFieldKeys.FirstOrDefault());
                 var setList = new List<string>();
@@ -67,7 +60,7 @@ namespace NGP.Foundation.Service.Analysis
                         case FieldType.EmployeeType:
                             {
                                 var value = parserCommand.LinqStringFormatter(workContext.Current.EmplId);
-                                setList.Add(parserCommand.LinqSetCommand(fieldKey, value));                                
+                                setList.Add(parserCommand.LinqSetCommand(fieldKey, value));
                                 break;
                             }
                         case FieldType.DeptType:
@@ -113,6 +106,11 @@ namespace NGP.Foundation.Service.Analysis
                 var whereCommand = parserCommand.WhereCommand(whereExpression);
                 var updateCommand = parserCommand.UpdateCommand(formKey, setCommand, whereCommand);
                 commandList.Add(updateCommand);
+            }
+
+            if (commandList.Count == 0)
+            {
+                return false;
             }
 
             ctx.ExcuteLinqText = parserCommand.JoinUpdate(commandList);
