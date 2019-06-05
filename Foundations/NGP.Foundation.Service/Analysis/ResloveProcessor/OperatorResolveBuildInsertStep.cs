@@ -55,7 +55,7 @@ namespace NGP.Foundation.Service.Analysis
                 return false;
             }
             commandList.AddRange(buildReulst.CommandList);
-            ctx.InsertPrimaryKeys.AddRange(buildReulst.PrimaryKeys);
+            ctx.InsertPrimaryKeys.Add(buildReulst.PrimaryKeys);
 
             ctx.ExcuteLinqText = parserCommand.JoinInsert(commandList);
             return true;

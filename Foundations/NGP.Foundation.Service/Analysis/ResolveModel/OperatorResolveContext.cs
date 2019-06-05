@@ -39,7 +39,7 @@ namespace NGP.Foundation.Service.Analysis
         /// <summary>
         /// 主键列表
         /// </summary>
-        public List<NGPKeyValuePair> InsertPrimaryKeys { get; set; } = new List<NGPKeyValuePair>();
+        public List<List<NGPKeyValuePair>> InsertPrimaryKeys { get; set; } = new List<List<NGPKeyValuePair>>();
 
         /// <summary>
         /// 执行结果

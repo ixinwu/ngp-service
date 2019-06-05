@@ -15,6 +15,7 @@ using NGP.Foundation.Resources;
 using NGP.Framework.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NGP.Foundation.Service.Analysis
 {
@@ -164,7 +165,7 @@ namespace NGP.Foundation.Service.Analysis
                 ErrorCode = context.Response.ErrorCode,
                 Message = context.Response.Message,
                 Status = context.Response.Status,
-                Data = context.InsertPrimaryKeys
+                Data = context.InsertPrimaryKeys.FirstOrDefault()
             };
         }
 
@@ -173,17 +174,17 @@ namespace NGP.Foundation.Service.Analysis
         /// </summary>
         /// <param name="info">追加对象</param>
         /// <returns>操作结果</returns>
-        public NGPResponse<List<NGPKeyValuePair>> BulkInsertDynamicData(DynamicBulkInsertRequest info)
+        public NGPResponse<List<List<NGPKeyValuePair>>> BulkInsertDynamicData(DynamicBulkInsertRequest info)
         {
             if (info == null)
             {
-                return new NGPResponse<List<NGPKeyValuePair>>
+                return new NGPResponse<List<List<NGPKeyValuePair>>>
                 {
                     AffectedRows = 0,
                     ErrorCode = ErrorCode.ParamEmpty,
                     Message = CommonResource.ParameterError,
                     Status = OperateStatus.Error,
-                    Data = new List<NGPKeyValuePair>()
+                    Data = new List<List<NGPKeyValuePair>>()
                 };
             }
 
@@ -195,16 +196,16 @@ namespace NGP.Foundation.Service.Analysis
             ResolveProcessorFactory.BulkInsertSetp.HandleProcess(context);
             if (context.Response.Status == OperateStatus.Error)
             {
-                return new NGPResponse<List<NGPKeyValuePair>>
+                return new NGPResponse<List<List<NGPKeyValuePair>>>
                 {
                     AffectedRows = context.Response.AffectedRows,
                     ErrorCode = context.Response.ErrorCode,
                     Message = context.Response.Message,
                     Status = context.Response.Status,
-                    Data = new List<NGPKeyValuePair>()
+                    Data = new List<List<NGPKeyValuePair>>()
                 };
             }
-            return new NGPResponse<List<NGPKeyValuePair>>
+            return new NGPResponse<List<List<NGPKeyValuePair>>>
             {
                 AffectedRows = context.Response.AffectedRows,
                 ErrorCode = context.Response.ErrorCode,
