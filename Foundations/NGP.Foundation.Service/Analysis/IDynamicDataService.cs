@@ -51,6 +51,13 @@ namespace NGP.Foundation.Service.Analysis
         NGPResponse<List<NGPKeyValuePair>> InsertDynamicData(DynamicInsertRequest info);
 
         /// <summary>
+        /// 批量添加动态数据
+        /// </summary>
+        /// <param name="info">追加对象</param>
+        /// <returns>操作结果</returns>
+        NGPResponse<List<NGPKeyValuePair>> BulkInsertDynamicData(DynamicBulkInsertRequest info);
+
+        /// <summary>
         /// 更新动态数据
         /// </summary>
         /// <param name="info">更新对象</param>

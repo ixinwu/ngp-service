@@ -83,6 +83,17 @@ namespace NGP.WebApi
         }
 
         /// <summary>
+        /// 批量添加动态数据
+        /// </summary>
+        /// <param name="info">追加对象</param>
+        /// <returns>操作结果</returns>
+        [HttpPost("bulkInsertDynamicData")]
+        public ActionResult<NGPResponse<List<NGPKeyValuePair>>> BulkInsertDynamicData(DynamicBulkInsertRequest info)
+        {
+            return Ok(_dynamicDataService.BulkInsertDynamicData(info));
+        }
+
+        /// <summary>
         /// 更新动态数据
         /// </summary>
         /// <param name="info">更新对象</param>

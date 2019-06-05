@@ -11,9 +11,7 @@
  *
  * ------------------------------------------------------------------------------*/
 
-using NGP.Foundation.Resources;
 using NGP.Framework.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,14 +20,14 @@ namespace NGP.Foundation.Service.Analysis
     /// <summary>
     /// 操作解析构建追加command步骤
     /// </summary>
-    public class OperatorResolveBuildInsertStep : StepBase<OperatorResolveContext<DynamicInsertRequest>>
+    public class OperatorResolveBuildBulkInsertStep : StepBase<OperatorResolveContext<DynamicBulkInsertRequest>>
     {
         /// <summary>
         /// 执行上下文
         /// </summary>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public override bool Process(OperatorResolveContext<DynamicInsertRequest> ctx)
+        public override bool Process(OperatorResolveContext<DynamicBulkInsertRequest> ctx)
         {
             var defaultFields = new List<AppDefaultFieldConfig>();
 
@@ -47,15 +45,18 @@ namespace NGP.Foundation.Service.Analysis
 
             var commandList = new List<string>();
 
-            var buildReulst = ResolveExtend.BuildInsertCommand(ctx.Request.OperateFields,
-                ctx.InitContext, defaultFields);
-            if (buildReulst.Response != null)
+            foreach (var operateFields in ctx.Request.OperateFields)
             {
-                ctx.Response = buildReulst.Response;
-                return false;
+                var buildReulst = ResolveExtend.BuildInsertCommand(operateFields,
+                    ctx.InitContext, defaultFields);
+                if (buildReulst.Response != null)
+                {
+                    ctx.Response = buildReulst.Response;
+                    return false;
+                }
+                commandList.AddRange(buildReulst.CommandList);
+                ctx.InsertPrimaryKeys.AddRange(buildReulst.PrimaryKeys);
             }
-            commandList.AddRange(buildReulst.CommandList);
-            ctx.InsertPrimaryKeys.AddRange(buildReulst.PrimaryKeys);
 
             ctx.ExcuteLinqText = parserCommand.JoinInsert(commandList);
             return true;

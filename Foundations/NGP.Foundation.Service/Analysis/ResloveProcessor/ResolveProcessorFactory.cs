@@ -48,6 +48,12 @@ namespace NGP.Foundation.Service.Analysis
         = new OperatorResolveInitializeStep<DynamicInsertRequest>();
 
         /// <summary>
+        /// 批量追加步骤
+        /// </summary>
+        public static IStep<OperatorResolveContext<DynamicBulkInsertRequest>> BulkInsertSetp { get; private set; }
+        = new OperatorResolveInitializeStep<DynamicBulkInsertRequest>();
+
+        /// <summary>
         /// 更新步骤
         /// </summary>
         public static IStep<OperatorResolveContext<DynamicUpdateRequest>> UpdateSetp { get; private set; }
@@ -95,6 +101,10 @@ namespace NGP.Foundation.Service.Analysis
             InsertSetp.AddNextStep(new OperatorResolvePermissionStep<DynamicInsertRequest>())
                 .AddNextStep(new OperatorResolveBuildInsertStep())
                 .AddNextStep(new OperatorResolveBuildExcuteStep<DynamicInsertRequest>());
+
+            BulkInsertSetp.AddNextStep(new OperatorResolvePermissionStep<DynamicBulkInsertRequest>())
+                .AddNextStep(new OperatorResolveBuildBulkInsertStep())
+                .AddNextStep(new OperatorResolveBuildExcuteStep<DynamicBulkInsertRequest>());
 
             UpdateSetp.AddNextStep(new OperatorResolvePermissionStep<DynamicUpdateRequest>())
                 .AddNextStep(new OperatorResolveBuildUpdateStep())

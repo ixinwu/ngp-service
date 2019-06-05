@@ -169,6 +169,52 @@ namespace NGP.Foundation.Service.Analysis
         }
 
         /// <summary>
+        /// 批量添加动态数据
+        /// </summary>
+        /// <param name="info">追加对象</param>
+        /// <returns>操作结果</returns>
+        public NGPResponse<List<NGPKeyValuePair>> BulkInsertDynamicData(DynamicBulkInsertRequest info)
+        {
+            if (info == null)
+            {
+                return new NGPResponse<List<NGPKeyValuePair>>
+                {
+                    AffectedRows = 0,
+                    ErrorCode = ErrorCode.ParamEmpty,
+                    Message = CommonResource.ParameterError,
+                    Status = OperateStatus.Error,
+                    Data = new List<NGPKeyValuePair>()
+                };
+            }
+
+            var context = new OperatorResolveContext<DynamicBulkInsertRequest>()
+            {
+                Request = info
+            };
+
+            ResolveProcessorFactory.BulkInsertSetp.HandleProcess(context);
+            if (context.Response.Status == OperateStatus.Error)
+            {
+                return new NGPResponse<List<NGPKeyValuePair>>
+                {
+                    AffectedRows = context.Response.AffectedRows,
+                    ErrorCode = context.Response.ErrorCode,
+                    Message = context.Response.Message,
+                    Status = context.Response.Status,
+                    Data = new List<NGPKeyValuePair>()
+                };
+            }
+            return new NGPResponse<List<NGPKeyValuePair>>
+            {
+                AffectedRows = context.Response.AffectedRows,
+                ErrorCode = context.Response.ErrorCode,
+                Message = context.Response.Message,
+                Status = context.Response.Status,
+                Data = context.InsertPrimaryKeys
+            };
+        }
+
+        /// <summary>
         /// 更新动态数据
         /// </summary>
         /// <param name="info">更新对象</param>
