@@ -53,25 +53,25 @@
 - 步骤3/10：COPY . ./aspnetapp/ 
   文件复制到容器内的工作目录。
   
-- 步骤4/10：COPY ./Hosts/NGP.WebApi/App_Data/ /app/App_Data/ 
+- 步骤4/10：COPY ./Hosts/NGP.WebApi/App_Data/ /app/App_Data/  
   拷贝app_data的目录到容器app根目录
   
-- 步骤5/10：WORKDIR /app/aspnetapp 
+- 步骤5/10：WORKDIR /app/aspnetapp  
   设定工作目录
  
-- 步骤6/10：RUN dotnet publish -c Release -o out   
+- 步骤6/10：RUN dotnet publish -c Release -o out  
   此步骤使用.NET CLI创建发布版本，输出目录为“out”
   
-- 步骤7/10：FROM microsoft/dotnet:aspnetcore-runtime AS runtime 
+- 步骤7/10：FROM microsoft/dotnet:aspnetcore-runtime AS runtime  
   提供运行ASP.NET Core Web应用程序的最少组件。
   
-- 步骤8/10：WORKDIR /app 
+- 步骤8/10：WORKDIR /app  
   与上面的步骤2相同。
   
-- 步骤9/10：COPY --from=build-env /app/aspnetapp/Hosts/NGP.WebApi/out ./ 
+- 步骤9/10：COPY --from=build-env /app/aspnetapp/Hosts/NGP.WebApi/out ./  
   这会将out文件夹的内容从“build-env”复制到此网络容器。
   
-- 步骤10/10：ENTRYPOINT ["dotnet", "NGP.WebApi.dll"]
+- 步骤10/10：ENTRYPOINT ["dotnet", "NGP.WebApi.dll"]  
   这允许容器作为可执行文件运行。
   
  
