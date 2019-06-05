@@ -43,12 +43,12 @@
 - 执行命令运行容器 <pre><code>docker run -d -p 8099:80 --name ngp aspnetapp</code></pre>
 
 ### 以下是每个步骤的说明
-- 步骤1/10：FROM microsoft/dotnet:sdk AS build-env
+- 步骤1/10：FROM microsoft/dotnet:sdk AS build-env  
   从docker hub上的Microsoft / dotnet注册表中用标签“sdk”拉出图像 - https://hub.docker.com/r/microsoft/dotnet/tags
   “build-env”名称可以赋予新的构建阶段。这将用于在后面的步骤中复制文件。
   
-- 步骤2/10：WORKDIR / app
-  WORKDIR指令设置Dockerfile中跟随它的任何RUN，CMD，ENTRYPOINT，COPY和ADD指令的工作目录。如果WORKDIR不存在，即使它未在任何后续Dockerfile指令中使用，也将创建它。
+- 步骤2/10：WORKDIR / app  
+  WORKDIR指令设置Dockerfile中跟随它的任何RUN，CMD，ENTRYPOINT，COPY和ADD指令的工作目录。如果WORKDIR不存在，即使它未在任何后续Dockerfile指令中使 用，也将创建它。
   
 - 步骤3/10：COPY . ./aspnetapp/ 
   文件复制到容器内的工作目录。
