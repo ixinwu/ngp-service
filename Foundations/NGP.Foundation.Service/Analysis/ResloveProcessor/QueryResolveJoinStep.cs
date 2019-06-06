@@ -31,6 +31,11 @@ namespace NGP.Foundation.Service.Analysis
         {
             var parserCommand = Singleton<IEngine>.Instance.Resolve<ILinqParserCommand>();
 
+            var allFormKeys = new List<string>();
+            var whereFieldKeys = AppConfigExtend.MatchFieldKeys(ctx.Request.WhereExpression);
+            allFormKeys.AddRange(whereFieldKeys.Select(s => AppConfigExtend.GetFormKey(s)).Distinct());
+            allFormKeys.AddRange(ctx.Request.QueryFieldKeys.Select(s => AppConfigExtend.GetFormKey(s)).Distinct());
+
             // 获取关联列表
             var relationList = ctx.InitContext.FormRelations.Where(s => s.SourceFormKey == ctx.MainFormKey);
 
@@ -43,6 +48,19 @@ namespace NGP.Foundation.Service.Analysis
                     AppConfigExtend.GetSqlFullName(relation.SourceFieldKey),
                     AppConfigExtend.GetSqlFullName(relation.RelationFieldKey));
                 var command = parserCommand.LeftJoinCommand(relation.RelationFormKey, equals);
+                joinList.Add(command);
+            }
+
+            // 循环额外关联列表
+            var extendRelationList = ctx.InitContext.FormRelations.Where(s =>
+                allFormKeys.Contains(s.SourceFormKey) && allFormKeys.Contains(s.RelationFormKey) &&
+                !relationList.Contains(s));
+            foreach (var relation in extendRelationList)
+            {
+                var equals = parserCommand.EqualCommand(
+                    AppConfigExtend.GetSqlFullName(relation.RelationFieldKey),
+                    AppConfigExtend.GetSqlFullName(relation.SourceFieldKey));
+                var command = parserCommand.LeftJoinCommand(relation.SourceFormKey, equals);
                 joinList.Add(command);
             }
 
