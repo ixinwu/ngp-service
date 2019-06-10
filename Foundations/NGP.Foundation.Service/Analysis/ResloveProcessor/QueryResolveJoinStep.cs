@@ -32,7 +32,7 @@ namespace NGP.Foundation.Service.Analysis
             var parserCommand = Singleton<IEngine>.Instance.Resolve<ILinqParserCommand>();
 
             //var allFormKeys = new List<string>();
-            var whereFieldKeys = AppConfigExtend.MatchFieldKeys(ctx.Request.WhereExpression);
+            //var whereFieldKeys = AppConfigExtend.MatchFieldKeys(ctx.Request.WhereExpression);
             //allFormKeys.AddRange(whereFieldKeys.Select(s => AppConfigExtend.GetFormKey(s)).Distinct());
             //allFormKeys.AddRange(ctx.Request.QueryFieldKeys.Select(s => AppConfigExtend.GetFormKey(s)).Distinct());
 
