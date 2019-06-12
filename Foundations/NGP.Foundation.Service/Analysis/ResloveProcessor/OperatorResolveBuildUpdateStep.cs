@@ -227,6 +227,7 @@ namespace NGP.Foundation.Service.Analysis
                             return false;
                         }
                         setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey, parserCommand.NullCommandKey));
+                        continue;
                     }
 
                     // 添加设定字段
