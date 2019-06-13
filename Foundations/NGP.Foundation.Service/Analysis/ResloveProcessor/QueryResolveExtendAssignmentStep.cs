@@ -73,6 +73,11 @@ namespace NGP.Foundation.Service.Analysis
                     // 获取key值
                     dynamic getValue = dicItem[field.GetPropertyName];
                     var value = string.Empty;
+                    if (string.IsNullOrWhiteSpace(Convert.ToString( getValue)))
+                    {
+                        dicItem[field.SetPropertyName] = value;
+                        continue;
+                    } 
 
                     // 根据类型筛选
                     switch (field.FieldType)
