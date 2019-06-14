@@ -28,7 +28,7 @@ namespace NGP.Framework.Core
         public static string FileUrl(string filePath,string fileName)
         {
             var webHelper = Singleton<IEngine>.Instance.Resolve<IWebHelper>();
-            return string.Format("{0}{1}", filePath, fileName).Replace("wwwroot", webHelper.GetStoreHost(false));
+            return string.Format("{0}{1}", filePath, fileName).Replace("wwwroot/", webHelper.GetStoreHost(false));
         }
     }
 }

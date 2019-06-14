@@ -261,7 +261,8 @@ namespace NGP.Foundation.Service.Analysis
                     }
 
                     // 添加操作值
-                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.String)
+                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.String ||
+                        operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.Attachment)
                     {
                         insertElementList.Add(new NGPKeyValuePair<object>
                         {
