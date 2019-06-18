@@ -258,6 +258,7 @@ namespace NGP.Foundation.Service.Analysis
                             Key = operatorField.FieldKey,
                             Value = parserCommand.NullCommandKey
                         });
+                        continue;
                     }
 
                     // 添加操作值
