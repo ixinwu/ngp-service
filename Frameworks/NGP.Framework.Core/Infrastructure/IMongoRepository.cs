@@ -66,5 +66,13 @@ namespace NGP.Framework.Core
         /// <param name="id"></param>
         /// <returns></returns>
         byte[] ReadGridFS(string id);
+
+        /// <summary>
+        /// 保存GridFS信息
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        string SaveGridFS(string fileName, byte[] bytes);
     }
 }

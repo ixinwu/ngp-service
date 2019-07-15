@@ -84,7 +84,7 @@ namespace NGP.Foundation.Service.Analysis
                 }
 
                 // 获取验证字段
-                var operatorFieldKeys = operatorFields.Select(s => s.FieldKey).ToList();     
+                var operatorFieldKeys = operatorFields.Select(s => s.FieldKey).ToList();
                 var uniqueFields = new List<FormUniqueConfig>();
                 if (formItem.ExtendConfig != null && !formItem.ExtendConfig.UniqueFields.IsNullOrEmpty())
                 {
@@ -152,7 +152,7 @@ namespace NGP.Foundation.Service.Analysis
                         var defaultField = ctx.InitContext.App.ExtendConfig.DefaultFields.FirstOrDefault(s =>
                         s.DefaultType.Contains(AppDefaultFieldType.Delete.ToString("G")) &&
                         s.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.Bool);
-                        andDsls.Add(parserCommand.EqualCommand(AppConfigExtend.GenerateFieldKey(formKey,defaultField.ColumnName), 0));
+                        andDsls.Add(parserCommand.EqualCommand(AppConfigExtend.GenerateFieldKey(formKey, defaultField.ColumnName), 0));
 
                         // 约束验证
                         if (!uniqueField.ScopeFieldKeys.IsNullOrEmpty())
@@ -231,9 +231,10 @@ namespace NGP.Foundation.Service.Analysis
                     }
 
                     // 添加设定字段
-                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.String)
+                    if (operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.String
+                        || operatorField.FormField.DbConfig.ColumnType.ToEnum<FieldColumnType>() == FieldColumnType.Attachment)
                     {
-                        setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey, 
+                        setList.Add(parserCommand.LinqSetCommand(operatorField.FieldKey,
                             parserCommand.LinqStringFormatter(Convert.ToString(operatorField.OperateField.Value))));
                         continue;
                     }

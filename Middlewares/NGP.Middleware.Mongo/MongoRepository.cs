@@ -110,6 +110,18 @@ namespace NGP.Middleware.Mongo
         }
 
         /// <summary>
+        /// 保存GridFS信息
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public string SaveGridFS(string fileName, byte[] bytes)
+        {
+            var objectId = _context.GridFSBucket.UploadFromBytes(fileName, bytes);
+            return objectId.ToString();
+        }
+
+        /// <summary>
         /// 释放资源
         /// </summary>
         public void Dispose()
