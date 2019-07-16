@@ -32,13 +32,15 @@ namespace NGP.Framework.DataAccess
         /// </summary>
         /// <param name="services">服务描述符的集合</param>
         /// <param name="configuration">配置应用程序</param>
-        public  void ConfigureDataBase(IServiceCollection services, IConfiguration configuration)
+        public void ConfigureDataBase(IServiceCollection services, IConfiguration configuration)
         {
             //add object context
-            services.AddDbContext<UnitObjectContext>(optionsBuilder =>
-            {
-                optionsBuilder.UseSqlServer(ConfigurationExtensions.GetConnectionString(configuration, "DbConnection"));
-            });
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<UnitObjectContext>(optionsBuilder =>
+                {
+                    optionsBuilder.UseSqlServer(ConfigurationExtensions.GetConnectionString(configuration, "DbConnection"));
+                },
+                ServiceLifetime.Scoped);
         }
     }
 }

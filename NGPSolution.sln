@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.Dsl", "Middl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.Mongo", "Middlewares\NGP.Middleware.Mongo\NGP.Middleware.Mongo.csproj", "{64E59316-E302-46B9-B0C1-AF8430BD10C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGP.Middleware.Crawlar", "Middlewares\NGP.Middleware.Crawlar\NGP.Middleware.Crawlar.csproj", "{ED448474-1E0B-4A6B-A437-D7E4AACBE79C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NGP.Middleware.Crawlar", "Middlewares\NGP.Middleware.Crawlar\NGP.Middleware.Crawlar.csproj", "{ED448474-1E0B-4A6B-A437-D7E4AACBE79C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{35E9D431-F8C8-4F54-B08C-74951D279F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

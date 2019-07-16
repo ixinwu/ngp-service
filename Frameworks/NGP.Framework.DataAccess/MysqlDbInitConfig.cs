@@ -35,10 +35,11 @@ namespace NGP.Framework.DataAccess
         public  void ConfigureDataBase(IServiceCollection services, IConfiguration configuration)
         {
             //add object context
-            services.AddDbContext<UnitObjectContext>(optionsBuilder =>
+            services.AddEntityFrameworkMySql().AddDbContext<UnitObjectContext>(optionsBuilder =>
             {
                 optionsBuilder.UseMySql(ConfigurationExtensions.GetConnectionString(configuration, "DbConnection"));
-            });
+            },
+            ServiceLifetime.Scoped);
         }
     }
 }
